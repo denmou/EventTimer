@@ -5,6 +5,10 @@ Assets = {
     Asset("ATLAS", "images/customization_shipwrecked.xml" ),
     Asset("IMAGE", "images/customization_porkland.tex" ),
     Asset("ATLAS", "images/customization_porkland.xml" ),
+    Asset("IMAGE", "images/inventoryimages.tex" ),
+    Asset("ATLAS", "images/inventoryimages.xml" ),
+    Asset("IMAGE", "images/inventoryimages_2.tex" ),
+    Asset("ATLAS", "images/inventoryimages_2.xml" ),
     Asset("IMAGE", "images/ui.tex" ),
     Asset("ATLAS", "images/ui.xml" )
 }
@@ -400,7 +404,7 @@ local function PugaliskFountainPrefabPostInit(inst)
                     if not inst._resetTimeTask then
                         inst._resetTime = inst.resettaskinfo.time
                         inst._resetTimeTask = inst:DoPeriodicTask(REFRESH_TIME, function()
-                            inst._resetTime = inst._resetTime -1
+                            inst._resetTime = inst._resetTime - REFRESH_TIME
                             if inst._resetTime <= 0 then
                                 inst._resetTimeTask:Cancel()
                                 inst._resetTimeTask = nil

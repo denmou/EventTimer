@@ -7,7 +7,9 @@ local Image = require "widgets/image"
 local images = {
     "images/customization_porkland.xml", 
     "images/customization_shipwrecked.xml", 
-    "images/customisation.xml"
+    "images/customisation.xml", 
+    "images/inventoryimages.xml", 
+    "images/inventoryimages_2.xml"
 }
 
 local Noticebadge = Class(Widget, function(self, name)
@@ -17,6 +19,9 @@ local Noticebadge = Class(Widget, function(self, name)
     self:SetHAnchor(ANCHOR_LEFT)
     self:SetVAnchor(ANCHOR_TOP)
     
+	self.icon_bg = self:AddChild(Image("images/ui.xml", "portrait_bg.tex"))
+    self.icon_bg:SetSize(30, 30)
+
     for i, v in ipairs(images) do
         self.icon = self:AddChild(Image(v, name .. ".tex"))
         local w, h = self.icon:GetSize()

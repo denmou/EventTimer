@@ -5,10 +5,6 @@ Assets = {
     Asset("ATLAS", "images/customization_shipwrecked.xml" ),
     Asset("IMAGE", "images/customization_porkland.tex" ),
     Asset("ATLAS", "images/customization_porkland.xml" ),
-    Asset("IMAGE", "images/inventoryimages.tex" ),
-    Asset("ATLAS", "images/inventoryimages.xml" ),
-    Asset("IMAGE", "images/inventoryimages_2.tex" ),
-    Asset("ATLAS", "images/inventoryimages_2.xml" ),
     Asset("IMAGE", "images/ui.tex" ),
     Asset("ATLAS", "images/ui.xml" )
 }
@@ -440,7 +436,7 @@ local GetDisplayName = _G.EntityScript.GetDisplayName
 
 _G.EntityScript.GetDisplayName = function(self,...)
     local _name = GetDisplayName(self,...)
-    if GetModConfigData("GrowthTime") and self.components and self.components.pickable then
+    if GetModConfigData("GrowthTime") and self.components and self.components.pickable and self.components.pickable.targettime then
         if self.components.inspectable and self.components.inspectable:GetStatus(self) == "WITHERED" then
             _name = _name .. "\nWITHERED"
         elseif self.components.pickable.paused then

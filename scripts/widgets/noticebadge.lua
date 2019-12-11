@@ -7,9 +7,7 @@ local Image = require "widgets/image"
 local images = {
     "images/customization_porkland.xml", 
     "images/customization_shipwrecked.xml", 
-    "images/customisation.xml", 
-    "images/inventoryimages.xml", 
-    "images/inventoryimages_2.xml"
+    "images/customisation.xml",
 }
 
 local Noticebadge = Class(Widget, function(self, name)

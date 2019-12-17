@@ -162,14 +162,16 @@ local function VolcanomanagerPostInit(self)
                     BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.end_in .. ": " .. Define:timeFormat(math.ceil(self.firerain_timer)))
                 else
                     local _eruptionSeg = self:GetNumSegmentsUntilEruption()
-                    local _normtime = _G.GetClock():GetNormTime()
-                    local _curSeg= _normtime * 16 % 1
-                    local _waitTime = (_eruptionSeg - _curSeg) * _G.TUNING.SEG_TIME
-                    if _waitTime < WARNING_TIME then
-                        ShowNoticeBadge(_name)
-                        BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.come .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
-                    else
-                        HideNoticeBadge(_name)
+                    if _eruptionSeg then
+                        local _normtime = _G.GetClock():GetNormTime()
+                        local _curSeg= _normtime * 16 % 1
+                        local _waitTime = (_eruptionSeg - _curSeg) * _G.TUNING.SEG_TIME
+                        if _waitTime < WARNING_TIME then
+                            ShowNoticeBadge(_name)
+                            BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.come .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
+                        else
+                            HideNoticeBadge(_name)
+                        end
                     end
                 end
             end

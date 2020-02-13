@@ -28,7 +28,6 @@ local BADGE_LIST = {}
 local BADGE_INDEX = {}
 local DISPLAY_TEXT = Define.english
 local BAT_ATTACK = false
-
 local function ChangeNoticeBadge()
     local _hideCount = 0
     for i = 1, #BADGE_INDEX do
@@ -282,30 +281,33 @@ local function TigersharkerPostInit(self)
 end
 
 local function KrakenerPostInit(self)
-    local _name = "kraken"
-    self.inst:DoPeriodicTask(REFRESH_TIME, function()
-        if BADGE_ROOT then
-            if not BADGE_LIST[_name] then
-                AddNoticeBadge(_name)
-            end
-            if self.kraken then
-                ShowNoticeBadge(_name)
-                BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.rage)
-            else
-                local _waitTime = self:TimeUntilCanSpawn()
-                if _waitTime < WARNING_TIME then
+    local WORLD = _G.SaveGameIndex:GetCurrentMode()
+    if not GetModConfigData("KrakenOnly") or WORLD == "shipwrecked" then
+        local _name = "kraken"
+        self.inst:DoPeriodicTask(REFRESH_TIME, function()
+            if BADGE_ROOT then
+                if not BADGE_LIST[_name] then
+                    AddNoticeBadge(_name)
+                end
+                if self.kraken then
                     ShowNoticeBadge(_name)
-                    if _waitTime > 0 then
-                        BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.reset .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
-                    else
-                        BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.ready)
-                    end
+                    BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.rage)
                 else
-                    HideNoticeBadge(_name)
+                    local _waitTime = self:TimeUntilCanSpawn()
+                    if _waitTime < WARNING_TIME then
+                        ShowNoticeBadge(_name)
+                        if _waitTime > 0 then
+                            BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.reset .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
+                        else
+                            BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.ready)
+                        end
+                    else
+                        HideNoticeBadge(_name)
+                    end
                 end
             end
-        end
-    end)
+        end)
+    end
 end
 
 local function HoundedPostInit(self)

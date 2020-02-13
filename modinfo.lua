@@ -8,7 +8,7 @@ description = "Show event timer"
 author = "Denmou"
 
 --[NEW] A version number so you can ask people if they are running an old version of your mod.
-version = "2.2.2"
+version = "2.2.3"
 
 --[NEW] This lets other players know if your mod is out of date.  This typically needs to be updated every time there's a new game update.
 api_version = 6
@@ -118,6 +118,16 @@ configuration_options =
 			{ description = "FALSE", data = false }
 		},
 		default = true,
+	},
+	{
+		name = "KrakenOnly",
+		label = "Kraken Only SW",
+		hover = "Just show Kraken in shipwrecked.",
+		options = {
+			{ description = "TRUE", data = true },
+			{ description = "FALSE", data = false }
+		},
+		default = false,
 	},
 	{
 		name = "Hound",

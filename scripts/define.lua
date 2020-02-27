@@ -1,5 +1,6 @@
 local Define = {
 	english = {
+        sleep = "Not Active",
         come = "Coming",
         escape = "Escaping",
         reset = "Resetting",
@@ -19,6 +20,7 @@ local Define = {
         pick = "Picked"
 	},
 	chinese = {
+        sleep = "未激活",
         come = "抵达计时",
         escape = "逃亡中",
         reset = "重生中",
@@ -38,6 +40,7 @@ local Define = {
         pick = "可摘取"
     },
 	idiom = {
+        sleep = "蓄势待发",
         come = "危机四伏",
         escape = "东逃西窜",
         reset = "修养生息",

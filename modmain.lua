@@ -282,7 +282,7 @@ end
 
 local function KrakenerPostInit(self)
     local WORLD = _G.SaveGameIndex:GetCurrentMode()
-    if not GetModConfigData("KrakenOnly") or WORLD == "shipwrecked" then
+    if not GetModConfigData("SWOnly") or WORLD == "shipwrecked" then
         local _name = "kraken"
         self.inst:DoPeriodicTask(REFRESH_TIME, function()
             if BADGE_ROOT then
@@ -337,15 +337,10 @@ local function BattedPostInit(self)
     self._batsCount = 0
     local _DoBatAttack = self.DoBatAttack
     self.DoBatAttack = function(inst,...)
-        if #self.batstoattack > 0 then
-            self._batsCount = self._batsCount + #self.batstoattack
-            BAT_ATTACK = true
-        end
+        self._batsCount = #self.batstoattack
+        BAT_ATTACK = true
         _DoBatAttack(inst,...)
     end
-    self.inst:ListenForEvent("_vampire_bat_attacked", function(inst, data) 
-        self._batsCount = 0
-    end)
     self.inst:DoPeriodicTask(REFRESH_TIME, function()
         if BADGE_ROOT then
             if not BADGE_LIST[_name] then
@@ -355,8 +350,7 @@ local function BattedPostInit(self)
             if _waitTime < WARNING_TIME then
                 ShowNoticeBadge(_name)
                 if BAT_ATTACK then
-                    local _count = self._batsCount
-                    BADGE_LIST[_name].badge.text:SetString("[" .. _count .. "]" .. DISPLAY_TEXT.circle)
+                    BADGE_LIST[_name].badge.text:SetString("[" .. self._batsCount .. "]" .. DISPLAY_TEXT.circle)
                 else
                     BADGE_LIST[_name].badge.text:SetString("[" .. self:CountBats() .. "]" .. DISPLAY_TEXT.come .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
                 end
@@ -368,7 +362,7 @@ local function BattedPostInit(self)
 end
 
 local function VampirebatPrefabPostInit(inst)
-    inst:ListenForEvent("attacked", function()
+    inst:ListenForEvent("wingdown", function()
         BAT_ATTACK = false
     end)
 end
@@ -420,6 +414,30 @@ local function PugaliskFountainPrefabPostInit(inst)
             end
         end
     end)
+end
+
+local function ChessNavyPostInit(self)
+    local WORLD = _G.SaveGameIndex:GetCurrentMode()
+    if not GetModConfigData("SWOnly") or WORLD == "shipwrecked" then
+        local _name = "chess_monsters"
+        self.inst:DoPeriodicTask(REFRESH_TIME, function()
+            if BADGE_ROOT then
+                if not BADGE_LIST[_name] then
+                    AddNoticeBadge(_name)
+                end
+                local _waitTime = self.spawn_timer
+                if _waitTime and _waitTime >= 0 then
+                    local _text = DISPLAY_TEXT.sleep
+                    if _waitTime > 0 then
+                        _text = DISPLAY_TEXT.come .. ": " .. Define:timeFormat(math.ceil(_waitTime))
+                    end
+                    BADGE_LIST[_name].badge.text:SetString(_text)
+                else
+                    HideNoticeBadge(_name)
+                end
+            end
+        end)
+    end
 end
 
 local function ControlsPostConstruct(self)
@@ -484,6 +502,9 @@ end
 if GetModConfigData("Bat") then
     AddPrefabPostInit("vampirebat", VampirebatPrefabPostInit)
     AddComponentPostInit("batted", BattedPostInit)
+end
+if GetModConfigData("ChessMonsters") then
+    AddComponentPostInit("chessnavy", ChessNavyPostInit)
 end
 if GetModConfigData("HayfeverTime") then
     AddComponentPostInit("hayfever", HayfeverPostInit)

@@ -8,7 +8,7 @@ description = "Show event timer"
 author = "Denmou"
 
 --[NEW] A version number so you can ask people if they are running an old version of your mod.
-version = "2.2.3"
+version = "2.2.4"
 
 --[NEW] This lets other players know if your mod is out of date.  This typically needs to be updated every time there's a new game update.
 api_version = 6
@@ -120,9 +120,9 @@ configuration_options =
 		default = true,
 	},
 	{
-		name = "KrakenOnly",
-		label = "Kraken Only SW",
-		hover = "Just show Kraken in shipwrecked.",
+		name = "SWOnly",
+		label = "SW Only Self",
+		hover = "Just show item of SW in shipwrecked.",
 		options = {
 			{ description = "TRUE", data = true },
 			{ description = "FALSE", data = false }
@@ -153,6 +153,16 @@ configuration_options =
 		name = "HayfeverTime",
 		label = "Hayfever Time",
 		hover = "Display hayfever time.",
+		options = {
+			{ description = "TRUE", data = true },
+			{ description = "FALSE", data = false }
+		},
+		default = true,
+	},
+	{
+		name = "ChessMonsters",
+		label = "Chess Monsters",
+		hover = "Chess Monsters Refresh time.",
 		options = {
 			{ description = "TRUE", data = true },
 			{ description = "FALSE", data = false }

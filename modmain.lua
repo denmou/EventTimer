@@ -17,7 +17,8 @@ local Loc = _G.require "languages/loc"
 local BADGE_ROOT = nil
 local REFRESH_TIME = GetModConfigData("RefreshTime")
 local WARNING_TIME = GetModConfigData("WarningTime")
-local IDIOM = GetModConfigData("Idiom")
+
+local OBJECT_ITEMS = {}
 local ABSCISSA = 20
 local ORDINATE = -20
 local ABSCISSA_SPACING = 210
@@ -77,11 +78,11 @@ local function ShowNoticeBadge(name)
 end
 
 local function AporkalypsePostInit(self)
-    local _name = "aporkalypse"
-    self._cycleInterval = 60 * _G.TUNING.TOTAL_DAY_TIME
-    self._seasonEnd = 0
-    self.inst:DoPeriodicTask(REFRESH_TIME, function()
-        if BADGE_ROOT then
+    if GetModConfigData("Aporkalypse") then
+        local _name = "aporkalypse"
+        self._cycleInterval = 60 * _G.TUNING.TOTAL_DAY_TIME
+        self._seasonEnd = 0
+        self._eventTimer = function ()
             if not BADGE_LIST[_name] then
                 AddNoticeBadge(_name)
             end
@@ -107,14 +108,15 @@ local function AporkalypsePostInit(self)
                 end
             end
         end
-    end)
+        table.insert(OBJECT_ITEMS, self)
+    end
 end
 
 local function RocmanagerPostInit(self)
-    local _name = "roc"
-    self._arriveTime = 0
-    self.inst:DoPeriodicTask(REFRESH_TIME, function()
-        if BADGE_ROOT then
+    if GetModConfigData("Roc") then
+        local _name = "roc"
+        self._arriveTime = 0
+        self._eventTimer = function ()
             if not BADGE_LIST[_name] then
                 AddNoticeBadge(_name)
             end
@@ -143,13 +145,14 @@ local function RocmanagerPostInit(self)
                 end
             end
         end
-    end)
+        table.insert(OBJECT_ITEMS, self)
+    end
 end
 
 local function VolcanomanagerPostInit(self)
-    local _name = "volcano"
-    self.inst:DoPeriodicTask(REFRESH_TIME, function()
-        if BADGE_ROOT then
+    if GetModConfigData("Volcano") then
+        local _name = "volcano"
+        self._eventTimer = function ()
             if not BADGE_LIST[_name] then
                 AddNoticeBadge(_name)
             end
@@ -175,17 +178,51 @@ local function VolcanomanagerPostInit(self)
                 end
             end
         end
-    end)
+        table.insert(OBJECT_ITEMS, self)
+    end
 end
 
 local function BasehasslerPostInit(self)
-    self.inst:DoPeriodicTask(REFRESH_TIME, function()
-        if self.hasslers then
-            for _name,_boss in pairs(self.hasslers) do
+    if GetModConfigData("SeasonBoss") then
+        self._eventTimer = function ()
+            if self.hasslers then
+                for _name,_boss in pairs(self.hasslers) do
+                    if not BADGE_LIST[_name] then
+                    AddNoticeBadge(_name)
+                    end
+                    local _hassler = _G.TheSim:FindFirstEntityWithTag(_boss.prefab)
+                    if _hassler then
+                    if not self._hassler then
+                        ShowNoticeBadge(_name)
+                        BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.rage)
+                    end
+                    else
+                        self._hassler = nil
+                        local _state = self:GetHasslerState(_name)
+                        if  _state == self.hassler_states.DORMANT then
+                            HideNoticeBadge(_name)
+    	        	    else
+                            local _waitTime = math.ceil(_boss.timer)
+                            if _state == self.hassler_states.WARNING then
+                                ShowNoticeBadge(_name)
+                                BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.attack .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
+                            elseif _state == self.hassler_states.WAITING then
+                                if _waitTime < WARNING_TIME then
+                                    ShowNoticeBadge(_name)
+                                    BADGE_LIST[_name].badge.text:SetString("[" .. _boss.chance * 100 .. "%]" .. DISPLAY_TEXT.come .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
+                                else
+                                    HideNoticeBadge(_name)
+                                end
+                            end
+                        end
+                    end
+                end
+            else
+                local _name = self.hasslerprefab
                 if not BADGE_LIST[_name] then
                     AddNoticeBadge(_name)
                 end
-                local _hassler = _G.TheSim:FindFirstEntityWithTag(_boss.prefab)
+                local _hassler = _G.TheSim:FindFirstEntityWithTag(self.hasslerprefab)
                 if _hassler then
                     if not self._hassler then
                         ShowNoticeBadge(_name)
@@ -193,63 +230,33 @@ local function BasehasslerPostInit(self)
                     end
                 else
                     self._hassler = nil
-                    local _state = self:GetHasslerState(_name)
-                    if  _state == self.hassler_states.DORMANT then
+                    print()
+                    if not self.timetoattack then
                         HideNoticeBadge(_name)
-    	    	    else
-                        local _waitTime = math.ceil(_boss.timer)
-                        if _state == self.hassler_states.WARNING then
+                    else
+                        local _waitTime = math.ceil(self.timetoattack)
+                        print(_waitTime)
+                        if self.warning then
                             ShowNoticeBadge(_name)
                             BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.attack .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
-                        elseif _state == self.hassler_states.WAITING then
-                            if _waitTime < WARNING_TIME then
-                                ShowNoticeBadge(_name)
-                                BADGE_LIST[_name].badge.text:SetString("[" .. _boss.chance * 100 .. "%]" .. DISPLAY_TEXT.come .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
-                            else
-                                HideNoticeBadge(_name)
-                            end
+                        elseif _waitTime < WARNING_TIME then
+                            ShowNoticeBadge(_name)
+                            BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.come .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
+                        else
+                            HideNoticeBadge(_name)
                         end
                     end
                 end
             end
-        else
-            local _name = self.hasslerprefab
-            if not BADGE_LIST[_name] then
-                AddNoticeBadge(_name)
-            end
-            local _hassler = _G.TheSim:FindFirstEntityWithTag(self.hasslerprefab)
-            if _hassler then
-                if not self._hassler then
-                    ShowNoticeBadge(_name)
-                    BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.rage)
-                end
-            else
-                self._hassler = nil
-                print()
-                if not self.timetoattack then
-                    HideNoticeBadge(_name)
-                else
-                    local _waitTime = math.ceil(self.timetoattack)
-                    print(_waitTime)
-                    if self.warning then
-                        ShowNoticeBadge(_name)
-                        BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.attack .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
-                    elseif _waitTime < WARNING_TIME then
-                        ShowNoticeBadge(_name)
-                        BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.come .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
-                    else
-                        HideNoticeBadge(_name)
-                    end
-                end
-            end
         end
-    end)
+        table.insert(OBJECT_ITEMS, self)
+    end
 end
 
 local function TigersharkerPostInit(self)
-    local _name = "tigershark"
-    self.inst:DoPeriodicTask(REFRESH_TIME, function()
-        if BADGE_ROOT then
+    if GetModConfigData("Tigershark") then
+        local _name = "tigershark"
+        self._eventTimer = function ()
             if not BADGE_LIST[_name] then
                 AddNoticeBadge(_name)
             end
@@ -277,43 +284,43 @@ local function TigersharkerPostInit(self)
                 end
             end
         end
-    end)
+        table.insert(OBJECT_ITEMS, self)
+    end
 end
 
 local function KrakenerPostInit(self)
     local WORLD = _G.SaveGameIndex:GetCurrentMode()
-    if not GetModConfigData("SWOnly") or WORLD == "shipwrecked" then
+    if GetModConfigData("Kraken") and not GetModConfigData("SWOnly") or WORLD == "shipwrecked" then
         local _name = "kraken"
-        self.inst:DoPeriodicTask(REFRESH_TIME, function()
-            if BADGE_ROOT then
-                if not BADGE_LIST[_name] then
-                    AddNoticeBadge(_name)
-                end
-                if self.kraken then
+        self._eventTimer = function ()
+            if not BADGE_LIST[_name] then
+                AddNoticeBadge(_name)
+            end
+            if self.kraken then
+                ShowNoticeBadge(_name)
+                BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.rage)
+            else
+                local _waitTime = self:TimeUntilCanSpawn()
+                if _waitTime < WARNING_TIME then
                     ShowNoticeBadge(_name)
-                    BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.rage)
-                else
-                    local _waitTime = self:TimeUntilCanSpawn()
-                    if _waitTime < WARNING_TIME then
-                        ShowNoticeBadge(_name)
-                        if _waitTime > 0 then
-                            BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.reset .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
-                        else
-                            BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.ready)
-                        end
+                    if _waitTime > 0 then
+                        BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.reset .. ": " .. Define:timeFormat(math.ceil(_waitTime)))
                     else
-                        HideNoticeBadge(_name)
+                        BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.ready)
                     end
+                else
+                    HideNoticeBadge(_name)
                 end
             end
-        end)
+        end
+        table.insert(OBJECT_ITEMS, self)
     end
 end
 
 local function HoundedPostInit(self)
-    local _name = "hounds"
-    self.inst:DoPeriodicTask(REFRESH_TIME, function()
-        if BADGE_ROOT then
+    if GetModConfigData("Hound") then
+        local _name = "hounds"
+        self._eventTimer = function ()
             if not BADGE_LIST[_name] then
                 AddNoticeBadge(_name)
             end
@@ -329,20 +336,21 @@ local function HoundedPostInit(self)
                 HideNoticeBadge(_name)
             end
         end
-    end)
+        table.insert(OBJECT_ITEMS, self)
+    end
 end
 
 local function BattedPostInit(self)
-    local _name = "vampire_bats"
-    self._batsCount = 0
-    local _DoBatAttack = self.DoBatAttack
-    self.DoBatAttack = function(inst,...)
-        self._batsCount = #self.batstoattack
-        BAT_ATTACK = true
-        _DoBatAttack(inst,...)
-    end
-    self.inst:DoPeriodicTask(REFRESH_TIME, function()
-        if BADGE_ROOT then
+    if GetModConfigData("Bat") then
+        local _name = "vampire_bats"
+        self._batsCount = 0
+        local _DoBatAttack = self.DoBatAttack
+        self.DoBatAttack = function(inst,...)
+            self._batsCount = #self.batstoattack
+            BAT_ATTACK = true
+            _DoBatAttack(inst,...)
+        end
+        self._eventTimer = function ()
             if not BADGE_LIST[_name] then
                 AddNoticeBadge(_name)
             end
@@ -358,7 +366,8 @@ local function BattedPostInit(self)
                 HideNoticeBadge(_name)
             end
         end
-    end)
+        table.insert(OBJECT_ITEMS, self)
+    end
 end
 
 local function VampirebatPrefabPostInit(inst)
@@ -368,9 +377,9 @@ local function VampirebatPrefabPostInit(inst)
 end
 
 local function HayfeverPostInit(self)
-    local _name = "hayfever"
-    self.inst:DoPeriodicTask(REFRESH_TIME, function()
-        if BADGE_ROOT then
+    if GetModConfigData("HayfeverTime") then
+        local _name = "hayfever"
+        self._eventTimer = function ()
             if not BADGE_LIST[_name] then
                 AddNoticeBadge(_name)
             end
@@ -382,14 +391,15 @@ local function HayfeverPostInit(self)
                 HideNoticeBadge(_name)
             end
         end
-    end)
+        table.insert(OBJECT_ITEMS, self)
+    end
 end
 
 local function PugaliskFountainPrefabPostInit(inst) 
-    inst._resetTime = 0
-    local _name = "pugalisk_fountain"
-    inst:DoPeriodicTask(REFRESH_TIME, function()
-        if BADGE_ROOT then
+    if GetModConfigData("PugaliskFountain") then
+        inst._resetTime = 0
+        local _name = "pugalisk_fountain"
+        inst._eventTimer = function ()
             if not BADGE_LIST[_name] then
                 AddNoticeBadge(_name)
             end
@@ -413,37 +423,38 @@ local function PugaliskFountainPrefabPostInit(inst)
                 BADGE_LIST[_name].badge.text:SetString(DISPLAY_TEXT.flow)
             end
         end
-    end)
+        table.insert(OBJECT_ITEMS, inst)
+    end
 end
 
 local function ChessNavyPostInit(self)
     local WORLD = _G.SaveGameIndex:GetCurrentMode()
-    if not GetModConfigData("SWOnly") or WORLD == "shipwrecked" then
+    if GetModConfigData("ChessMonsters") and not GetModConfigData("SWOnly") or WORLD == "shipwrecked" then
         local _name = "chess_monsters"
-        self.inst:DoPeriodicTask(REFRESH_TIME, function()
-            if BADGE_ROOT then
-                if not BADGE_LIST[_name] then
-                    AddNoticeBadge(_name)
-                end
-                local _waitTime = self.spawn_timer
-                if _waitTime and _waitTime >= 0 then
-                    local _text = DISPLAY_TEXT.sleep
-                    if _waitTime > 0 then
-                        _text = DISPLAY_TEXT.come .. ": " .. Define:timeFormat(math.ceil(_waitTime))
-                    end
-                    BADGE_LIST[_name].badge.text:SetString(_text)
-                else
-                    HideNoticeBadge(_name)
-                end
+        self._eventTimer = function ()
+            if not BADGE_LIST[_name] then
+                AddNoticeBadge(_name)
             end
-        end)
+            local _waitTime = self.spawn_timer
+            if _waitTime and _waitTime >= 0 then
+                local _text = DISPLAY_TEXT.sleep
+                if _waitTime > 0 then
+                    _text = DISPLAY_TEXT.come .. ": " .. Define:timeFormat(math.ceil(_waitTime))
+                end
+                ShowNoticeBadge(_name)
+                BADGE_LIST[_name].badge.text:SetString(_text)
+            else
+                HideNoticeBadge(_name)
+            end
+        end
+        table.insert(OBJECT_ITEMS, self)
     end
 end
 
 local function ControlsPostConstruct(self)
     if not BADGE_ROOT then
         BADGE_ROOT = self.left_root
-        if IDIOM then 
+        if GetModConfigData("Idiom") then 
             DISPLAY_TEXT = Define.idiom
         else
             local _language = Loc.GetLanguage()
@@ -460,11 +471,11 @@ _G.EntityScript.GetDisplayName = function(self,...)
     local _name = GetDisplayName(self,...)
     if GetModConfigData("GrowthTime") and self.components and self.components.pickable and self.components.pickable.targettime then
         if self.components.inspectable and self.components.inspectable:GetStatus(self) == "WITHERED" then
-            _name = _name .. "\nWITHERED"
+            _name = _name .. "\n" .. Define.wither
         elseif self.components.pickable.paused then
-            _name = _name .. "\nStop Growing"
+            _name = _name .. "\n" .. Define.stop_grow
         elseif self.components.pickable:CanBePicked() then
-            _name = _name .. "\nPICKED"
+            _name = _name .. "\n" .. Define.pick
         else
             local _currentTime = math.ceil(self.components.pickable.targettime - _G.GetTime())
             _name = _name .. "\n" .. Define:timeFormat(_currentTime)
@@ -478,37 +489,25 @@ _G.EntityScript.GetDisplayName = function(self,...)
 end
 
 AddClassPostConstruct("widgets/controls", ControlsPostConstruct)
-if GetModConfigData("Aporkalypse") then
-    AddComponentPostInit("aporkalypse", AporkalypsePostInit)
-end
-if GetModConfigData("Roc") then
-    AddComponentPostInit("rocmanager", RocmanagerPostInit)
-end
-if GetModConfigData("Volcano") then
-    AddComponentPostInit("volcanomanager", VolcanomanagerPostInit)
-end
-if GetModConfigData("SeasonBoss") then
-    AddComponentPostInit("basehassler", BasehasslerPostInit)
-end
-if GetModConfigData("Tigershark") then
-    AddComponentPostInit("tigersharker", TigersharkerPostInit)
-end
-if GetModConfigData("Kraken") then
-    AddComponentPostInit("krakener", KrakenerPostInit)
-end
-if GetModConfigData("Hound") then
-    AddComponentPostInit("hounded", HoundedPostInit)
-end
-if GetModConfigData("Bat") then
-    AddPrefabPostInit("vampirebat", VampirebatPrefabPostInit)
-    AddComponentPostInit("batted", BattedPostInit)
-end
-if GetModConfigData("ChessMonsters") then
-    AddComponentPostInit("chessnavy", ChessNavyPostInit)
-end
-if GetModConfigData("HayfeverTime") then
-    AddComponentPostInit("hayfever", HayfeverPostInit)
-end
-if GetModConfigData("PugaliskFountain") then
-    AddPrefabPostInit("pugalisk_fountain", PugaliskFountainPrefabPostInit)
-end
+AddComponentPostInit("krakener", KrakenerPostInit)
+AddComponentPostInit("aporkalypse", AporkalypsePostInit)
+AddComponentPostInit("rocmanager", RocmanagerPostInit)
+AddComponentPostInit("volcanomanager", VolcanomanagerPostInit)
+AddComponentPostInit("basehassler", BasehasslerPostInit)
+AddComponentPostInit("tigersharker", TigersharkerPostInit)
+AddComponentPostInit("hounded", HoundedPostInit)
+AddComponentPostInit("hayfever", HayfeverPostInit)
+AddPrefabPostInit("pugalisk_fountain", PugaliskFountainPrefabPostInit)
+AddComponentPostInit("chessnavy", ChessNavyPostInit)
+AddPrefabPostInit("vampirebat", VampirebatPrefabPostInit)
+AddComponentPostInit("batted", BattedPostInit)
+
+AddSimPostInit(function (player)
+    player:DoPeriodicTask(REFRESH_TIME, function()
+        if BADGE_ROOT then
+            for i = 1, #OBJECT_ITEMS do
+                OBJECT_ITEMS[i]:_eventTimer()
+            end
+        end
+    end)
+end)

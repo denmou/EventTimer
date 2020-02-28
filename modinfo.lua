@@ -8,7 +8,7 @@ description = "Show event timer"
 author = "Denmou"
 
 --[NEW] A version number so you can ask people if they are running an old version of your mod.
-version = "2.2.4"
+version = "2.2.5"
 
 --[NEW] This lets other players know if your mod is out of date.  This typically needs to be updated every time there's a new game update.
 api_version = 6
@@ -43,7 +43,7 @@ configuration_options =
 			{ description = "500ms", data = 0.5 },
 			{ description = "1s", data = 1 }
 		},
-		default = 0.5,
+		default = 0.2,
 	},
 	{
 		name = "WarningTime",
@@ -55,9 +55,10 @@ configuration_options =
 			{ description = "30min", data = 1800 },
 			{ description = "40min", data = 2400 },
 			{ description = "50min", data = 3000 },
-			{ description = "60min", data = 3600 }
+			{ description = "60min", data = 3600 },
+			{ description = "120min", data = 7200 }
 		},
-		default = 1800,
+		default = 2400,
 	},
 	{
 		name = "Aporkalypse",

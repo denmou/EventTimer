@@ -505,11 +505,11 @@ _G.EntityScript.GetDisplayName = function(self,...)
     local _name = GetDisplayName(self,...)
     if GetModConfigData("GrowthTime") and self.components and self.components.pickable and self.components.pickable.targettime then
         if self.components.inspectable and self.components.inspectable:GetStatus(self) == "WITHERED" then
-            _name = _name .. "\n" .. Define.wither
+            _name = _name .. "\n" .. DISPLAY_TEXT.wither
         elseif self.components.pickable.paused then
-            _name = _name .. "\n" .. Define.stop_grow
+            _name = _name .. "\n" .. DISPLAY_TEXT.stop_grow
         elseif self.components.pickable:CanBePicked() then
-            _name = _name .. "\n" .. Define.pick
+            _name = _name .. "\n" .. DISPLAY_TEXT.pick
         else
             local _currentTime = math.ceil(self.components.pickable.targettime - _G.GetTime())
             _name = _name .. "\n" .. Define:timeFormat(_currentTime)

@@ -17,7 +17,8 @@ local Define = {
         dry = "drying",
         wither = "Withered",
         stop_grow = "Stop Growing",
-        pick = "Picked"
+        pick = "Picked",
+        generate = "Generated"
 	},
 	chinese = {
         sleep = "未激活",
@@ -37,7 +38,8 @@ local Define = {
         dry = "已干涸",
         wither = "已枯萎",
         stop_grow = "停止生长",
-        pick = "可摘取"
+        pick = "可摘取",
+        generate = "已生成"
     },
 	idiom = {
         sleep = "蓄势待发",
@@ -57,7 +59,8 @@ local Define = {
         dry = "甘井先竭",
         wither = "枯枝败叶",
         stop_grow = "中道而止",
-        pick = "硕果累累"
+        pick = "硕果累累",
+        generate = "忽隐忽现"
     }
 }
 

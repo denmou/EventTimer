@@ -6,7 +6,9 @@ Assets = {
     Asset("IMAGE", "images/customization_porkland.tex" ),
     Asset("ATLAS", "images/customization_porkland.xml" ),
     Asset("IMAGE", "images/ui.tex" ),
-    Asset("ATLAS", "images/ui.xml" )
+    Asset("ATLAS", "images/ui.xml" ),
+    Asset("IMAGE", "images/customisation_dst.tex" ),
+    Asset("ATLAS", "images/customisation_dst.xml" )
 }
 
 local _G = GLOBAL
@@ -451,6 +453,38 @@ local function ChessNavyPostInit(self)
     end
 end
 
+local function PeriodicThreatPostInit(self)
+    if GetModConfigData("Worm") then
+        local _name = "worms"
+        self._eventTimer = function ()
+            if not BADGE_LIST[_name] then
+                AddNoticeBadge(_name)
+            end
+            local worm = self.threats["WORM"]
+            if worm then
+                local _waitTime = worm.timer
+                local _text = nil
+                if _waitTime < WARNING_TIME then
+                    if worm.state == "wait" then
+                        _text = DISPLAY_TEXT.come .. ": " .. Define:timeFormat(math.ceil(_waitTime))
+                    elseif worm.state == "warn" then
+                        _text = DISPLAY_TEXT.attack .. ": " .. Define:timeFormat(math.ceil(_waitTime))
+                    elseif worm.state == "event" then
+                        _text = DISPLAY_TEXT.generate .. ": " .. math.floor(worm.numspawned)
+                    end
+                end
+                if _text then
+                    ShowNoticeBadge(_name)
+                    BADGE_LIST[_name].badge.text:SetString(_text)
+                else
+                    HideNoticeBadge(_name)
+                end
+            end
+        end
+        table.insert(OBJECT_ITEMS, self)
+    end
+end
+
 local function ControlsPostConstruct(self)
     if not BADGE_ROOT then
         BADGE_ROOT = self.left_root
@@ -501,6 +535,7 @@ AddPrefabPostInit("pugalisk_fountain", PugaliskFountainPrefabPostInit)
 AddComponentPostInit("chessnavy", ChessNavyPostInit)
 AddPrefabPostInit("vampirebat", VampirebatPrefabPostInit)
 AddComponentPostInit("batted", BattedPostInit)
+AddComponentPostInit("periodicthreat", PeriodicThreatPostInit)
 
 AddSimPostInit(function (player)
     player:DoPeriodicTask(REFRESH_TIME, function()

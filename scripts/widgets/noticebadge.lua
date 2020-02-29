@@ -8,6 +8,7 @@ local images = {
     "images/customization_porkland.xml", 
     "images/customization_shipwrecked.xml", 
     "images/customisation.xml",
+    "images/customisation_dst.xml",
 }
 
 local Noticebadge = Class(Widget, function(self, name)

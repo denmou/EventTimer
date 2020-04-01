@@ -8,7 +8,7 @@
 默认显示文本为英文、根据游戏显示语言适配中文文本  
 
 —Steam创意工坊链接：  
-https://steamcommunity.com/sharedfiles/filedetails/?id=1914952455&searchtext=Timer  
+https://steamcommunity.com/sharedfiles/filedetails/?id=1914952455&searchtext=
 
 游戏中效果：  
 

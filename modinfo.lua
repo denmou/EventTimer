@@ -8,7 +8,7 @@ description = "Show event timer"
 author = "Denmou"
 
 --[NEW] A version number so you can ask people if they are running an old version of your mod.
-version = "2.2.7"
+version = "2.2.8"
 
 --[NEW] This lets other players know if your mod is out of date.  This typically needs to be updated every time there's a new game update.
 api_version = 6
@@ -191,6 +191,26 @@ configuration_options =
 		default = true,
 	},
 	{
+		name = "LocoMotor",
+		label = "LocoMotor Stage",
+		hover = "Display locoMotor stage time.",
+		options = {
+			{ description = "TRUE", data = true },
+			{ description = "FALSE", data = false }
+		},
+		default = true,
+	},
+	{
+		name = "NightmareClock",
+		label = "Nightmare Phase",
+		hover = "Display nightmare phase time.",
+		options = {
+			{ description = "TRUE", data = true },
+			{ description = "FALSE", data = false }
+		},
+		default = true,
+	},
+	{
 		name = "GrowthTime",
 		label = "Growth Time",
 		hover = "Display growth time.",
@@ -204,6 +224,16 @@ configuration_options =
 		name = "FuelTime",
 		label = "Fuel Time",
 		hover = "Display fuel time.",
+		options = {
+			{ description = "TRUE", data = true },
+			{ description = "FALSE", data = false }
+		},
+		default = true,
+	},
+	{
+		name = "WX78",
+		label = "WX78 Charge",
+		hover = "Display wx78 charge time.",
 		options = {
 			{ description = "TRUE", data = true },
 			{ description = "FALSE", data = false }

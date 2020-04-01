@@ -29,14 +29,6 @@ _G.g_func_mod_config = GetModConfigData
 _G.g_func_component_init = AddComponentPostInit
 _G.g_func_prefab_init = AddPrefabPostInit
 
-_G.g_func_add_asset = function(name)
-    if not _G.g_obj_asset[name] then
-        table.insert(Assets, Asset('IMAGE', 'images/' .. name .. '.tex'))
-        table.insert(Assets, Asset('ATLAS', 'images/' .. name .. '.xml'))
-        _G.g_obj_asset[name] = 1
-    end
-end
-
 local Constant = _G.require 'constant'
 local Loc = _G.require 'languages/loc'
 if GetModConfigData('Idiom') then
@@ -65,7 +57,6 @@ _G.require 'extensions/pugalisk_fountain'
 _G.require 'extensions/rocmanager'
 _G.require 'extensions/tigersharker'
 _G.require 'extensions/volcanomanager'
---_G.require 'extensions/wilba'
 _G.require 'extensions/wx78'
 
 local function ControlsPostConstruct(self)

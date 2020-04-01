@@ -18,6 +18,8 @@ local function AporkalypsePostInit(self)
                 g_obj_control.set(name, g_obj_constant.end_in .. ': ' .. g_obj_utils.timeFormat(math.ceil(waitTime)))
             else
                 self.end_date = 0
+                g_str_aporkalypse_bat.time = 0
+                g_str_aporkalypse_bat.count = 0
                 local waitTime = self.begin_date - totalTime
                 if waitTime < g_str_warning_time then
                     g_obj_control.set(name, g_obj_constant.come .. ': ' .. g_obj_utils.timeFormat(math.ceil(waitTime)))

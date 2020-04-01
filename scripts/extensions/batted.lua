@@ -14,7 +14,7 @@ local function BattedPostInit(self)
         self._eventTimer = function()
             local waitTime = self.timetoattack
             local count = self:CountBats()
-            if waitTime > g_str_aporkalypse_bat.time then
+            if g_str_aporkalypse_bat.time and waitTime > g_str_aporkalypse_bat.time then
                 waitTime = g_str_aporkalypse_bat.time
                 count = g_str_aporkalypse_bat.count
             end

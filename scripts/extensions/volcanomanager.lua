@@ -17,7 +17,7 @@ local function VolcanomanagerPostInit(self)
                         local normtime = GetClock():GetNormTime()
                         local curSeg = normtime * 16 % 1
                         local waitTime = (eruptionSeg - curSeg) * TUNING.SEG_TIME
-                        if _waitTime < g_str_warning_time then
+                        if waitTime < g_str_warning_time then
                             g_obj_control.set(
                                 name,
                                 g_obj_constant.come .. ': ' .. g_obj_utils.timeFormat(math.ceil(waitTime))

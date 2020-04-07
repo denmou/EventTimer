@@ -16,6 +16,9 @@ Assets = {
 }
 
 local _G = GLOBAL
+_G.g_func_mod_config = GetModConfigData
+_G.g_func_component_init = AddComponentPostInit
+_G.g_func_prefab_init = AddPrefabPostInit
 
 _G.g_obj_control = _G.require 'control'
 _G.g_obj_utils = _G.require 'utils'
@@ -25,9 +28,6 @@ _G.g_obj_asset = {}
 _G.g_str_refresh_time = GetModConfigData('RefreshTime')
 _G.g_str_warning_time = GetModConfigData('WarningTime')
 _G.g_str_aporkalypse_bat = {}
-_G.g_func_mod_config = GetModConfigData
-_G.g_func_component_init = AddComponentPostInit
-_G.g_func_prefab_init = AddPrefabPostInit
 
 local Constant = _G.require 'constant'
 local Loc = _G.require 'languages/loc'

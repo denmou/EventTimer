@@ -2,13 +2,13 @@
 name = 'Event Timer'
 
 --[NEW] A description of the mod.
-description = 'Show event timer'
+description = '显示游戏事件的剩余时间\n—By Google Translate\nShow the remaining time for game events'
 
 --[NEW] Who wrote this awesome mod?
 author = 'Denmou'
 
 --[NEW] A version number so you can ask people if they are running an old version of your mod.
-version = '2.3.1'
+version = '2.3.2'
 
 --[NEW] This lets other players know if your mod is out of date.  This typically needs to be updated every time there's a new game update.
 api_version = 6
@@ -23,14 +23,79 @@ icon = 'modicon.tex'
 
 configuration_options = {
     {
-        name = 'Idiom',
-        label = 'Idiom',
-        hover = 'Display idioms.',
+        name = 'Rows',
+        label = 'Rows',
+        hover = 'Number of rows per column',
         options = {
-            {description = 'TRUE', data = true},
-            {description = 'FALSE', data = false}
+            {description = '1', data = 1},
+            {description = '2', data = 2},
+            {description = '3', data = 3},
+            {description = '4', data = 4},
+            {description = '5', data = 5},
+            {description = '6', data = 6},
+            {description = '7', data = 7},
+            {description = '8', data = 8},
+            {description = '9', data = 9}
         },
-        default = false
+        default = 5
+    },
+    {
+        name = 'Multiplier',
+        label = 'Display multiplier',
+        hover = 'Display multiplier',
+        options = {
+            {description = '0.5', data = 0.5},
+            {description = '0.6', data = 0.6},
+            {description = '0.7', data = 0.7},
+            {description = '0.8', data = 0.8},
+            {description = '0.9', data = 0.9},
+            {description = '1.0', data = 1},
+            {description = '1.1', data = 1.1},
+            {description = '1.2', data = 1.2},
+            {description = '1.3', data = 1.3},
+            {description = '1.4', data = 1.4},
+            {description = '1.5', data = 1.5},
+            {description = '1.6', data = 1.6},
+            {description = '1.7', data = 1.7},
+            {description = '1.8', data = 1.8},
+            {description = '1.9', data = 1.9},
+            {description = '2.0', data = 2},
+            {description = '2.1', data = 2.1},
+            {description = '2.2', data = 2.2},
+            {description = '2.3', data = 2.3},
+            {description = '2.4', data = 2.4},
+            {description = '2.5', data = 2.5},
+            {description = '2.6', data = 2.6},
+            {description = '2.7', data = 2.7},
+            {description = '2.8', data = 2.8},
+            {description = '2.9', data = 2.9},
+            {description = '3.0', data = 3}
+        },
+        default = 1
+    },
+    {
+        name = 'FontMultiplier',
+        label = 'Font multiplier',
+        hover = 'Font multiplier',
+        options = {
+            {description = '0.5', data = 0.5},
+            {description = '0.6', data = 0.6},
+            {description = '0.7', data = 0.7},
+            {description = '0.8', data = 0.8},
+            {description = '0.9', data = 0.9},
+            {description = '1.0', data = 1},
+            {description = '1.1', data = 1.1},
+            {description = '1.2', data = 1.2},
+            {description = '1.3', data = 1.3},
+            {description = '1.4', data = 1.4},
+            {description = '1.5', data = 1.5},
+            {description = '1.6', data = 1.6},
+            {description = '1.7', data = 1.7},
+            {description = '1.8', data = 1.8},
+            {description = '1.9', data = 1.9},
+            {description = '2.0', data = 2},
+        },
+        default = 1
     },
     {
         name = 'RefreshTime',
@@ -58,6 +123,16 @@ configuration_options = {
             {description = '120min', data = 7200}
         },
         default = 2400
+    },
+    {
+        name = 'Idiom',
+        label = 'Idiom',
+        hover = 'Display idioms.',
+        options = {
+            {description = 'TRUE', data = true},
+            {description = 'FALSE', data = false}
+        },
+        default = false
     },
     {
         name = 'Aporkalypse',

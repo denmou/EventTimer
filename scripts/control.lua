@@ -1,10 +1,11 @@
 local Noticebadge = require 'widgets/noticebadge'
 
-local ABSCISSA = 20
-local ORDINATE = -20
-local ABSCISSA_SPACING = 210
-local ORDINATE_SPACING = -31
-local COLUMN_LENGTH = 5
+local multiplier = g_func_mod_config('Multiplier')
+local ABSCISSA = 20 * multiplier
+local ORDINATE = -20 * multiplier
+local ABSCISSA_SPACING = 210 * multiplier
+local ORDINATE_SPACING = -31 * multiplier
+local COLUMN_LENGTH = g_func_mod_config('Rows')
 local BADGE_LIST = {}
 local BADGE_INDEX = {}
 

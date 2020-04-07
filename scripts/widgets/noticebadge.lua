@@ -4,6 +4,9 @@ local easing = require 'easing'
 local Widget = require 'widgets/widget'
 local Image = require 'widgets/image'
 
+local multiplier = g_func_mod_config('Multiplier')
+local fontMultiplier = g_func_mod_config('FontMultiplier')
+
 local images = {
     'images/customization_porkland.xml',
     'images/customization_shipwrecked.xml',
@@ -24,7 +27,7 @@ local Noticebadge =
         self:SetVAnchor(ANCHOR_TOP)
 
         self.icon_bg = self:AddChild(Image('images/ui.xml', 'portrait_bg.tex'))
-        self.icon_bg:SetSize(30, 30)
+        self.icon_bg:SetSize(30 * multiplier, 30 * multiplier)
 
         for i, v in ipairs(images) do
             self.icon = self:AddChild(Image(v, name .. '.tex'))
@@ -34,16 +37,16 @@ local Noticebadge =
             end
         end
 
-        self.icon:SetSize(30, 30)
+        self.icon:SetSize(30 * multiplier, 30 * multiplier)
 
         self.bg = self:AddChild(Image('images/ui.xml', 'textbox_long.tex'))
-        self.bg:SetSize(185, 31.5)
-        self.bg:SetPosition(104.5, -.5)
+        self.bg:SetSize(185 * multiplier, 31.5 * multiplier)
+        self.bg:SetPosition(104.5 * multiplier, -.5 * multiplier)
 
-        self.text = self:AddChild(Text(NUMBERFONT, 28))
+        self.text = self:AddChild(Text(NUMBERFONT, 28 * fontMultiplier))
         self.text:SetHAlign(ANCHOR_MIDDLE)
-        self.text:SetPosition(104.5, -.5)
-        self.text:SetScale(.8, .8, .8)
+        self.text:SetPosition(106.5 * multiplier, -.5 * multiplier)
+        self.text:SetScale(.8 * multiplier)
     end
 )
 

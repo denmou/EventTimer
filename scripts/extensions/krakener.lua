@@ -1,6 +1,6 @@
 local function KrakenerPostInit(self)
     local WORLD = SaveGameIndex:GetCurrentMode()
-    if g_func_mod_config('Kraken') and not g_func_mod_config('SWOnly') or WORLD == 'shipwrecked' then
+    if g_func_mod_config('Kraken') and (not g_func_mod_config('SWOnly') or WORLD == 'shipwrecked') then
         local name = 'kraken'
         g_obj_control.add(name)
         self._eventTimer = function()

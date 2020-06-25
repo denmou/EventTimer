@@ -1,6 +1,6 @@
 # Don't Starve Mod
 ## EventTimer
-![icon](https://github.com/denmou20/EventTimer/raw/master/preview.png)  
+![icon](https://steamuserimages-a.akamaihd.net/ugc/787498263132570199/6FE03494BAC8F42BB56CCCA07FF525D5BF1C1D8B/)  
 显示事件计时器、可摘取作物生长状态、剩余燃料值
 自适应分辨率
 

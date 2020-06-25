@@ -1,17 +1,21 @@
+local id = "hayfever"
+
 local function HayfeverPostInit(self)
-    if g_func_mod_config('HayfeverTime') then
-        local name = 'hayfever'
-        g_obj_control.add(name)
-        self._eventTimer = function()
+    g_obj_control.add(id)
+    self._eventTimer = function()
+        local config = _G.g_func_mod_config:GetById(id)
+        if config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             local waitTime = self.nextsneeze
-            if waitTime < g_str_warning_time and self.enabled then
-                g_obj_control.set(name, g_obj_constant.sneeze .. ': ' .. g_obj_utils.timeFormat(math.ceil(waitTime)))
+            if waitTime < config.time and self.enabled then
+                g_obj_control.set(id, g_obj_constant.sneeze .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
             else
-                g_obj_control.hide(name)
+                g_obj_control.hide(id)
             end
+        else
+            g_obj_control.hide(id)
         end
-        table.insert(g_obj_items, self)
     end
+    table.insert(g_obj_items, self)
 end
 
-g_func_component_init('hayfever', HayfeverPostInit)
+g_func_component_init("hayfever", HayfeverPostInit)

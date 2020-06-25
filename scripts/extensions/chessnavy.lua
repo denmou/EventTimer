@@ -1,23 +1,25 @@
+local id = "chess_monsters"
+
 local function ChessNavyPostInit(self)
-    local WORLD = SaveGameIndex:GetCurrentMode()
-    if g_func_mod_config('ChessMonsters') and not g_func_mod_config('SWOnly') or WORLD == 'shipwrecked' then
-        local name = 'chess_monsters'
-        g_obj_control.add(name)
-        self._eventTimer = function()
+    g_obj_control.add(id)
+    self._eventTimer = function()
+        local config = _G.g_func_mod_config:GetById(id)
+        if config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             local waitTime = self.spawn_timer
-            if waitTime and waitTime >= 0 then
+            if waitTime and waitTime >= 0 and waitTime < config.time then
                 local text = g_obj_constant.sleep
                 if waitTime > 0 then
-                    text = g_obj_constant.come .. ': ' .. g_obj_utils.timeFormat(math.ceil(waitTime))
+                    text = g_obj_constant.come .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
                 end
-
-                g_obj_control.set(name, text)
+                g_obj_control.set(id, text)
             else
-                g_obj_control.hide(name)
+                g_obj_control.hide(id)
             end
+        else
+            g_obj_control.hide(id)
         end
-        table.insert(g_obj_items, self)
     end
+    table.insert(g_obj_items, self)
 end
 
-g_func_component_init('chessnavy', ChessNavyPostInit)
+g_func_component_init("chessnavy", ChessNavyPostInit)

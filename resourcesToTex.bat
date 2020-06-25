@@ -6,5 +6,5 @@ for /r "./resources" %%i in (*) do (
 )
 set "value=%value:~1%"
 echo powershell code
-echo ktech --atlas ./images/resources.xml --width 2048 --height 1024 %value%
+echo ktech --atlas ./images/resources.xml --width 512 --height 256 %value%
 pause

@@ -1,11 +1,13 @@
+local id = "aporkalypse"
+local herald = "ancient_herald"
+
 local function AporkalypsePostInit(self)
-    if g_func_mod_config('Aporkalypse') then
-        local name = 'aporkalypse'
-        local herald = 'ancient_herald'
-        g_obj_control.add(name)
-        g_obj_control.add(herald)
-        self.end_date = 0
-        self._eventTimer = function()
+    g_obj_control.add(id)
+    g_obj_control.add(herald)
+    self.end_date = 0
+    self._eventTimer = function()
+        local config = _G.g_func_mod_config:GetById(id)
+        if config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             local totalTime = GetClock():GetTotalTime()
             if self:IsActive() then
                 local normTime = GetClock():GetNormTime()
@@ -15,16 +17,16 @@ local function AporkalypsePostInit(self)
                     self.end_date = totalDay * TUNING.TOTAL_DAY_TIME + totalTime
                 end
                 local waitTime = self.end_date - totalTime
-                g_obj_control.set(name, g_obj_constant.end_in .. ': ' .. g_obj_utils.timeFormat(math.ceil(waitTime)))
+                g_obj_control.set(id, g_obj_constant.end_in .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
             else
                 self.end_date = 0
                 g_str_aporkalypse_bat.time = 0
                 g_str_aporkalypse_bat.count = 0
                 local waitTime = self.begin_date - totalTime
-                if waitTime < g_str_warning_time then
-                    g_obj_control.set(name, g_obj_constant.come .. ': ' .. g_obj_utils.timeFormat(math.ceil(waitTime)))
+                if waitTime < config.time then
+                    g_obj_control.set(id, g_obj_constant.come .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
                 else
-                    g_obj_control.hide(name)
+                    g_obj_control.hide(id)
                 end
             end
             if self.bat_task then
@@ -33,13 +35,16 @@ local function AporkalypsePostInit(self)
             end
             if self.herald_check_task then
                 local waitTime = (self.herald_check_task.nexttick - GetTick()) * GetTickTime()
-                g_obj_control.set(herald, g_obj_constant.refresh .. ': ' .. g_obj_utils.timeFormat(math.ceil(waitTime)))
+                g_obj_control.set(herald, g_obj_constant.refresh .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
             else
                 g_obj_control.hide(herald)
             end
+        else
+            g_obj_control.hide(id)
+            g_obj_control.hide(herald)
         end
-        table.insert(g_obj_items, self)
     end
+    table.insert(g_obj_items, self)
 end
 
-g_func_component_init('aporkalypse', AporkalypsePostInit)
+g_func_component_init("aporkalypse", AporkalypsePostInit)

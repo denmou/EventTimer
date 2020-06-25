@@ -1,15 +1,17 @@
+local id = "volcano"
+
 local function VolcanomanagerPostInit(self)
-    if g_func_mod_config('Volcano') then
-        local name = 'volcano'
-        g_obj_control.add(name)
-        self._eventTimer = function()
+    g_obj_control.add(id)
+    self._eventTimer = function()
+        local config = _G.g_func_mod_config:GetById(id)
+        if config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             if self:IsDormant() then
-                g_obj_control.hide(name)
+                g_obj_control.hide(id)
             else
                 if self:IsFireRaining() then
                     g_obj_control.set(
-                        name,
-                        g_obj_constant.end_in .. ': ' .. g_obj_utils.timeFormat(math.ceil(self.firerain_timer))
+                        id,
+                        g_obj_constant.end_in .. ": " .. g_obj_utils.timeFormat(math.ceil(self.firerain_timer))
                     )
                 else
                     local eruptionSeg = self:GetNumSegmentsUntilEruption()
@@ -17,20 +19,22 @@ local function VolcanomanagerPostInit(self)
                         local normtime = GetClock():GetNormTime()
                         local curSeg = normtime * 16 % 1
                         local waitTime = (eruptionSeg - curSeg) * TUNING.SEG_TIME
-                        if waitTime < g_str_warning_time then
+                        if waitTime < config.time then
                             g_obj_control.set(
-                                name,
-                                g_obj_constant.come .. ': ' .. g_obj_utils.timeFormat(math.ceil(waitTime))
+                                id,
+                                g_obj_constant.come .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
                             )
                         else
-                            g_obj_control.hide(name)
+                            g_obj_control.hide(id)
                         end
                     end
                 end
             end
+        else
+            g_obj_control.hide(id)
         end
-        table.insert(g_obj_items, self)
     end
+    table.insert(g_obj_items, self)
 end
 
-g_func_component_init('volcanomanager', VolcanomanagerPostInit)
+g_func_component_init("volcanomanager", VolcanomanagerPostInit)

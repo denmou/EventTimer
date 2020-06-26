@@ -93,7 +93,7 @@ local Configurationbadge =
         local dlc_count = 0
 
         if self.config.name then
-            self.title = self:AddChild(Text(NUMBERFONT, RESOLUTION_Y * .025))
+            self.title = self:AddChild(Text(BODYTEXTFONT, RESOLUTION_Y * .025))
             self.title:SetSize(RESOLUTION_X * .15 - RESOLUTION_Y * .06, RESOLUTION_Y * .03)
             self.title:Nudge(Vector3(RESOLUTION_X * .075 + RESOLUTION_Y * .05, RESOLUTION_Y * .015, 0))
             local nameString

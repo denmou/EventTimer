@@ -68,7 +68,7 @@ _G.require "extensions/volcanomanager"
 
 local function ControlsPostConstruct(self)
     if not _G.g_obj_panel then
-        _G.g_obj_panel = self.mapcontrols
+        _G.g_obj_panel = self.sidepanel
     end
 end
 

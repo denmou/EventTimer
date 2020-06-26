@@ -12,11 +12,11 @@ local images = {
     "images/resources.xml"
 }
 
-local font_size = 20
-local icon_size = {22,22}
+local font_size = 25
+local icon_size = {28,28}
 local bg_size = {200,30}
-local bg_offset = 82
-local text_offset = 93
+local bg_offset = 111
+local text_offset = 111
 
 
 
@@ -27,19 +27,16 @@ local Noticebadge =
         Widget._ctor(self, "Noticebadge")
         self.name = name
 
+        --self:SetScaleMode(SCALEMODE_PROPORTIONAL)
+
         self.bg = self:AddChild(Image("images/ui.xml", "textbox_long.tex"))
         self.bg:SetSize(bg_size)
-        self.bg:Nudge(Vector3(bg_offset,0,0))
-
-        --self:SetHAnchor(ANCHOR_LEFT)
-        --self:SetVAnchor(ANCHOR_MIDDLE)
-        --self:SetMaxPropUpscale(1.25)
-        --self:SetHAnchor(ANCHOR_RIGHT)
-        --self:SetVAnchor(ANCHOR_BOTTOM)
-        --self:SetScaleMode(SCALEMODE_PROPORTIONAL)
+        self.bg:Nudge(Vector3(bg_offset,-1,0))
+        self.bg:SetTint(1, 1, 1, .62)
 
         self.icon_bg = self:AddChild(Image("images/ui.xml", "portrait_bg.tex"))
         self.icon_bg:SetSize(icon_size)
+        self.icon_bg:SetTint(1, 1, 1, .62)
 
         for i, v in ipairs(images) do
             self.icon = self:AddChild(Image(v, name .. ".tex"))
@@ -48,12 +45,13 @@ local Noticebadge =
                 break
             end
         end
-
         self.icon:SetSize(icon_size)
+        self.icon:SetTint(1, 1, 1, .62)
 
         self.text = self:AddChild(Text(NUMBERFONT, font_size))
         self.text:SetHAlign(ANCHOR_MIDDLE)
-        self.text:Nudge(Vector3(text_offset,0,0))
+        self.text:Nudge(Vector3(text_offset,-1,0))
+        self.text:SetAlpha(.62)
     end
 )
 

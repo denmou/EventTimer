@@ -4,9 +4,11 @@ local BADGE_LIST = {}
 local BADGE_INDEX = {}
 local Control = {}
 
-local position_x = -120
-local position_y = 110
-local spacing = 30
+local position_x = -350
+local position_y = 40
+local spacing_x = -225
+local spacing_y = -30
+local column_size = 6
 
 local function ChangeNoticeBadge()
     if g_obj_panel then
@@ -25,10 +27,13 @@ local function ChangeNoticeBadge()
                 end
                 item.badge.text:SetString(item.value)
                 item.badge:Show()
-                local value = position_y+(item.index-hideCount-1)*spacing
-                if item.y ~= value then
-                    item.badge:SetPosition(position_x, value)
-                    item.y = value
+                local column_index = math.floor((i - hideCount) / (column_size + 1))
+                local item_x = position_x + column_index * spacing_x
+                local item_y = position_y + (i - hideCount - 1) % column_size * spacing_y
+                if item.y ~= item_y or item.x ~= item_x then
+                    item.badge:SetPosition(item_x, item_y)
+                    item.x = item_x
+                    item.y = item_y
                 end
             end
         end
@@ -41,9 +46,8 @@ function Control.add(name)
             index = #BADGE_INDEX,
             badge = nil,
             value = nil,
+            x = 0,
             y = 0
-            --abscissa = 0,
-            --ordinate = 0
         }
         table.insert(BADGE_INDEX, name)
     end

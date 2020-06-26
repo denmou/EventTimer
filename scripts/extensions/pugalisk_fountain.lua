@@ -4,7 +4,7 @@ local function PugaliskFountainPrefabPostInit(inst)
     g_obj_control.add(id)
     inst._eventTimer = function()
         local config = _G.g_func_mod_config:GetById(id)
-        if config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
+        if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             if inst.dry then
                 if inst.resettask then
                     local waitTime = (inst.resettask.nexttick - GetTick()) * GetTickTime()

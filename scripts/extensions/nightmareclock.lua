@@ -5,7 +5,7 @@ local function NightmareClockPostInit(self)
     g_obj_control.add(name)
     self._eventTimer = function()
         local config = _G.g_func_mod_config:GetById(id)
-        if config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
+        if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             local waitTime = self:GetTimeLeftInEra()
             if waitTime < config.time then
                 g_obj_control.set(

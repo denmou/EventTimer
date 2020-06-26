@@ -9,7 +9,7 @@ local function LocoMotorPostInit(self, inst)
         self._eventTimer = function()
             local config = _G.g_func_mod_config:GetById(id)
             for key, name in pairs(MAP) do
-                if config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
+                if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
                     g_obj_control.add(name)
                     local waitTime = self.speed_modifiers_add_timer[key]
                     if waitTime then

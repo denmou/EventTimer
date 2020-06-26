@@ -4,7 +4,7 @@ local function PeriodicThreatPostInit(self)
     g_obj_control.add(id)
     self._eventTimer = function()
         local config = _G.g_func_mod_config:GetById(id)
-        if config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
+        if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             local worm = self.threats["WORM"]
             if worm then
                 local waitTime = worm.timer

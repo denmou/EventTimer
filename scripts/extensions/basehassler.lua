@@ -6,7 +6,7 @@ local function BasehasslerPostInit(self)
         if self.hasslers then
             for name, boss in pairs(self.hasslers) do
                 g_obj_control.add(name)
-                if config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
+                if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
                     local hassler = TheSim:FindFirstEntityWithTag(boss.prefab)
                     if hassler then
                         g_obj_control.set(name, g_obj_constant.rage)
@@ -44,7 +44,7 @@ local function BasehasslerPostInit(self)
         else
             local name = self.hasslerprefab
             g_obj_control.add(name)
-            if config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
+            if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
                 local hassler = TheSim:FindFirstEntityWithTag(self.hasslerprefab)
                 if hassler then
                     g_obj_control.set(name, g_obj_constant.rage)

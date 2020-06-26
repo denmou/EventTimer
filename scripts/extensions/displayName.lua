@@ -11,7 +11,7 @@ EntityScript.GetDisplayName = function(self, ...)
         local pickable = self.components.pickable
         local hackable = self.components.hackable
         local fueled = self.components.fueled
-        if config_growthTime.switch and (g_dlc_mode and config_growthTime.dlc[g_dlc_mode]) then
+        if config_growthTime and config_growthTime.switch and (g_dlc_mode and config_growthTime.dlc[g_dlc_mode]) then
             if pickable then
                 if self.components.inspectable and self.components.inspectable:GetStatus(self) == "WITHERED" then
                     name = name .. "\n" .. g_obj_constant.wither
@@ -26,7 +26,7 @@ EntityScript.GetDisplayName = function(self, ...)
                 name = name .. "\n" .. g_obj_utils.timeFormat(math.ceil(currentTime))
             end
         end
-        if config_fuelTime.switch and (g_dlc_mode and config_fuelTime.dlc[g_dlc_mode]) and fueled then
+        if config_fuelTime and config_fuelTime.switch and (g_dlc_mode and config_fuelTime.dlc[g_dlc_mode]) and fueled then
             local currentTime = math.ceil(fueled.currentfuel)
             local maxTime = math.ceil(fueled.maxfuel)
             name = name .. "\n" .. g_obj_utils.timeFormat(currentTime) .. "/" .. g_obj_utils.timeFormat(maxTime)

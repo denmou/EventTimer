@@ -1,37 +1,38 @@
-local modname = "EventTimer"
+local modname = 'enevt_timer'
+local path
 
 local options = {
     {
-        id = "aporkalypse",
-        icon = "aporkalypse",
-        type = {"NAMES"},
-        name = "APORKALYPSE_CLOCK",
+        id = 'aporkalypse',
+        icon = 'aporkalypse',
+        type = {'NAMES'},
+        name = 'APORKALYPSE_CLOCK',
         switch = true,
         dlc = {
             rog = true,
             sw = true,
             ham = true
         },
-        time = 24*60
+        time = 24 * 60
     },
     {
-        id = "roc",
-        icon = "roc",
-        type = {"UI","CUSTOMIZATIONSCREEN","NAMES"},
-        name = "ROC",
+        id = 'roc',
+        icon = 'roc',
+        type = {'UI', 'CUSTOMIZATIONSCREEN', 'NAMES'},
+        name = 'ROC',
         switch = true,
         dlc = {
             rog = true,
             sw = true,
             ham = true
         },
-        time = 24*60
+        time = 24 * 60
     },
     {
-        id = "pugalisk_fountain",
-        icon = "pugalisk_fountain",
-        type = {"NAMES"},
-        name = "PUGALISK_FOUNTAIN",
+        id = 'pugalisk_fountain',
+        icon = 'pugalisk_fountain',
+        type = {'NAMES'},
+        name = 'PUGALISK_FOUNTAIN',
         switch = true,
         dlc = {
             rog = true,
@@ -40,49 +41,49 @@ local options = {
         }
     },
     {
-        id = "hayfever",
-        icon = "hayfever",
-        type = {"UI","CUSTOMIZATIONSCREEN","NAMES"},
-        name = "HAYFEVER",
+        id = 'hayfever',
+        icon = 'hayfever',
+        type = {'UI', 'CUSTOMIZATIONSCREEN', 'NAMES'},
+        name = 'HAYFEVER',
         switch = true,
         dlc = {
             rog = true,
             sw = true,
             ham = true
         },
-        time = 16*60
+        time = 16 * 60
     },
     {
-        id = "volcano",
-        icon = "volcano",
-        type = {"NAMES"},
-        name = "VOLCANO",
+        id = 'volcano',
+        icon = 'volcano',
+        type = {'NAMES'},
+        name = 'VOLCANO',
         switch = true,
         dlc = {
             rog = true,
             sw = true,
             ham = true
         },
-        time = 24*60
+        time = 24 * 60
     },
     {
-        id = "chess_monsters",
-        icon = "chess_monsters",
-        type = {"NAMES"},
-        name = "KNIGHTBOAT",
+        id = 'chess_monsters',
+        icon = 'chess_monsters',
+        type = {'NAMES'},
+        name = 'KNIGHTBOAT',
         switch = true,
         dlc = {
             rog = true,
             sw = true,
             ham = true
         },
-        time = 24*60
+        time = 24 * 60
     },
     {
-        id = "basehassler",
-        icon = "deerclops",
-        type = {"NAMES"},
-        name = "DEERCLOPS",
+        id = 'basehassler',
+        icon = 'deerclops',
+        type = {'NAMES'},
+        name = 'DEERCLOPS',
         group = true,
         switch = true,
         dlc = {
@@ -90,91 +91,91 @@ local options = {
             sw = true,
             ham = true
         },
-        time = 24*60
+        time = 24 * 60
     },
     {
-        id = "tigershark",
-        icon = "tigershark",
-        type = {"NAMES"},
-        name = "TIGERSHARK",
+        id = 'tigershark',
+        icon = 'tigershark',
+        type = {'NAMES'},
+        name = 'TIGERSHARK',
         switch = true,
         dlc = {
             rog = true,
             sw = true,
             ham = true
         },
-        time = 24*60
+        time = 24 * 60
     },
     {
-        id = "kraken",
-        icon = "kraken",
-        type = {"NAMES"},
-        name = "KRAKEN",
+        id = 'kraken',
+        icon = 'kraken',
+        type = {'NAMES'},
+        name = 'KRAKEN',
         switch = true,
         dlc = {
             rog = true,
             sw = true,
             ham = true
         },
-        time = 24*60
+        time = 24 * 60
     },
     {
-        id = "hounds",
-        icon = "hounds",
-        type = {"NAMES"},
-        name = "HOUND",
+        id = 'hounds',
+        icon = 'hounds',
+        type = {'NAMES'},
+        name = 'HOUND',
         switch = true,
         dlc = {
             rog = true,
             sw = true,
             ham = true
         },
-        time = 24*60
+        time = 24 * 60
     },
     {
-        id = "vampire_bats",
-        icon = "vampire_bats",
-        type = {"NAMES"},
-        name = "VAMPIREBAT",
+        id = 'vampire_bats',
+        icon = 'vampire_bats',
+        type = {'NAMES'},
+        name = 'VAMPIREBAT',
         switch = true,
         dlc = {
             rog = true,
             sw = true,
             ham = true
         },
-        time = 24*60
+        time = 24 * 60
     },
     {
-        id = "worm",
-        icon = "worm",
-        type = {"NAMES"},
-        name = "WORM",
+        id = 'worm',
+        icon = 'worm',
+        type = {'NAMES'},
+        name = 'WORM',
         switch = true,
         dlc = {
             rog = true,
             sw = true,
             ham = true
         },
-        time = 24*60
+        time = 24 * 60
     },
     {
-        id = "nightmareclock",
-        icon = "fissure",
-        type = {"NAMES"},
-        name = "NIGHTMARELIGHT",
+        id = 'nightmareclock',
+        icon = 'fissure',
+        type = {'NAMES'},
+        name = 'NIGHTMARELIGHT',
         switch = true,
         dlc = {
             rog = true,
             sw = true,
             ham = true
         },
-        time = 24*60
+        time = 24 * 60
     },
     {
-        id = "locomotor",
-        icon = "coffee",
-        type = {"NAMES"},
-        name = "COFFEE",
+        id = 'locomotor',
+        icon = 'coffee',
+        type = {'NAMES'},
+        name = 'COFFEE',
         group = true,
         switch = true,
         dlc = {
@@ -184,10 +185,10 @@ local options = {
         }
     },
     {
-        id = "WX78",
-        icon = "lightning",
-        type = {"NAMES"},
-        name = "WX78",
+        id = 'WX78',
+        icon = 'lightning',
+        type = {'NAMES'},
+        name = 'WX78',
         switch = true,
         dlc = {
             rog = true,
@@ -196,8 +197,8 @@ local options = {
         }
     },
     {
-        id = "growthTime",
-        icon = "regrowth",
+        id = 'growthTime',
+        icon = 'regrowth',
         switch = true,
         dlc = {
             rog = true,
@@ -206,8 +207,8 @@ local options = {
         }
     },
     {
-        id = "fuelTime",
-        icon = "firepit",
+        id = 'fuelTime',
+        icon = 'firepit',
         switch = true,
         dlc = {
             rog = true,
@@ -217,21 +218,44 @@ local options = {
     }
 }
 
-local Configure = Class(function(self)
-    self.options = {}
-    self.options_active = {}
-end)
+local Configure =
+    Class(
+    function(self)
+        self.options = {}
+        self.options_active = {}
+    end
+)
 
 function Configure:Init()
-    local config = KnownModIndex:LoadModConfigurationOptions(modname)
-    if not config then
-        self.options = deepcopy(options)
-        KnownModIndex:SaveConfigurationOptions(function() print("EventTimer: init configuration") end, modname, self.options)
-    else
-        --self.configuration_options = config
-        self.options = deepcopy(config)
-    end
-    self.options_active = deepcopy(self.options)
+    path = KnownModIndex:GetModConfigurationPath(modname)
+    TheSim:GetPersistentString(
+        path,
+        function(load_success, str)
+            local config
+            if load_success == true then
+                local success, savedata = RunInSandbox(str)
+                if success and string.len(str) > 0 then
+                    config = savedata
+                end
+            end
+            if not config then
+                self.options = deepcopy(options)
+                self:Save(
+                    function()
+                        print('EventTimer: init configuration')
+                    end
+                )
+            else
+                self.options = deepcopy(config)
+            end
+            self.options_active = deepcopy(self.options)
+        end
+    )
+end
+
+function Configure:Save(cb)
+    local data = DataDumper(self.options, nil, false)
+    SavePersistentString(path, data, ENCODE_SAVES, cb)
 end
 
 function Configure:Get()
@@ -240,9 +264,9 @@ end
 
 function Configure:GetById(id)
     local index
-    for i,v in ipairs(self.options_active) do
+    for i, v in ipairs(self.options_active) do
         if v.id == id then
-            index=i
+            index = i
             break
         end
     end
@@ -253,11 +277,11 @@ function Configure:GetById(id)
     end
 end
 
-function Configure:OnSwitch(id,value,dlc)
+function Configure:OnSwitch(id, value, dlc)
     local index
-    for i,v in ipairs(self.options) do
+    for i, v in ipairs(self.options) do
         if v.id == id then
-            index=i
+            index = i
             break
         end
     end
@@ -270,11 +294,11 @@ function Configure:OnSwitch(id,value,dlc)
     end
 end
 
-function Configure:UpdateTimeValue(id,value)
+function Configure:UpdateTimeValue(id, value)
     local index
-    for i,v in ipairs(self.options) do
+    for i, v in ipairs(self.options) do
         if v.id == id then
-            index=i
+            index = i
             break
         end
     end
@@ -285,13 +309,21 @@ end
 
 function Configure:Apply()
     self.options_active = deepcopy(self.options)
-    KnownModIndex:SaveConfigurationOptions(function() print("EventTimer: apply configuration") end, modname, self.options)
+    self:Save(
+        function()
+            print('EventTimer: apply configuration')
+        end
+    )
 end
 
 function Configure:Reset()
     self.options = deepcopy(options)
     self.options_active = deepcopy(self.options)
-    KnownModIndex:SaveConfigurationOptions(function() print("EventTimer: reset configuration") end, modname, self.options)
+    self:Save(
+        function()
+            print('EventTimer: reset configuration')
+        end
+    )
 end
 
 function Configure:Cancel()

@@ -6,7 +6,7 @@ local function RocmanagerPostInit(self)
     self._arriveTime = 0
     self._eventTimer = function()
         local config = _G.g_func_mod_config:GetById(id)
-        if config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
+        if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             local totalTime = GetClock():GetTotalTime()
             if self._arriveTime < totalTime and self.nexttime > ROC_TIME then
                 self._arriveTime = self.nexttime + totalTime

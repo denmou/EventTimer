@@ -48,7 +48,7 @@ local Noticebadge =
         self.icon:SetSize(icon_size)
         self.icon:SetTint(1, 1, 1, .62)
 
-        self.text = self:AddChild(Text(NUMBERFONT, font_size))
+        self.text = self:AddChild(Text(BODYTEXTFONT, font_size))
         self.text:SetHAlign(ANCHOR_MIDDLE)
         self.text:Nudge(Vector3(text_offset,-1,0))
         self.text:SetAlpha(.62)

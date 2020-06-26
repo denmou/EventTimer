@@ -53,6 +53,23 @@ local Times = {
     }
 }
 
+local icon_size = 43.2
+local icon_offset_x = 36
+local font_size = 18
+local font_offset_x = 132
+local font_offset_y = 10.8
+local options_offset_x = 173.4
+local options_offset_y = -10.8
+local dlc_offset_x_1 = 72
+local dlc_offset_x_1_space = 23.4
+local dlc_offset_x_2 = 90
+local dlc_offset_x_2_space = 46.8
+local dlc_offset_x_3 = 93.6
+local dlc_offset_x_3_space = 46.8
+local dlc_offset_y = -10.8
+local mask_size = {204.8, 43.2}
+local mask_offset_x = 116.8
+
 local Configurationbadge =
     Class(
     Widget,
@@ -74,10 +91,9 @@ local Configurationbadge =
             end
         )
 
-        local icon_size = RESOLUTION_Y * .06
         self.icon_bg = self:AddChild(Image('images/ui.xml', 'portrait_bg.tex'))
         self.icon_bg:SetSize(icon_size, icon_size)
-        self.icon_bg:Nudge(Vector3(RESOLUTION_Y * .05, 0, 0))
+        self.icon_bg:Nudge(Vector3(icon_offset_x, 0, 0))
 
         for i, v in ipairs(images) do
             self.icon = self:AddChild(Image(v, self.config.icon .. '.tex'))
@@ -86,16 +102,16 @@ local Configurationbadge =
                 break
             end
         end
+        icon_size=43.2
         self.icon:SetSize(icon_size, icon_size)
-        self.icon:Nudge(Vector3(RESOLUTION_Y * .05, 0, 0))
+        self.icon:Nudge(Vector3(icon_offset_x, 0, 0))
 
         self.dlc = {}
         local dlc_count = 0
 
         if self.config.name then
-            self.title = self:AddChild(Text(BODYTEXTFONT, RESOLUTION_Y * .025))
-            self.title:SetSize(RESOLUTION_X * .15 - RESOLUTION_Y * .06, RESOLUTION_Y * .03)
-            self.title:Nudge(Vector3(RESOLUTION_X * .075 + RESOLUTION_Y * .05, RESOLUTION_Y * .015, 0))
+            self.title = self:AddChild(Text(BODYTEXTFONT, font_size))
+            self.title:Nudge(Vector3(font_offset_x, font_offset_y, 0))
             local nameString
             if self.config.type then
                 local localString = STRINGS
@@ -117,7 +133,7 @@ local Configurationbadge =
                     self.dlc[i] =
                         self:AddChild(ImageButton('images/ui.xml', i .. '_' .. ((v and 'on') or 'off') .. '.tex'))
                     self.dlc[i]:SetScale(.2)
-                    self.dlc[i]:Nudge(Vector3(RESOLUTION_Y * (.1 + .0325 * dlc_count), -RESOLUTION_Y * .015, 0))
+                    self.dlc[i]:Nudge(Vector3(dlc_offset_x_1 + dlc_offset_x_1_space * dlc_count, dlc_offset_y, 0))
                     self.dlc[i]:SetOnClick(
                         function()
                             self:OnSwitchByDlc(i)
@@ -127,7 +143,7 @@ local Configurationbadge =
                 end
                 self.options = self:AddChild(Spinner(Times, 300, 64, {font = NUMBERFONT, size = 64}))
                 self.options:Nudge(
-                    Vector3(RESOLUTION_X * .075 - RESOLUTION_Y * .0825 + RESOLUTION_Y * .19, -RESOLUTION_Y * .015, 0)
+                    Vector3(options_offset_x, options_offset_y, 0)
                 )
                 self.options:SetScale(.3)
                 for i, v in pairs(Times) do
@@ -146,7 +162,7 @@ local Configurationbadge =
                     self.dlc[i] =
                         self:AddChild(ImageButton('images/ui.xml', i .. '_' .. ((v and 'on') or 'off') .. '.tex'))
                     self.dlc[i]:SetScale(.2)
-                    self.dlc[i]:Nudge(Vector3(RESOLUTION_Y * (.125 + .065 * dlc_count), -RESOLUTION_Y * .015, 0))
+                    self.dlc[i]:Nudge(Vector3(dlc_offset_x_2 + dlc_offset_x_2_space * dlc_count, dlc_offset_y, 0))
                     self.dlc[i]:SetOnClick(
                         function()
                             self:OnSwitchByDlc(i)
@@ -159,7 +175,7 @@ local Configurationbadge =
             for i, v in pairs(self.config.dlc) do
                 self.dlc[i] = self:AddChild(ImageButton('images/ui.xml', i .. '_' .. ((v and 'on') or 'off') .. '.tex'))
                 self.dlc[i]:SetScale(.3)
-                self.dlc[i]:Nudge(Vector3(RESOLUTION_Y * (.13 + .065 * dlc_count), 0, 0))
+                self.dlc[i]:Nudge(Vector3(dlc_offset_x_3 + dlc_offset_x_3_space * dlc_count, 0, 0))
                 self.dlc[i]:SetOnClick(
                     function()
                         self:OnSwitchByDlc(i)
@@ -170,8 +186,8 @@ local Configurationbadge =
         end
 
         self.mask = self:AddChild(Image('images/global.xml', 'square.tex'))
-        self.mask:SetSize(RESOLUTION_X * .16, RESOLUTION_Y * .06)
-        self.mask:Nudge(Vector3(RESOLUTION_X * .08 + RESOLUTION_Y * .02, 0, 0))
+        self.mask:SetSize(mask_size)
+        self.mask:Nudge(Vector3(mask_offset_x, 0, 0))
         self.mask:SetTint(0, 0, 0, .75)
         if self.config.switch then
             self.mask:Hide()

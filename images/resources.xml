@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<Atlas>
-	<Texture filename="resources.tex" />
-	<Elements>
-		<Element name="ancient_herald.tex" u1="0.000244141" u2="0.499756" v1="0.000488281" v2="0.999512" />
-		<Element name="worm.tex" u1="0.500244" u2="0.999756" v1="0.000488281" v2="0.999512" />
-	</Elements>
-</Atlas>

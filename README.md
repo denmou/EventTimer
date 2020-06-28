@@ -6,7 +6,7 @@
 
 图形化配置页面 
 
-![icon](https://steamuserimages-a.akamaihd.net/ugc/1287415702957415438/BE2A6CE8A665C5954CFD7A6E61DB148DDB009EF3/)  
+![icon](https://steamuserimages-a.akamaihd.net/ugc/1287416097461924270/7AE5C5DC6DFAD0D15EDC3A3979BFDE526A037B7B/)  
 
 根据游戏显示语言适配文本  
 

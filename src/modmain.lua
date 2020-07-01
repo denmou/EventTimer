@@ -4,6 +4,7 @@ Assets = {
 }
 
 local _G = GLOBAL
+local Widget = _G.require "widgets/widget"
 local ImageButton = _G.require "widgets/imagebutton"
 local EnevtScreen = _G.require "screen/eventscreen"
 local Configure = _G.require "configure"
@@ -15,7 +16,8 @@ _G.g_func_prefab_init = AddPrefabPostInit
 _G.g_func_mod_config = _G.require "configure"
 _G.g_obj_control = _G.require "control"
 _G.g_obj_utils = _G.require "utils"
-_G.g_obj_panel = nil
+_G.g_top_left_notice_panel = nil
+_G.g_top_right_notice_panel = nil
 _G.g_dlc_mode = nil
 _G.g_obj_items = {}
 _G.g_obj_asset = {}
@@ -51,8 +53,16 @@ _G.require "extensions/tigersharker"
 _G.require "extensions/volcanomanager"
 
 local function ControlsPostConstruct(self)
-    if not _G.g_obj_panel then
-        _G.g_obj_panel = self.sidepanel
+    if not _G.g_top_left_notice_panel or not _G.g_top_right_notice_panel then
+        _G.g_top_left_notice_panel = self:AddChild(Widget("top_left_notice_panel"))
+        _G.g_top_left_notice_panel:SetScaleMode(_G.SCALEMODE_PROPORTIONAL)
+        _G.g_top_left_notice_panel:SetHAnchor(_G.ANCHOR_LEFT)
+        _G.g_top_left_notice_panel:SetVAnchor(_G.ANCHOR_TOP)
+        _G.g_top_right_notice_panel = self:AddChild(Widget("top_right_notice_panel"))
+        _G.g_top_right_notice_panel:SetScaleMode(_G.SCALEMODE_PROPORTIONAL)
+        _G.g_top_right_notice_panel:SetHAnchor(_G.ANCHOR_RIGHT)
+        _G.g_top_right_notice_panel:SetVAnchor(_G.ANCHOR_TOP)
+        --_G.g_obj_panel = self.sidepanel
     end
 end
 
@@ -68,7 +78,7 @@ local function PlayerPostInit(player)
     player:DoPeriodicTask(
         .5,
         function()
-            if _G.g_obj_panel then
+            if _G.g_top_right_notice_panel and _G.g_top_left_notice_panel then
                 for i = 1, #_G.g_obj_items do
                     _G.g_obj_items[i]:_eventTimer()
                 end

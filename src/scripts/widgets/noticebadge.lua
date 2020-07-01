@@ -2,11 +2,11 @@ local Text = require "widgets/text"
 local Widget = require "widgets/widget"
 local Image = require "widgets/image"
 
-local font_size = 25
-local icon_size = {28,28}
-local bg_size = {200,30}
-local bg_offset = 111
-local text_offset = 111
+local font_size = 20
+local icon_size = {23,23}
+local bg_size = {160,25}
+local bg_offset = 89
+local text_offset = 89
 
 local Noticebadge =
     Class(

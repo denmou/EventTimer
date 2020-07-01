@@ -260,12 +260,12 @@ function Configure:Init()
                             option.time = item.time
                             option.row = item.row
                             if option.dlc then
-                                for key, v in ipairs(option.dlc) do
+                                for key, v in pairs(option.dlc) do
                                     option.dlc[key] = item.dlc[key]
                                 end
                             end
                             if option.position then
-                                for key, v in ipairs(option.position) do
+                                for key, v in pairs(option.position) do
                                     option.position[key] = item.position[key]
                                 end
                             end

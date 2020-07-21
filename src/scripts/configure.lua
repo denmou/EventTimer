@@ -227,7 +227,8 @@ local options = {
             left = false,
             right = true
         },
-        row = 6
+        row = 6,
+        scale = 1
     }
 }
 
@@ -257,8 +258,15 @@ function Configure:Init()
                     for m, item in ipairs(config) do
                         if item.id == option.id then
                             option.switch = item.switch
-                            option.time = item.time
-                            option.row = item.row
+                            if item.time then
+                                option.time = item.time
+                            end
+                            if item.row then
+                                option.row = item.row
+                            end
+                            if item.scale then
+                                option.scale = item.scale
+                            end
                             if option.dlc then
                                 for key, v in pairs(option.dlc) do
                                     option.dlc[key] = item.dlc[key]

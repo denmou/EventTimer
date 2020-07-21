@@ -78,6 +78,73 @@ local Rows = {
     }
 }
 
+local Scales = {
+    {
+        text = '0.5',
+        data = 0.5
+    },
+    {
+        text = '0.6',
+        data = 0.6
+    },
+    {
+        text = '0.7',
+        data = 0.7
+    },
+    {
+        text = '0.8',
+        data = 0.8
+    },
+    {
+        text = '0.9',
+        data = 0.9
+    },
+    {
+        text = '1',
+        data = 1
+    },
+    {
+        text = '1.1',
+        data = 1.1
+    },
+    {
+        text = '1.2',
+        data = 1.2
+    },
+    {
+        text = '1.3',
+        data = 1.3
+    },
+    {
+        text = '1.4',
+        data = 1.4
+    },
+    {
+        text = '1.5',
+        data = 1.5
+    },
+    {
+        text = '1.6',
+        data = 1.6
+    },
+    {
+        text = '1.7',
+        data = 1.7
+    },
+    {
+        text = '1.8',
+        data = 1.8
+    },
+    {
+        text = '1.9',
+        data = 1.9
+    },
+    {
+        text = '2',
+        data = 2
+    }
+}
+
 local icon_fix = {
     size = {43.2, 43.2},
     offset_x = 36
@@ -97,6 +164,24 @@ local options_fix = {
     offset_y = -10.8,
     scale = .3
 }
+local rows_fix = {
+    width = 150,
+    height = 64,
+    font = BODYTEXTFONT,
+    font_size = 64,
+    offset_x = 137.4,
+    offset_y = -10.8,
+    scale = .3
+}
+local scale_fix = {
+    width = 200,
+    height = 64,
+    font = BODYTEXTFONT,
+    font_size = 64,
+    offset_x = 185.4,
+    offset_y = -10.8,
+    scale = .3
+}
 local dlc_fix = {
     position_space = 23.4,
     position_x = 72,
@@ -104,8 +189,8 @@ local dlc_fix = {
     scale = .2
 }
 local localtion_fix = {
-    position_space = 30,
-    position_x = 80,
+    position_space = 28,
+    position_x = 72,
     position_y = -10.8,
     scale = .28
 }
@@ -132,7 +217,8 @@ local Configurationbadge =
             self:addOptions('time')
         elseif self.config.row then
             self.options_sign = true
-            self:addOptions('row')
+            self:addRow()
+            self:addScale()
         end
         if self.config.dlc then
             self:addDlc()
@@ -191,12 +277,7 @@ function Configurationbadge:addTitle()
 end
 
 function Configurationbadge:addOptions(type)
-    local values = {}
-    if type == 'time' then
-        values = Times
-    elseif type == 'row' then
-        values = Rows
-    end
+    local values = Times
     self.options =
         self:AddChild(
         Spinner(values, options_fix.width, options_fix.height, {font = options_fix.font, size = options_fix.font_size})
@@ -212,6 +293,48 @@ function Configurationbadge:addOptions(type)
     self.options:SetOnChangedFn(
         function(value)
             Configure:UpdateValue(self.config.id, type, value)
+        end
+    )
+end
+
+function Configurationbadge:addRow()
+    local values = Rows
+    self.options =
+        self:AddChild(
+        Spinner(values, rows_fix.width, rows_fix.height, {font = rows_fix.font, size = rows_fix.font_size})
+    )
+    self.options:Nudge(Vector3(rows_fix.offset_x, rows_fix.offset_y, 0))
+    self.options:SetScale(rows_fix.scale)
+    for i, v in pairs(values) do
+        if self.config.row == v.data then
+            self.options:SetSelectedIndex(i)
+            break
+        end
+    end
+    self.options:SetOnChangedFn(
+        function(value)
+            Configure:UpdateValue(self.config.id, 'row', value)
+        end
+    )
+end
+
+function Configurationbadge:addScale()
+    local values = Scales
+    self.options =
+        self:AddChild(
+        Spinner(values, scale_fix.width, scale_fix.height, {font = scale_fix.font, size = scale_fix.font_size})
+    )
+    self.options:Nudge(Vector3(scale_fix.offset_x, scale_fix.offset_y, 0))
+    self.options:SetScale(scale_fix.scale)
+    for i, v in pairs(values) do
+        if self.config.scale == v.data then
+            self.options:SetSelectedIndex(i)
+            break
+        end
+    end
+    self.options:SetOnChangedFn(
+        function(value)
+            Configure:UpdateValue(self.config.id, 'scale', value)
         end
     )
 end

@@ -53,7 +53,6 @@ local function BasehasslerPostInit(self)
                         g_obj_control.hide(name)
                     else
                         local waitTime = math.ceil(self.timetoattack)
-                        print(waitTime)
                         if self.warning then
                             g_obj_control.set(
                                 name,

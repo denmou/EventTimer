@@ -43,8 +43,8 @@ EntityScript.GetDisplayName = function(self, ...)
                 local currentTime = stewer:GetTimeToCook()
                 name = name .. "\n" .. g_obj_utils.timeFormat(math.ceil(currentTime))
             end
-            if hunger then 
-                name = name .. "\n" .. hunger:GetCurrent()
+            if hunger and hunger.max then 
+                name = name .. "\n" .. hunger.current .. "/" .. hunger.max
             end
         end
     end

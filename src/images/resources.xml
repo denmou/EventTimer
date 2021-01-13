@@ -14,27 +14,31 @@
 		<Element name="dog.tex" u1="0.6250234375" u2="0.68503515625" v2="0.8749765625" v1="0.752953125" variant="" />
 		<Element name="dragonfly.tex" u1="0.56301171875" u2="0.6230234375" v2="0.750953125" v1="0.6289296875" variant="" />
 		<Element name="events.tex" u1="0.501" u2="0.56101171875" v2="0.56540625" v1="0.4433828125" variant="" />
-		<Element name="firepit.tex" u1="0.53176171875" u2="0.5605234375" v2="0.750953125" v1="0.6914296875" variant="" />
-		<Element name="fissure.tex" u1="0.6250234375" u2="0.68503515625" v2="0.750953125" v1="0.6289296875" variant="" />
-		<Element name="food.tex" u1="0.56301171875" u2="0.6230234375" v2="0.6269296875" v1="0.50490625" variant="" />
-		<Element name="goosemoose.tex" u1="0.68703515625" u2="0.747046875" v2="0.8749765625" v1="0.752953125" variant="" />
-		<Element name="hayfever.tex" u1="0.749046875" u2="0.80905859375" v2="0.999" v1="0.8769765625" variant="" />
-		<Element name="hounds.tex" u1="0.501" u2="0.56101171875" v2="0.4413828125" v1="0.319359375" variant="" />
-		<Element name="kraken.tex" u1="0.68703515625" u2="0.747046875" v2="0.750953125" v1="0.6289296875" variant="" />
-		<Element name="mods.tex" u1="0.81105859375" u2="0.9335703125" v2="0.999" v1="0.7519765625" variant="" />
-		<Element name="position_left_off.tex" u1="0.749046875" u2="0.80905859375" v2="0.8749765625" v1="0.752953125" variant="" />
-		<Element name="position_left_on.tex" u1="0.6250234375" u2="0.68503515625" v2="0.6269296875" v1="0.50490625" variant="" />
-		<Element name="position_right_off.tex" u1="0.56301171875" u2="0.6230234375" v2="0.50290625" v1="0.3808828125" variant="" />
-		<Element name="position_right_on.tex" u1="0.501" u2="0.56101171875" v2="0.317359375" v1="0.1953359375" variant="" />
-		<Element name="pugalisk_fountain.tex" u1="0.68703515625" u2="0.747046875" v2="0.6269296875" v1="0.50490625" variant="" />
-		<Element name="regrowth.tex" u1="0.6250234375" u2="0.68503515625" v2="0.50290625" v1="0.3808828125" variant="" />
-		<Element name="roc.tex" u1="0.56301171875" u2="0.6230234375" v2="0.3788828125" v1="0.256859375" variant="" />
-		<Element name="tigershark.tex" u1="0.749046875" u2="0.80905859375" v2="0.750953125" v1="0.6289296875" variant="" />
-		<Element name="tropicalbouillabaisse.tex" u1="0.501" u2="0.52976171875" v2="0.1933359375" v1="0.1338125" variant="" />
-		<Element name="twister.tex" u1="0.501" u2="0.56101171875" v2="0.1318125" v1="0.0097890625" variant="" />
-		<Element name="vampire_bats.tex" u1="0.56301171875" u2="0.6230234375" v2="0.254859375" v1="0.1328359375" variant="" />
-		<Element name="volcano.tex" u1="0.749046875" u2="0.80905859375" v2="0.6269296875" v1="0.50490625" variant="" />
-		<Element name="worm.tex" u1="0.68703515625" u2="0.747046875" v2="0.50290625" v1="0.3808828125" variant="" />
-		<Element name="wx78.tex" u1="0.6250234375" u2="0.68112890625" v2="0.3788828125" v1="0.280296875" variant="" />
+		<Element name="firepit.tex" u1="0.6250234375" u2="0.6855234375" v2="0.750953125" v1="0.627953125" variant="" />
+		<Element name="fissure.tex" u1="0.56301171875" u2="0.6230234375" v2="0.6269296875" v1="0.50490625" variant="" />
+		<Element name="food.tex" u1="0.68703515625" u2="0.747046875" v2="0.8749765625" v1="0.752953125" variant="" />
+		<Element name="goosemoose.tex" u1="0.749046875" u2="0.80905859375" v2="0.999" v1="0.8769765625" variant="" />
+		<Element name="grow.tex" u1="0.501" u2="0.5615" v2="0.4413828125" v1="0.3183828125" variant="" />
+		<Element name="hayfever.tex" u1="0.749046875" u2="0.80905859375" v2="0.8749765625" v1="0.752953125" variant="" />
+		<Element name="hounds.tex" u1="0.81105859375" u2="0.8710703125" v2="0.999" v1="0.8769765625" variant="" />
+		<Element name="kraken.tex" u1="0.6250234375" u2="0.68503515625" v2="0.625953125" v1="0.5039296875" variant="" />
+		<Element name="mods.tex" u1="0.6875234375" u2="0.81003515625" v2="0.750953125" v1="0.5039296875" variant="" />
+		<Element name="packim.tex" u1="0.501" u2="0.624" v2="0.3163828125" v1="0.0683828125" variant="" />
+		<Element name="packim_fat.tex" u1="0.8730703125" u2="0.9960703125" v2="0.999" v1="0.751" variant="" />
+		<Element name="packims.tex" u1="0.626" u2="0.749" v2="0.5019296875" v1="0.2539296875" variant="" />
+		<Element name="position_left_off.tex" u1="0.5635" u2="0.62351171875" v2="0.5019296875" v1="0.37990625" variant="" />
+		<Element name="position_left_on.tex" u1="0.81105859375" u2="0.8710703125" v2="0.8749765625" v1="0.752953125" variant="" />
+		<Element name="position_right_off.tex" u1="0.81203515625" u2="0.872046875" v2="0.749" v1="0.6269765625" variant="" />
+		<Element name="position_right_on.tex" u1="0.81203515625" u2="0.872046875" v2="0.6249765625" v1="0.502953125" variant="" />
+		<Element name="pugalisk_fountain.tex" u1="0.874046875" u2="0.93405859375" v2="0.749" v1="0.6269765625" variant="" />
+		<Element name="regrowth.tex" u1="0.626" u2="0.68601171875" v2="0.2519296875" v1="0.12990625" variant="" />
+		<Element name="roc.tex" u1="0.93605859375" u2="0.9960703125" v2="0.749" v1="0.6269765625" variant="" />
+		<Element name="tigershark.tex" u1="0.874046875" u2="0.93405859375" v2="0.6249765625" v1="0.502953125" variant="" />
+		<Element name="tropicalbouillabaisse.tex" u1="0.53176171875" u2="0.5605234375" v2="0.750953125" v1="0.6914296875" variant="" />
+		<Element name="twister.tex" u1="0.751" u2="0.81101171875" v2="0.500953125" v1="0.3789296875" variant="" />
+		<Element name="vampire_bats.tex" u1="0.626" u2="0.68601171875" v2="0.12790625" v1="0.0058828125" variant="" />
+		<Element name="volcano.tex" u1="0.68801171875" u2="0.7480234375" v2="0.2519296875" v1="0.12990625" variant="" />
+		<Element name="worm.tex" u1="0.751" u2="0.81101171875" v2="0.3769296875" v1="0.25490625" variant="" />
+		<Element name="wx78.tex" u1="0.81301171875" u2="0.8691171875" v2="0.500953125" v1="0.4023671875" variant="" />
 	</Elements>
 </Atlas>

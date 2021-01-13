@@ -51,6 +51,7 @@ _G.require "extensions/krakener"
 _G.require "extensions/locomotor"
 _G.require "extensions/tigersharker"
 _G.require "extensions/volcanomanager"
+_G.require "extensions/packim"
 
 local function ControlsPostConstruct(self)
     if not _G.g_top_left_notice_panel or not _G.g_top_right_notice_panel then

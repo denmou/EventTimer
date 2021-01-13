@@ -200,7 +200,10 @@ local options = {
     },
     {
         id = 'growthTime',
-        icon = 'regrowth',
+        icon = 'grow',
+        type = {'NAMES'},
+        name = 'FAST_FARMPLOT',
+        group = true,
         switch = true,
         dlc = {
             rog = true,
@@ -211,6 +214,21 @@ local options = {
     {
         id = 'fuelTime',
         icon = 'firepit',
+        type = {'NAMES'},
+        name = 'FIRE',
+        group = true,
+        switch = true,
+        dlc = {
+            rog = true,
+            sw = true,
+            ham = true
+        }
+    },
+    {
+        id = 'packim',
+        icon = 'packims',
+        type = {'NAMES'},
+        name = 'PACKIM',
         switch = true,
         dlc = {
             rog = true,

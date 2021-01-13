@@ -13,7 +13,7 @@ EntityScript.GetDisplayName = function(self, ...)
         local fueled = self.components.fueled
         local dryer = self.components.dryer
         local stewer = self.components.stewer
-        local hunger = self.components.hunger
+        local crop = self.components.crop
         if config_growthTime and config_growthTime.switch and (g_dlc_mode and config_growthTime.dlc[g_dlc_mode]) then
             if pickable then
                 if self.components.inspectable and self.components.inspectable:GetStatus(self) == "WITHERED" then
@@ -27,6 +27,13 @@ EntityScript.GetDisplayName = function(self, ...)
             elseif hackable and hackable.targettime then
                 local currentTime = hackable.targettime - GetTime()
                 name = name .. "\n" .. g_obj_utils.timeFormat(math.ceil(currentTime))
+            elseif crop and not crop.matured then
+                if GetSeasonManager():GetTemperature() < TUNING.MIN_CROP_GROW_TEMP then
+                    name = name .. "\n" .. g_obj_constant.stop_grow
+                else
+                    local currentTime = (1 - crop.growthpercent)/crop.rate
+                    name = name .. "\n" .. g_obj_utils.timeFormat(math.ceil(currentTime))
+                end
             end
         end
         if config_fuelTime and config_fuelTime.switch and (g_dlc_mode and config_fuelTime.dlc[g_dlc_mode]) then
@@ -42,9 +49,6 @@ EntityScript.GetDisplayName = function(self, ...)
             if stewer and stewer:GetTimeToCook() > 0 then
                 local currentTime = stewer:GetTimeToCook()
                 name = name .. "\n" .. g_obj_utils.timeFormat(math.ceil(currentTime))
-            end
-            if hunger and hunger.max then 
-                name = name .. "\n" .. hunger.current .. "/" .. hunger.max
             end
         end
     end

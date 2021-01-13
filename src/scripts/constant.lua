@@ -27,7 +27,8 @@ local Constant = {
             dawn = "Dawn"
         },
         remain = "remaining",
-        recovery = "recovery"
+        recovery = "recovery",
+        hunger = "hunger"
     },
     chinese = {
         sleep = "未激活",
@@ -57,7 +58,8 @@ local Constant = {
             dawn = "黎明阶段"
         },
         remain = "生效时间",
-        recovery = "恢复时间"
+        recovery = "恢复时间",
+        hunger = "饱食度"
     },
     idiom = {
         sleep = "蓄势待发",
@@ -87,7 +89,8 @@ local Constant = {
             dawn = "东方将白"
         },
         remain = "稍纵即逝",
-        recovery = "重获新生"
+        recovery = "重获新生",
+        hunger = "大快朵颐"
     }
 }
 

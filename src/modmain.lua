@@ -83,6 +83,7 @@ local function PlayerPostInit(player)
                 for i = 1, #_G.g_obj_items do
                     _G.g_obj_items[i]:_eventTimer()
                 end
+                _G.g_obj_control.ChangeNoticeBadge()
             end
         end
     )

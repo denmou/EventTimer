@@ -14,9 +14,10 @@ local right_position_x = -180
 local position_y = -12.5
 local spacing_x = -180
 local spacing_y = -25
+local modify = false
 
-local function ChangeNoticeBadge()
-    if g_top_left_notice_panel and g_top_right_notice_panel then
+function Control.ChangeNoticeBadge()
+    if modify and g_top_left_notice_panel and g_top_right_notice_panel then
         local config = g_func_mod_config:GetById(id)
         local row_size = config.row
         local local_position_y = position_y
@@ -73,6 +74,7 @@ local function ChangeNoticeBadge()
                 end
             end
         end
+        modify = false
     end
 end
 
@@ -100,7 +102,6 @@ function Control.hide(name)
     if left_badge_list[name] then
         left_badge_list[name].value = nil
         right_badge_list[name].value = nil
-        ChangeNoticeBadge()
     end
 end
 
@@ -108,7 +109,7 @@ function Control.set(name, value)
     if left_badge_list[name] then
         left_badge_list[name].value = value
         right_badge_list[name].value = value
-        ChangeNoticeBadge()
+        modify = true
     end
 end
 

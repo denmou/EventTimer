@@ -12,6 +12,7 @@ Configure:Init()
 
 _G.g_func_component_init = AddComponentPostInit
 _G.g_func_prefab_init = AddPrefabPostInit
+_G.g_func_player_init = AddPlayerPostInit
 
 _G.g_func_mod_config = _G.require "configure"
 _G.g_obj_control = _G.require "control"
@@ -33,6 +34,7 @@ else
 end
 
 _G.require "extensions/displayName"
+_G.require "extensions/player"
 --HAM
 _G.require "extensions/aporkalypse"
 _G.require "extensions/batted"
@@ -48,7 +50,7 @@ _G.require "extensions/periodicthreat"
 --SW
 _G.require "extensions/chessnavy"
 _G.require "extensions/krakener"
-_G.require "extensions/locomotor"
+--_G.require "extensions/locomotor"
 _G.require "extensions/tigersharker"
 _G.require "extensions/volcanomanager"
 _G.require "extensions/packim"

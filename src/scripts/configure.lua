@@ -176,9 +176,8 @@ local options = {
     {
         id = 'locomotor',
         icon = 'food',
-        type = {'NAMES'},
-        name = 'COFFEE',
-        group = true,
+        type = {'TABS'},
+        name = 'FARM',
         switch = true,
         dlc = {
             rog = true,

@@ -1,7 +1,7 @@
 local Utils = {}
 
 function Utils.timeFormat(time)
-    local timeText = nil
+    local timeText
     local second = math.mod(time, 60)
     time = math.floor(time / 60)
     local minute = math.mod(time, 60)

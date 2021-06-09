@@ -11,10 +11,10 @@ local function PackimPrefabPostInit(inst)
         if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) and (inst.PackimState == "NORMAL" or inst.PackimState == "FAT") and current > 0 then
             local hunger = inst.components.hunger
             if inst.PackimState == "NORMAL" then
-                g_obj_control.set(normal, g_obj_constant.hunger .. ": " .. current .. " / " .. hunger.max)
+                g_obj_control.set(normal, STRINGS.ACTIONS.EAT .. ": " .. current .. " / " .. hunger.max)
                 g_obj_control.hide(fat)
             else
-                g_obj_control.set(fat, g_obj_constant.recovery .. ": " .. g_obj_utils.timeFormat(math.ceil(current / (hunger.hungerrate * hunger:GetBurnRate() * hunger.period))))
+                g_obj_control.set(fat, STRINGS.ACTIONS.RESETMINE .. ": " .. g_obj_utils.timeFormat(math.ceil(current / (hunger.hungerrate * hunger:GetBurnRate() * hunger.period))))
                 g_obj_control.hide(normal)
             end
         else

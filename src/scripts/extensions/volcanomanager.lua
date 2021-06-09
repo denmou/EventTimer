@@ -9,10 +9,7 @@ local function VolcanomanagerPostInit(self)
                 g_obj_control.hide(id)
             else
                 if self:IsFireRaining() then
-                    g_obj_control.set(
-                        id,
-                        STRINGS.ACTIONS.LAUNCH .. ": " .. g_obj_utils.timeFormat(math.ceil(self.firerain_timer))
-                    )
+                    g_obj_control.set(id, STRINGS.ACTIONS.ACTIVATE.GENERIC .. ": " .. g_obj_utils.timeFormat(math.ceil(self.firerain_timer)))
                 else
                     local eruptionSeg = self:GetNumSegmentsUntilEruption()
                     if eruptionSeg then
@@ -20,10 +17,8 @@ local function VolcanomanagerPostInit(self)
                         local curSeg = normtime * 16 % 1
                         local waitTime = (eruptionSeg - curSeg) * TUNING.SEG_TIME
                         if waitTime < config.time then
-                            g_obj_control.set(
-                                id,
-                                STRINGS.ACTIONS.CHARGE_UP .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
-                            )
+                            g_obj_control.set(id,
+                                STRINGS.ACTIONS.CHARGE_UP .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
                         else
                             g_obj_control.hide(id)
                         end

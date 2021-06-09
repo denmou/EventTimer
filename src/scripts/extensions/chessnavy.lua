@@ -7,7 +7,7 @@ local function ChessNavyPostInit(self)
         if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             local waitTime = self.spawn_timer
             if waitTime and waitTime >= 0 and waitTime < config.time then
-                local text = STRINGS.ACTIONS.TRAVEL
+                local text = STRINGS.ACTIONS.SLEEPIN
                 if waitTime > 0 then
                     text = STRINGS.ACTIONS.REPAIR .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
                 end

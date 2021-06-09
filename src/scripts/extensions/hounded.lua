@@ -12,21 +12,9 @@ local function HoundedPostInit(self)
             local waitTime = self.timetoattack
             if waitTime < config.time then
                 if waitTime > 0 then
-                    g_obj_control.set(
-                        name,
-                        "[" ..
-                            self.houndstorelease ..
-                                "]" .. g_obj_constant.come .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
-                    )
+                    g_obj_control.set(name, "[" .. self.houndstorelease .. "]" .. STRINGS.ACTIONS.CHARGE_UP .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
                 else
-                    g_obj_control.set(
-                        name,
-                        "[" ..
-                            self.houndstorelease ..
-                                "]" ..
-                                    g_obj_constant.attack ..
-                                        ": " .. g_obj_utils.timeFormat(math.ceil(self.timetonexthound))
-                    )
+                    g_obj_control.set(name, "[" .. self.houndstorelease .. "]" .. STRINGS.ACTIONS.GIVE.LOAD .. ": " .. g_obj_utils.timeFormat(math.ceil(self.timetonexthound)))
                 end
             else
                 g_obj_control.hide(name)

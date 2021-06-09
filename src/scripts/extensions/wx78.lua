@@ -8,7 +8,7 @@ local function Wx78PrefabPostInit(inst)
         if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             if inst.charge_time and inst.charge_time > 0 then
                 local waitTime = inst.charge_time
-                g_obj_control.set(name, STRINGS.ACTIONS.CHARGE_UP .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
+                g_obj_control.set(name, STRINGS.ACTIONS.ACTIVATE.GENERIC .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
             else
                 g_obj_control.hide(name)
             end

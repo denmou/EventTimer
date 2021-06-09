@@ -11,11 +11,11 @@ local function PeriodicThreatPostInit(self)
                 local text = nil
                 if waitTime < config.time then
                     if worm.state == "wait" then
-                        text = g_obj_constant.come .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
+                        text = STRINGS.ACTIONS.CHARGE_UP .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
                     elseif worm.state == "warn" then
-                        text = g_obj_constant.attack .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
+                        text = STRINGS.ACTIONS.GIVE.LOAD .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
                     elseif worm.state == "event" then
-                        text = g_obj_constant.generate .. ": " .. math.floor(worm.numspawned)
+                        text = STRINGS.ACTIONS.ACTIVATE.GENERIC .. ": " .. math.floor(worm.numspawned)
                     end
                 end
                 if text then

@@ -22,12 +22,12 @@ local function BattedPostInit(self)
             end
             if waitTime < config.time then
                 if BAT_ATTACK then
-                    g_obj_control.set(id, "[" .. self._batsCount .. "]" .. g_obj_constant.circle)
+                    g_obj_control.set(id, "[" .. self._batsCount .. "]" .. STRINGS.ACTIONS.GIVE.LOAD)
                 else
                     g_obj_control.set(
                         id,
                         "[" ..
-                            count .. "]" .. g_obj_constant.come .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
+                            count .. "]" .. STRINGS.ACTIONS.CHARGE_UP .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
                     )
                 end
             else

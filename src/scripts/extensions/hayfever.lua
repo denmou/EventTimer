@@ -7,7 +7,7 @@ local function HayfeverPostInit(self)
         if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             local waitTime = self.nextsneeze
             if waitTime < config.time and self.enabled then
-                g_obj_control.set(id, g_obj_constant.sneeze .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
+                g_obj_control.set(id, STRINGS.ACTIONS.MAKEBALLOON .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
             else
                 g_obj_control.hide(id)
             end

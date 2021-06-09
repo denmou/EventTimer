@@ -14,20 +14,17 @@ local function RocmanagerPostInit(self)
             if self.roc then
                 local roccontroller = self.roc.components.roccontroller
                 if roccontroller.inst.bodyparts and #roccontroller.inst.bodyparts > 0 then
-                    g_obj_control.set(id, g_obj_constant.forage)
+                    g_obj_control.set(id, STRINGS.ACTIONS.CATCH)
                 else
-                    g_obj_control.set(id, g_obj_constant.land)
+                    g_obj_control.set(id, STRINGS.ACTIONS.INVESTIGATE)
                 end
             else
                 local waitTime = self._arriveTime - totalTime
                 if waitTime < config.time then
                     if self._arriveTime < totalTime then
-                        g_obj_control.set(id, g_obj_constant.appear)
+                        g_obj_control.set(id, STRINGS.ACTIONS.GIVE.LOAD)
                     else
-                        g_obj_control.set(
-                            id,
-                            g_obj_constant.come .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
-                        )
+                        g_obj_control.set(id, STRINGS.ACTIONS.CHARGE_UP .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
                     end
                 else
                     g_obj_control.hide(id)

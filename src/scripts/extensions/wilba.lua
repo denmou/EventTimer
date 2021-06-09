@@ -6,9 +6,12 @@ local function WilbaPrefabPostInit(inst)
     inst._eventTimer = function()
         local config = g_func_mod_config:GetById(id)
         if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
+            print(inst.monster_cooldown)
+            print(inst.monster_count)
+            print(inst.cooldown_schedule)
             if inst.transform_task then
                 local waitTime = (inst.transform_task.nexttick - GetTick()) * GetTickTime()
-                g_obj_control.set(name, g_obj_constant.recovery .. ': ' .. g_obj_utils.timeFormat(math.ceil(waitTime)))
+                g_obj_control.set(name, STRINGS.ACTIONS.ACTIVATE.GENERIC .. ': ' .. g_obj_utils.timeFormat(math.ceil(waitTime)))
             else
                 g_obj_control.hide(name)
             end

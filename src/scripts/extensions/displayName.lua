@@ -17,9 +17,9 @@ EntityScript.GetDisplayName = function(self, ...)
         if config_growthTime and config_growthTime.switch and (g_dlc_mode and config_growthTime.dlc[g_dlc_mode]) then
             if pickable then
                 if self.components.inspectable and self.components.inspectable:GetStatus(self) == "WITHERED" then
-                    name = name .. "\n" .. g_obj_constant.wither
+                    name = name .. "\n" .. STRINGS.ACTIONS.DRY
                 elseif self.components.pickable.paused then
-                    name = name .. "\n" .. g_obj_constant.stop_grow
+                    name = name .. "\n" .. STRINGS.ACTIONS.SLEEPIN
                 elseif pickable.targettime then
                     local currentTime = pickable.targettime - GetTime()
                     name = name .. "\n" .. g_obj_utils.timeFormat(math.ceil(currentTime))
@@ -29,7 +29,7 @@ EntityScript.GetDisplayName = function(self, ...)
                 name = name .. "\n" .. g_obj_utils.timeFormat(math.ceil(currentTime))
             elseif crop and not crop.matured then
                 if GetSeasonManager():GetTemperature() < TUNING.MIN_CROP_GROW_TEMP then
-                    name = name .. "\n" .. g_obj_constant.stop_grow
+                    name = name .. "\n" .. STRINGS.ACTIONS.SLEEPIN
                 else
                     local currentTime = (1 - crop.growthpercent)/crop.rate
                     name = name .. "\n" .. g_obj_utils.timeFormat(math.ceil(currentTime))

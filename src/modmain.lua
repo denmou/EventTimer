@@ -24,15 +24,6 @@ _G.g_obj_items = {}
 _G.g_obj_asset = {}
 _G.g_str_aporkalypse_bat = {}
 
-local Constant = _G.require "constant"
-local Loc = _G.require "languages/loc"
-local language = Loc.GetLanguage()
-if language >= 21 and language <= 23 then
-    _G.g_obj_constant = Constant.chinese
-else
-    _G.g_obj_constant = Constant.english
-end
-
 _G.require "extensions/displayName"
 _G.require "extensions/player"
 --HAM
@@ -41,6 +32,7 @@ _G.require "extensions/batted"
 _G.require "extensions/hayfever"
 _G.require "extensions/pugalisk_fountain"
 _G.require "extensions/rocmanager"
+_G.require "extensions/wilba"
 --ROG
 _G.require "extensions/wx78"
 _G.require "extensions/hounded"

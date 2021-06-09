@@ -17,14 +17,14 @@ local function AporkalypsePostInit(self)
                     self.end_date = totalDay * TUNING.TOTAL_DAY_TIME + totalTime
                 end
                 local waitTime = self.end_date - totalTime
-                g_obj_control.set(id, g_obj_constant.end_in .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
+                g_obj_control.set(id, STRINGS.ACTIONS.ACTIVATE.GENERIC .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
             else
                 self.end_date = 0
                 g_str_aporkalypse_bat.time = 0
                 g_str_aporkalypse_bat.count = 0
                 local waitTime = self.begin_date - totalTime
                 if waitTime < config.time then
-                    g_obj_control.set(id, g_obj_constant.come .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
+                    g_obj_control.set(id, STRINGS.ACTIONS.CHARGE_UP .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
                 else
                     g_obj_control.hide(id)
                 end
@@ -35,7 +35,7 @@ local function AporkalypsePostInit(self)
             end
             if self.herald_check_task then
                 local waitTime = (self.herald_check_task.nexttick - GetTick()) * GetTickTime()
-                g_obj_control.set(herald, g_obj_constant.refresh .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
+                g_obj_control.set(herald, STRINGS.ACTIONS.RESETMINE .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
             else
                 g_obj_control.hide(herald)
             end

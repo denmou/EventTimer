@@ -7,7 +7,7 @@ local function PugaliskFountainPrefabPostInit(inst)
         if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             if inst.dry then
                 if inst.resettask then
-                    local waitTime = (inst.resettask.nexttick - GetTick()) * GetTickTime()
+                    local waitTime = inst:TimeRemainingInTask(inst.resettaskinfo)
                     g_obj_control.set(id, STRINGS.ACTIONS.CHARGE_UP .. ': ' .. g_obj_utils.timeFormat(math.ceil(waitTime)))
                 else
                     g_obj_control.set(id, STRINGS.ACTIONS.SLEEPIN)

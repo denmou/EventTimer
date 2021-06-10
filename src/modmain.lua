@@ -42,7 +42,6 @@ _G.require "extensions/periodicthreat"
 --SW
 _G.require "extensions/chessnavy"
 _G.require "extensions/krakener"
---_G.require "extensions/locomotor"
 _G.require "extensions/tigersharker"
 _G.require "extensions/volcanomanager"
 _G.require "extensions/packim"
@@ -57,7 +56,6 @@ local function ControlsPostConstruct(self)
         _G.g_top_right_notice_panel:SetScaleMode(_G.SCALEMODE_PROPORTIONAL)
         _G.g_top_right_notice_panel:SetHAnchor(_G.ANCHOR_RIGHT)
         _G.g_top_right_notice_panel:SetVAnchor(_G.ANCHOR_TOP)
-        --_G.g_obj_panel = self.sidepanel
     end
 end
 

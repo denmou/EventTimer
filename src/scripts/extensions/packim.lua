@@ -14,7 +14,8 @@ local function PackimPrefabPostInit(inst)
                 g_obj_control.set(normal, STRINGS.ACTIONS.EAT .. ": " .. current .. " / " .. hunger.max)
                 g_obj_control.hide(fat)
             else
-                g_obj_control.set(fat, STRINGS.ACTIONS.RESETMINE .. ": " .. g_obj_utils.timeFormat(math.ceil(current / (hunger.hungerrate * hunger:GetBurnRate() * hunger.period))))
+                local waitTime = current / (hunger.hungerrate * hunger:GetBurnRate() * hunger.period)
+                g_obj_control.set(fat, STRINGS.ACTIONS.RESETMINE .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
                 g_obj_control.hide(normal)
             end
         else

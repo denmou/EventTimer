@@ -24,11 +24,7 @@ local function BattedPostInit(self)
                 if BAT_ATTACK then
                     g_obj_control.set(id, "[" .. self._batsCount .. "]" .. STRINGS.ACTIONS.GIVE.LOAD)
                 else
-                    g_obj_control.set(
-                        id,
-                        "[" ..
-                            count .. "]" .. STRINGS.ACTIONS.CHARGE_UP .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))
-                    )
+                    g_obj_control.set(id, "[" .. count .. "]" .. STRINGS.ACTIONS.CHARGE_UP .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime)))
                 end
             else
                 g_obj_control.hide(id)
@@ -41,12 +37,10 @@ local function BattedPostInit(self)
 end
 
 local function VampirebatPrefabPostInit(inst)
-    inst:ListenForEvent(
-        "wingdown",
+    inst:ListenForEvent("wingdown",
         function()
             BAT_ATTACK = false
-        end
-    )
+        end)
 end
 
 g_func_prefab_init("vampirebat", VampirebatPrefabPostInit)

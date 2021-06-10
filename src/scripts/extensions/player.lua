@@ -10,7 +10,11 @@ local LUMINOUS = {
 }
 
 local function PlayerPostInit(player)
+    local eventTimer = player._eventTimer
     player._eventTimer = function()
+        if eventTimer then
+            eventTimer()
+        end
         local config = g_func_mod_config:GetById(id)
         if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             local locomotor = player.components.locomotor

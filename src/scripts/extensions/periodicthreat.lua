@@ -8,7 +8,7 @@ local function PeriodicThreatPostInit(self)
             local worm = self.threats["WORM"]
             if worm then
                 local waitTime = worm.timer
-                local text = nil
+                local text
                 if waitTime < config.time then
                     if worm.state == "wait" then
                         text = STRINGS.ACTIONS.CHARGE_UP .. ": " .. g_obj_utils.timeFormat(math.ceil(waitTime))

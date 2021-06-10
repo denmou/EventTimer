@@ -198,6 +198,18 @@ local options = {
         }
     },
     {
+        id = 'Wilba',
+        icon = 'wilba',
+        type = {'NAMES'},
+        name = 'WILBA',
+        switch = true,
+        dlc = {
+            rog = true,
+            sw = true,
+            ham = true
+        }
+    },
+    {
         id = 'growthTime',
         icon = 'grow',
         type = {'NAMES'},

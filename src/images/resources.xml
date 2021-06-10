@@ -42,8 +42,9 @@
 		<Element name="twister.tex" u1="0.838623" u2="0.900146" v1="0.313232" v2="0.374756" />
 		<Element name="vampire_bats.tex" u1="0.900635" u2="0.962158" v1="0.313232" v2="0.374756" />
 		<Element name="volcano.tex" u1="0.000244141" u2="0.0617676" v1="0.188232" v2="0.249756" />
-		<Element name="worm.tex" u1="0.0622559" u2="0.123779" v1="0.188232" v2="0.249756" />
-		<Element name="wormlight.tex" u1="0.124268" u2="0.154541" v1="0.219482" v2="0.249756" />
-		<Element name="wx78.tex" u1="0.155029" u2="0.212646" v1="0.199951" v2="0.249756" />
+		<Element name="wilba.tex" u1="0.0622559" u2="0.119873" v1="0.199951" v2="0.249756" />
+		<Element name="worm.tex" u1="0.120361" u2="0.181885" v1="0.188232" v2="0.249756" />
+		<Element name="wormlight.tex" u1="0.182373" u2="0.212646" v1="0.219482" v2="0.249756" />
+		<Element name="wx78.tex" u1="0.213135" u2="0.270752" v1="0.199951" v2="0.249756" />
 	</Elements>
 </Atlas>

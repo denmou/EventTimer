@@ -29,7 +29,7 @@ local function AporkalypsePostInit(self)
                     g_obj_control.hide(id)
                 end
             end
-            if self.bat_task then
+            if self.bat_task and self.bat_task.nexttick then
                 g_str_aporkalypse_bat.time = (self.bat_task.nexttick - GetTick()) * GetTickTime()
                 g_str_aporkalypse_bat.count = self.bat_amount
             end

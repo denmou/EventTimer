@@ -18,7 +18,7 @@ local function PlayerPostInit(player)
         local config = g_func_mod_config:GetById(id)
         if config and config.switch and (g_dlc_mode and config.dlc[g_dlc_mode]) then
             local locomotor = player.components.locomotor
-            if locomotor then
+            if locomotor and locomotor.speed_modifiers_add_timer and locomotor.speed_modifiers_add then
                 for key, name in pairs(ACTIVATOR) do
                     g_obj_control.add(name)
                     local waitTime = locomotor.speed_modifiers_add_timer[key]

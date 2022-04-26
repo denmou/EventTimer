@@ -52,7 +52,12 @@ local function PlayerPostInit(player)
                 end
             end
         else
-            g_obj_control.hide(name)
+            for key, name in pairs(ACTIVATOR) do
+                g_obj_control.hide(name)
+            end
+            for key, name in pairs(LUMINOUS) do
+                g_obj_control.hide(name)
+            end
         end
     end
     table.insert(g_obj_items, player)

@@ -82,8 +82,8 @@ local function PlayerPostInit(player)
 end
 
 local function PauseScreenPostInit(self)
-    if self.survived then
-        self.survived_setting = self.proot:AddChild(ImageButton('images/resources.xml', "events.tex"))
+    if self.title then
+        self.survived_setting = self.title:AddChild(ImageButton('images/resources.xml', "events.tex"))
         self.survived_setting:SetPosition(280, 90, 0)
         self.survived_setting:SetScale(.45)
         self.survived_setting:SetOnClick(function()

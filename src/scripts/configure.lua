@@ -1,4 +1,4 @@
-local modname = 'enevt_timer'
+local modname = 'event_timer'
 local path
 
 local options = {
@@ -213,8 +213,7 @@ local options = {
         id = 'growthTime',
         icon = 'grow',
         type = {'NAMES'},
-        name = 'FAST_FARMPLOT',
-        group = true,
+        name = 'CROP',
         switch = true,
         dlc = {
             rog = true,

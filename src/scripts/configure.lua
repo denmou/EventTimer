@@ -186,6 +186,18 @@ local options = {
         }
     },
     {
+        id = 'bandit',
+        icon = 'bandit',
+        type = {'NAMES'},
+        name = 'PIGBANDIT',
+        switch = true,
+        dlc = {
+            rog = false,
+            sw = false,
+            ham = true
+        }
+    },
+    {
         id = 'WX78',
         icon = 'wx78',
         type = {'NAMES'},

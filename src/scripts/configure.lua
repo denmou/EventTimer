@@ -174,6 +174,19 @@ local options = {
         time = 24 * 60
     },
     {
+        id = 'bandit',
+        icon = 'pig_bandit',
+        type = {'NAMES'},
+        name = 'PIGBANDIT',
+        switch = true,
+        dlc = {
+            rog = false,
+            sw = false,
+            ham = true
+        },
+        time = 24 * 60
+    },
+    {
         id = 'locomotor',
         icon = 'food',
         type = {'TABS'},
@@ -182,18 +195,6 @@ local options = {
         dlc = {
             rog = true,
             sw = true,
-            ham = true
-        }
-    },
-    {
-        id = 'bandit',
-        icon = 'bandit',
-        type = {'NAMES'},
-        name = 'PIGBANDIT',
-        switch = true,
-        dlc = {
-            rog = false,
-            sw = false,
             ham = true
         }
     },

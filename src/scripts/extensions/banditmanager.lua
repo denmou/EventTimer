@@ -1,4 +1,4 @@
-local id = "bandit"
+local id = "pig_bandit"
 
 local function BanditmanagerPostInit(self)
     g_obj_control.add(id)

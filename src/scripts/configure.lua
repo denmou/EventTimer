@@ -174,7 +174,7 @@ local options = {
         time = 24 * 60
     },
     {
-        id = 'bandit',
+        id = 'pig_bandit',
         icon = 'pig_bandit',
         type = {'NAMES'},
         name = 'PIGBANDIT',

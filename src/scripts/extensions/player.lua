@@ -2,7 +2,7 @@ local id = "locomotor"
 local ACTIVATOR = {
     CAFFEINE = "coffee",
     SURF = "tropicalbouillabaisse",
-    AUTODRY = ""
+    AUTODRY = "tropicalbouillabaisse"
 }
 local LUMINOUS = {
     wormlight = "wormlight",

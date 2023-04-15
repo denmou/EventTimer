@@ -83,9 +83,8 @@ local options = {
     {
         id = 'basehassler',
         icon = 'boss',
-        type = {'NAMES'},
-        name = 'DEERCLOPS',
-        group = true,
+        type = {'UI', 'SANDBOXMENU'},
+        name = 'CHOICEMONSTERS',
         switch = true,
         dlc = {
             rog = true,

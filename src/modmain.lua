@@ -85,7 +85,7 @@ end
 local function PauseScreenPostInit(self)
     if self.title then
         self.survived_setting = self.title:AddChild(ImageButton('images/resources.xml', "events.tex"))
-        self.survived_setting:SetPosition(280, 90, 0)
+        self.survived_setting:SetPosition(280, 0, 0)
         self.survived_setting:SetScale(.45)
         self.survived_setting:SetOnClick(function()
             _G.TheFrontEnd:PushScreen(EnevtScreen())

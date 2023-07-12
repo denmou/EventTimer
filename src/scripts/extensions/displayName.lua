@@ -52,5 +52,9 @@ EntityScript.GetDisplayName = function(self, ...)
             end
         end
     end
+    if self.respawntime and self.respawntime > 0 then
+        local currentTime = self.respawntime - GetTime()
+        name = name .. "\n" .. g_obj_utils.timeFormat(math.ceil(currentTime))
+    end
     return name
 end

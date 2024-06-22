@@ -156,11 +156,11 @@ local font_fix = {
     offset_y = 10.8
 }
 local options_fix = {
-    width = 300,
+    width = 450,
     height = 64,
     font = BODYTEXTFONT,
     font_size = 64,
-    offset_x = 173.4,
+    offset_x = 132,
     offset_y = -10.8,
     scale = .3
 }
@@ -220,9 +220,10 @@ local Configurationbadge =
             self:addRow()
             self:addScale()
         end
-        if self.config.dlc then
-            self:addDlc()
-        elseif self.config.position then
+        --if self.config.dlc then
+        --    self:addDlc()
+        --else
+        if self.config.position then
             self:addPosition()
         end
         self:addMask()

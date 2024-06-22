@@ -8,6 +8,7 @@ local Text = require "widgets/text"
 local Image = require "widgets/image"
 local Widget = require "widgets/widget"
 local Configurationbadge = require "widgets/configurationbadge"
+local Modebadge = require "widgets/modebadge"
 local Configure = require "configure"
 
 local Columns = 3
@@ -16,6 +17,23 @@ local h_position = RESOLUTION_X*.2 - 80
 local v_position = RESOLUTION_Y*.35 - 20
 local t_position = RESOLUTION_Y*.24
 local r_position = RESOLUTION_X*.27
+local mode_options = {
+    {
+        id = 'rog',
+        checked = 'DLCicon.tex',
+        unchecked = 'DLCicontoggle.tex'
+    },
+    {
+        id = 'sw',
+        checked = 'SWicon.tex',
+        unchecked = 'SWicontoggle.tex'
+    },
+    {
+        id = 'ham',
+        checked = 'HAMicon.tex',
+        unchecked = 'pork_icon.tex'
+    }
+}
 
 
 local EventScreen = Class(Screen, function(self)
@@ -62,20 +80,42 @@ local EventScreen = Class(Screen, function(self)
     self.cancelbutton:SetTextSize(40)
 
     self.panel = self.scaleroot:AddChild(Widget("panel"))
+    self.mode_widgets = {}
     self.configuration_widgets = {}
     self:RefreshConfiguration()
 end)
 
 function EventScreen:RefreshConfiguration()
+    for k,v in pairs(self.mode_widgets) do
+		v:Kill()
+	end
+    for i,v in pairs(mode_options) do
+        local item = self.panel:AddChild(Modebadge(v.id, v.checked, v.unchecked, function(id)
+            self:ChangeShowMode(id)
+        end))
+        item:SetScale(.4,.4,.4)
+        item:SetPosition(-RESOLUTION_X*.1 + RESOLUTION_X*.05*i, RESOLUTION_Y*.33, 0)
+        table.insert(self.mode_widgets, item)
+    end
+    self:ChangeShowMode(g_dlc_mode)
+end
+
+function EventScreen:ChangeShowMode(id)
+    for k,v in pairs(self.mode_widgets) do
+		v:check(id)
+	end
     for k,v in pairs(self.configuration_widgets) do
 		v:Kill()
 	end
+    local index = 0
     for i, v in pairs(Configure:Get()) do
-        local index = (i-1)%Columns
-        local rows = math.floor((i-1)/Columns)
-        local item = self.panel:AddChild(Configurationbadge(v))
-        item:SetPosition(-r_position + RESOLUTION_X*.195*index, t_position - RESOLUTION_Y*.065*rows, 0)
-        table.insert(self.configuration_widgets, item)
+        if not v.dlc or v.dlc[id] then
+            local rows = math.floor(index/Columns)
+            local item = self.panel:AddChild(Configurationbadge(v))
+            item:SetPosition(-r_position + RESOLUTION_X*.195*(index % Columns), t_position - RESOLUTION_Y*.065*rows, 0)
+            table.insert(self.configuration_widgets, item)
+            index = index + 1
+        end
     end
 end
 

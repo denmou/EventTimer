@@ -253,7 +253,7 @@ local options = {
         name = 'PACKIM',
         switch = true,
         dlc = {
-            rog = true,
+            rog = false,
             sw = true,
             ham = true
         }
@@ -307,11 +307,11 @@ function Configure:Init()
                             if item.scale then
                                 option.scale = item.scale
                             end
-                            if option.dlc then
-                                for key, v in pairs(option.dlc) do
-                                    option.dlc[key] = item.dlc[key]
-                                end
-                            end
+                            --if option.dlc then
+                            --    for key, v in pairs(option.dlc) do
+                            --       option.dlc[key] = item.dlc[key]
+                            --    end
+                            --end
                             if option.position then
                                 for key, v in pairs(option.position) do
                                     option.position[key] = item.position[key]

@@ -1,6 +1,24 @@
 local Utils = {}
 
-function Utils.timeFormat(time)
+function Utils.SecondFormat(time)
+    time = math.ceil(time)
+    if 0 == time then
+        return '00:00'
+    end
+    local second = math.mod(time, 60)
+    local minute = math.floor(time / 60)
+    local timeText = minute
+    if minute < 10 then
+        timeText = '0' .. timeText
+    end
+    timeText = timeText .. ':'
+    if second < 10 then
+        timeText = timeText .. "0"
+    end
+    return timeText .. second
+end
+
+function Utils.TimeFormat(time)
     local timeText
     time = math.ceil(time)
     if 0 == time then

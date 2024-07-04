@@ -1,6 +1,7 @@
 require "constants"
 local Widget = require "widgets/widget"
 local NoticeBadge = require "widget/notice_badge"
+local FollowNoticeBadge = require "widget/follow_notice_badge"
 
 local LEFT_POSITION_OFFSET = 0
 local LEFT_POSITION_X = 12.5
@@ -17,15 +18,17 @@ local NoticeHud = Class(function(self)
 end)
 
 function NoticeHud:Init(root)
-    self.top_left_notice_panel = root:AddChild(Widget("top_left_notice_panel"))
+    self.root = root
+    self.top_left_notice_panel = self.root:AddChild(Widget("top_left_notice_panel"))
     self.top_left_notice_panel:SetScaleMode(SCALEMODE_PROPORTIONAL)
     self.top_left_notice_panel:SetHAnchor(ANCHOR_LEFT)
     self.top_left_notice_panel:SetVAnchor(ANCHOR_TOP)
-    self.top_right_notice_panel = root:AddChild(Widget("top_right_notice_panel"))
+    self.top_right_notice_panel = self.root:AddChild(Widget("top_right_notice_panel"))
     self.top_right_notice_panel:SetScaleMode(SCALEMODE_PROPORTIONAL)
     self.top_right_notice_panel:SetHAnchor(ANCHOR_RIGHT)
     self.top_right_notice_panel:SetVAnchor(ANCHOR_TOP)
     self.noticeMap = {}
+    self.followNoticeMap = {}
     self.spacingX = nil
     self.spacingY = SPACING_Y
     self.positionX = nil
@@ -65,7 +68,6 @@ function NoticeHud:Reload()
     local index = 0
     for _, v in pairs(self.noticeMap) do
         if v:RefreshText() then
-            index = index + 1
             local scaleOption = GLOBAL_SETTING:GetActiveOption(ID_SCALE)
             local rowOption = GLOBAL_SETTING:GetActiveOption(ID_ROW)
             local columnIndex = math.floor(index / rowOption.value)
@@ -75,12 +77,36 @@ function NoticeHud:Reload()
             local positionY = self.positionY + rowIndex * self.spacingY
             positionY = positionY * scaleOption.value
             v:SetPosition(positionX, positionY)
+            index = index + 1
+        end
+    end
+    for k, v in pairs(self.followNoticeMap) do
+        if not v then
+            self.followNoticeMap[k] = nil
+        else
+            v:RefreshText()
         end
     end
 end
 
 function NoticeHud:SetText(id, value, time)
     self.noticeMap[id]:AddText(value, time)
+end
+
+function NoticeHud:GetFollowNotice(inst, y)
+    if not self.followNoticeMap[inst.GUID] then
+        self.followNoticeMap[inst.GUID] = GetPlayer().HUD:AddChild(FollowNoticeBadge())
+        self.followNoticeMap[inst.GUID]:SetTarget(inst)
+        self.followNoticeMap[inst.GUID]:SetOffset(Vector3(0, y or 0, 0))
+    end
+    return self.followNoticeMap[inst.GUID]
+end
+
+function NoticeHud:RemoveFollowNotice(inst)
+    if self.followNoticeMap[inst.GUID] then
+        self.followNoticeMap[inst.GUID]:Kill()
+        self.followNoticeMap[inst.GUID] = nil
+    end
 end
 
 return NoticeHud

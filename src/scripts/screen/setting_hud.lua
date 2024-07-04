@@ -83,7 +83,7 @@ local SettingHud = Class(Screen, function(self)
         badge:SetPosition(-RESOLUTION_X * .1 + RESOLUTION_X * .05 * i, RESOLUTION_Y * .33, 0)
         table.insert(self.modeList, badge)
     end
-    for _, option in pairs(GLOBAL_SETTING.optionMap) do
+    for _, option in ipairs(GLOBAL_SETTING.optionList) do
         for _, mode in ipairs(option.mode) do
             self:AddConfigurationBadge(mode, option)
         end

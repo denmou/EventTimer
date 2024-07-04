@@ -8,10 +8,8 @@ GLOBAL.GLOBAL_SETTING = Settings()
 
 GLOBAL.require 'constant/constants'
 
-local componentExtensions = { 'banditmanager', 'volcanomanager', 'tigersharker', 'rocmanager', 'nightmareclock', 'krakener', 'hounded', 'hayfever', 'chessnavy' }
---local componentExtensions = { 'aporkalypse', 'basehassler', 'batted' }
---local prefabExtensions = { 'vampirebat'}
-local prefabExtensions = { 'wilba', 'wx78', 'pugalisk_fountain', 'packim', 'cave' }
+local componentExtensions = { 'aporkalypse', 'basehassler', 'batted', 'banditmanager', 'volcanomanager', 'tigersharker', 'rocmanager', 'nightmareclock', 'krakener', 'hounded', 'hayfever', 'chessnavy', 'stewer', 'dryer', 'fueled' }
+local prefabExtensions = { 'wilba', 'wx78', 'pugalisk_fountain', 'packim', 'cave', 'circlingbat' }
 --GLOBAL.require 'extension/displayName'
 
 for _, name in ipairs(componentExtensions) do
@@ -46,7 +44,7 @@ local function PauseScreenPostInit(self)
 end
 
 local function SimPostInit(inst)
-    inst:DoPeriodicTask(1 / 2, function()
+    inst:DoPeriodicTask(.5, function()
         for _, v in ipairs(GLOBAL.GLOBAL_SETTING.currentExtensionList) do
             v:OnEventReport()
         end

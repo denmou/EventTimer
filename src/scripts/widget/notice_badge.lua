@@ -10,7 +10,7 @@ local bg_offset = 89
 local text_offset = 89
 
 local NoticeBadge = Class(Widget, function(self, option)
-    Widget._ctor(self, option.id .. "_notice_badge")
+    Widget._ctor(self, "NoticeBadge")
     self.option = option
     self.textMap = {}
 
@@ -48,7 +48,7 @@ function NoticeBadge:RefreshText()
     if text then
         local time = self.textMap[text]
         if NONE_TIME ~= time then
-            text = text .. ': ' .. Utils.timeFormat(time)
+            text = text .. ': ' .. Utils.TimeFormat(time)
         end
         self.text:SetString(text)
         if not self:IsVisible() then

@@ -180,7 +180,7 @@ local DEFAULT_OPTIONS = {
     },
     {
         id = ID_VAMPIRE_BATS,
-        extension = { EXTENSION_BATTED },
+        extension = { EXTENSION_BATTED, EXTENSION_APORKALYPSE },
         icon = 'vampire_bats',
         name = 'STRINGS.NAMES.VAMPIREBAT',
         switch = true,
@@ -283,8 +283,8 @@ local DEFAULT_OPTIONS = {
         describe = {}
     },
     {
-        id = ID_FUEL,
-        extension = {},
+        id = ID_FUELED,
+        extension = { EXTENSION_FUELED },
         icon = 'fire',
         name = 'STRINGS.ACTIONS.ADDFUEL.GENERIC',
         switch = true,
@@ -293,8 +293,8 @@ local DEFAULT_OPTIONS = {
         describe = {}
     },
     {
-        id = ID_COOKPOT,
-        extension = {},
+        id = ID_STEWER,
+        extension = { EXTENSION_STEWER },
         icon = 'cookpot',
         name = 'STRINGS.ACTIONS.STORE.COOK',
         switch = true,
@@ -303,10 +303,10 @@ local DEFAULT_OPTIONS = {
         describe = {}
     },
     {
-        id = ID_MEATRACK,
-        extension = { EXTENSION_PLAYER },
+        id = ID_DRYER,
+        extension = { EXTENSION_DRYER },
         icon = 'meatrack',
-        name = 'STRINGS.NAMES.MEATRACK',
+        name = 'STRINGS.ACTIONS.DRY',
         switch = true,
         mode = { ROG_MODE, SW_MODE, HAM_MODE },
         value = nil,
@@ -358,14 +358,20 @@ local DEFAULT_OPTIONS = {
 }
 
 local Settings = Class(function(self)
-    self.optionMap = {}
-    self.activeOptionMap = {}
+    self.optionList = {}
+    self.activeOptionList = {}
     self.configurationPath = KnownModIndex:GetModConfigurationPath(MOD_NAME)
     print('Configuration Path: ' .. self.configurationPath)
     self.currentMode = nil
     self.extensionMap = {}
     self.currentExtensionList = {}
     self.currentOptionMap = {}
+    self.temporary = {}
+    self.temporary[ID_VAMPIRE_BATS] = {}
+    self.temporary[ID_PACKIM] = {}
+    self.temporary[ID_STEWER] = {}
+    self.temporary[ID_DRYER] = {}
+    self.temporary[ID_FUELED] = {}
     print('Initialize Setting')
 end)
 
@@ -378,8 +384,10 @@ function Settings:Init()
         self.currentMode = ROG_MODE
     end
     for _, v in ipairs(DEFAULT_OPTIONS) do
-        self.optionMap[v.id] = Option(v.id, v.name, v.icon, v.switch, v.mode, v.value, v.options, v.extension, v.resource)
-        self.activeOptionMap[v.id] = Option(v.id, v.name, v.icon, v.switch, v.mode, v.value, v.options, v.extension, v.resource)
+        local option = Option(v.id, v.name, v.icon, v.switch, v.mode, v.value, v.options, v.extension, v.resource)
+        table.insert(self.optionList, option)
+        option = Option(v.id, v.name, v.icon, v.switch, v.mode, v.value, v.options, v.extension, v.resource)
+        table.insert(self.activeOptionList, option)
     end
     TheSim:GetPersistentString(self.configurationPath, function(loadResult, str)
         local config
@@ -391,16 +399,15 @@ function Settings:Init()
             end
         end
         if config then
-            for k, v in pairs(self.optionMap) do
-                if config[k] then
-                    if nil ~= config[k].switch then
-                        v.switch = config[k].switch
-                        self.activeOptionMap[k].switch = config[k].switch
+            for i, v in ipairs(self.optionList) do
+                if config[v.id] then
+                    if nil ~= config[v.id].switch then
+                        v.switch = config[v.id].switch
+                        self.activeOptionList[i].switch = v.switch
                     end
-                    if nil ~= config[k].value then
-                        v.value = config[k].value
-                        self.activeOptionMap[k].value = config[k].value
-                        print('Set ' ..  k .. ' : ' .. config[k].value)
+                    if nil ~= config[v.id].value then
+                        v.value = config[v.id].value
+                        self.activeOptionList[i].value = v.value
                     end
                 end
             end
@@ -411,16 +418,16 @@ function Settings:Init()
 end
 
 function Settings:Reset()
-    for _, v in ipairs(DEFAULT_OPTIONS) do
-        self.optionMap[v.id].switch = v.switch
-        self.optionMap[v.id].value = v.value
+    for i, v in ipairs(DEFAULT_OPTIONS) do
+        self.optionList[i].switch = v.switch
+        self.optionList[i].value = v.value
     end
 end
 
 function Settings:Save()
     local data = {}
-    for k, v in pairs(self.optionMap) do
-        data[k] = {
+    for _, v in ipairs(self.optionList) do
+        data[v.id] = {
             switch = v.switch,
             value = v.value
         }
@@ -431,48 +438,65 @@ function Settings:Save()
 end
 
 function Settings:Apply()
-    for k, v in pairs(self.optionMap) do
-        self.activeOptionMap[k].switch = v.switch
-        self.activeOptionMap[k].value = v.value
+    for i, v in ipairs(self.optionList) do
+        self.activeOptionList[i].switch = v.switch
+        self.activeOptionList[i].value = v.value
     end
     self:RefreshCurrentExtension()
     self:Save()
 end
 
 function Settings:Cancel()
-    for k, v in pairs(self.optionMap) do
-        v.switch = self.activeOptionMap[k].switch
-        v.value = self.activeOptionMap[k].value
+    for i, v in pairs(self.optionList) do
+        v.switch = self.activeOptionList[i].switch
+        v.value = self.activeOptionList[i].value
     end
 end
 
 function Settings:GetActiveOption(id)
-    return self.activeOptionMap[id]
+    for _, v in ipairs(self.activeOptionList) do
+        if v.id == id then
+            return v
+        end
+    end
+    return nil
 end
 
 function Settings:UpdateOptionSwitch(id, switch)
-    if self.optionMap[id] then
-        self.optionMap[id].switch = switch
+    local index
+    for i, v in ipairs(self.optionList) do
+        if v.id == id then
+            index = i
+        end
+    end
+    if index then
+        self.optionList[index].switch = switch
     end
 end
 
 function Settings:UpdateOptionValue(id, value)
-    if self.optionMap[id] then
-        self.optionMap[id].value = value
+    local index
+    for i, v in ipairs(self.optionList) do
+        if v.id == id then
+            index = i
+        end
+    end
+    if index then
+        self.optionList[index].value = value
     end
 end
 
 function Settings:RefreshCurrentExtension()
     self.currentExtensionList = {}
     print('Clear All Extension')
-    for _, v in pairs(self.optionMap) do
+    for _, v in ipairs(self.optionList) do
         if Utils.contains(v.mode, self.currentMode) then
             if v.switch and v.extension then
                 self.currentOptionMap[v.id] = v
-                for _, e in ipairs(v.extension) do
-                    if self.extensionMap[e] then
-                        table.insert(self.currentExtensionList, self.extensionMap[e])
-                        print('Enable [' .. e .. '] Extension')
+                for _, ex in ipairs(v.extension) do
+                    if self.extensionMap[ex] then
+                        table.insert(self.currentExtensionList, self.extensionMap[ex])
+                        print('Enable [' .. ex .. '] Extension')
                     end
                 end
             end

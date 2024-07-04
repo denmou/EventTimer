@@ -2,7 +2,7 @@ local Widget = require "widgets/widget"
 local ImageButton = require 'widgets/imagebutton'
 
 local ModeBadge = Class(Widget, function(self, id, checked, unchecked, fn)
-    Widget._ctor(self, "Modebadge")
+    Widget._ctor(self, "ModeBadge")
     self.id = id
     self.checked = checked
     self.unchecked = unchecked

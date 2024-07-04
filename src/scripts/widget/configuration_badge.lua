@@ -30,7 +30,7 @@ local MASK_FIX = {
 }
 
 local ConfigurationBadge = Class(Widget, function(self, option)
-    Widget._ctor(self, option.id .. '_configuration_badge')
+    Widget._ctor(self, 'ConfigurationBadge')
     self.option = option
     self:AddSwitch()
     self:AddIcon()

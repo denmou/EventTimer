@@ -14,7 +14,7 @@ local function RocmanagerPostInit(self)
             if rocController.inst.bodyparts and #rocController.inst.bodyparts > 0 then
                 GLOBAL_NOTICE_HUD:SetText(ID_ROC, STRINGS.BORE_TALK_FIND_MEAT[4], NONE_TIME)
             else
-                GLOBAL_NOTICE_HUD:SetText(ID_ROC, STRINGS.BORE_TALK_FOLLOWWILSON[4], NONE_TIME)
+                GLOBAL_NOTICE_HUD:SetText(ID_ROC, STRINGS.BORE_TALK_FIND_MEAT[1], NONE_TIME)
             end
         else
             local waitTime = self._arriveTime - totalTime

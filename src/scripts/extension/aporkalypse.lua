@@ -18,7 +18,7 @@ local function AporkalypsePostInit(self)
             else
                 self.endDate = 0
                 local waitTime = self.begin_date - totalTime
-                if waitTime < config.time then
+                if waitTime < config.value then
                     GLOBAL_NOTICE_HUD:SetText(ID_APORKALYPSE, STRINGS.ACTIONS.GIVE.LOAD, waitTime)
                 end
             end
@@ -33,7 +33,7 @@ local function AporkalypsePostInit(self)
         if config.switch then
             if self.herald_check_task then
                 local waitTime = (self.herald_check_task.nexttick - GetTick()) * GetTickTime()
-                GLOBAL_NOTICE_HUD:SetText(ID_ANCIENT_HERALD, STRINGS.ACTIONS.HEAL, waitTime)
+                GLOBAL_NOTICE_HUD:SetText(ID_ANCIENT_HERALD, STRINGS.ACTIONS.GIVE.LOAD, waitTime)
             end
         end
     end

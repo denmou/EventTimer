@@ -93,11 +93,11 @@ function NoticeHud:SetText(id, value, time)
     self.noticeMap[id]:AddText(value, time)
 end
 
-function NoticeHud:GetFollowNotice(inst, y)
+function NoticeHud:GetFollowNotice(inst, y, fontSize)
     if not self.followNoticeMap[inst.GUID] then
-        self.followNoticeMap[inst.GUID] = GetPlayer().HUD:AddChild(FollowNoticeBadge())
+        self.followNoticeMap[inst.GUID] = GetPlayer().HUD:AddChild(FollowNoticeBadge(fontSize))
         self.followNoticeMap[inst.GUID]:SetTarget(inst)
-        self.followNoticeMap[inst.GUID]:SetOffset(Vector3(0, y or 0, 0))
+        self.followNoticeMap[inst.GUID]:SetOffset(Vector3( 0, y or 0, 0))
     end
     return self.followNoticeMap[inst.GUID]
 end

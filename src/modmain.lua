@@ -8,9 +8,11 @@ GLOBAL.GLOBAL_SETTING = Settings()
 
 GLOBAL.require 'constant/constants'
 
-local componentExtensions = { 'aporkalypse', 'basehassler', 'batted', 'banditmanager', 'volcanomanager', 'tigersharker', 'rocmanager', 'nightmareclock', 'krakener', 'hounded', 'hayfever', 'chessnavy', 'stewer', 'dryer', 'fueled' }
-local prefabExtensions = { 'wilba', 'wx78', 'pugalisk_fountain', 'packim', 'cave', 'circlingbat' }
---GLOBAL.require 'extension/displayName'
+local componentExtensions = { 'aporkalypse', 'basehassler', 'batted', 'banditmanager', 'volcanomanager', 'tigersharker',
+                              'rocmanager', 'nightmareclock', 'krakener', 'hounded', 'hayfever', 'chessnavy', 'stewer',
+                              'dryer', 'fueled', 'locomotor' }
+local prefabExtensions = { 'wilba', 'wx78', 'pugalisk_fountain', 'packim', 'cave', 'circlingbat', 'packim_fishbone' }
+GLOBAL.require 'extension/displayName'
 
 for _, name in ipairs(componentExtensions) do
     AddComponentPostInit(name, GLOBAL.require('extension/' .. name))
@@ -18,7 +20,6 @@ end
 for _, name in ipairs(prefabExtensions) do
     AddPrefabPostInit(name, GLOBAL.require('extension/' .. name))
 end
---AddPlayerPostInit(GLOBAL.require 'extension/player')
 
 local NoticeHud = GLOBAL.require 'screen/notice_hud'
 local SettingHud = GLOBAL.require 'screen/setting_hud'

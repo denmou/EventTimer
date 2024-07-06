@@ -1,4 +1,7 @@
 require 'constant/constants'
+local Utils = require 'util/utils'
+
+local OFFSET_Y = -400
 
 local function WilbaPrefabPostInit(inst)
     inst.OnEventReport = function()
@@ -8,10 +11,12 @@ local function WilbaPrefabPostInit(inst)
                 waitTime = waitTime + (inst.monster_count - 1) * inst.cooldown_schedule
             end
             if waitTime > 0 then
-                if inst.ready_to_transform then
-                    GLOBAL_NOTICE_HUD:SetText(ID_WILBA, STRINGS.ACTIONS.FEED, waitTime)
+                if inst.from_food then
+                    local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(inst, OFFSET_Y)
+                    notice:SetValue(Utils.SecondFormat(waitTime))
                 else
-                    GLOBAL_NOTICE_HUD:SetText(ID_WILBA, STRINGS.NAMES.DECO_WALLORNAMENT_HUNT, waitTime)
+                    local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(inst, OFFSET_Y)
+                    notice:SetValue(inst.monster_count .. '/2 (' .. Utils.SecondFormat(waitTime) .. ')')
                 end
             end
         end

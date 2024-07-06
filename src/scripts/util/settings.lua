@@ -243,30 +243,10 @@ local DEFAULT_OPTIONS = {
         describe = {}
     },
     {
-        id = ID_SPEED,
-        extension = { EXTENSION_PLAYER },
-        icon = 'coffee',
-        name = 'STRINGS.NAMES.COFFEE',
-        switch = true,
-        mode = { ROG_MODE, SW_MODE, HAM_MODE },
-        value = nil,
-        describe = {}
-    },
-    {
-        id = ID_DRY,
-        extension = { EXTENSION_PLAYER },
+        id = ID_LOCOMOTOR,
+        extension = { EXTENSION_LOCOMOTOR },
         icon = 'farm',
-        name = 'STRINGS.ACTIONS.DRY',
-        switch = true,
-        mode = { ROG_MODE, SW_MODE, HAM_MODE },
-        value = nil,
-        describe = {}
-    },
-    {
-        id = ID_SURF,
-        extension = { EXTENSION_PLAYER },
-        icon = 'farm',
-        name = 'STRINGS.ACTIONS.SURFTO',
+        name = 'STRINGS.TABS.FARM',
         switch = true,
         mode = { ROG_MODE, SW_MODE, HAM_MODE },
         value = nil,
@@ -314,7 +294,7 @@ local DEFAULT_OPTIONS = {
     },
     {
         id = ID_PACKIM,
-        extension = { EXTENSION_PACKIM },
+        extension = { EXTENSION_PACKIM, EXTENSION_PACKIM_FISHBONE },
         icon = 'packim',
         name = 'STRINGS.NAMES.PACKIM',
         switch = true,
@@ -372,6 +352,8 @@ local Settings = Class(function(self)
     self.temporary[ID_STEWER] = {}
     self.temporary[ID_DRYER] = {}
     self.temporary[ID_FUELED] = {}
+    self.temporary[ID_LOCOMOTOR] = {}
+    self.temporary[ID_PACKIM_FISHBONE] = {}
     print('Initialize Setting')
 end)
 

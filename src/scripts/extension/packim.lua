@@ -19,18 +19,6 @@ local function PackimPrefabPostInit(inst)
             end
         end
     end
-    local OnRemoveEntity = inst.OnRemoveEntity
-    inst.OnRemoveEntity = function(...)
-        if OnRemoveEntity then
-            OnRemoveEntity(...)
-        end
-        for i = #GLOBAL_SETTING.temporary[ID_PACKIM], 1, -1 do
-            if inst.GUID == GLOBAL_SETTING.temporary[ID_PACKIM][i].GUID then
-                table.remove(GLOBAL_SETTING.temporary[ID_PACKIM], i)
-            end
-        end
-        GLOBAL_NOTICE_HUD:RemoveFollowNotice(inst)
-    end
     GLOBAL_SETTING.extensionMap[EXTENSION_PACKIM] = inst
     print('Add [' .. EXTENSION_PACKIM .. '] Extension')
 end

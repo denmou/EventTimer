@@ -1,19 +1,21 @@
 require 'constant/constants'
 local Utils = require 'util/utils'
 
+local EXTENSION = EXTENSION_FUELED
 local OFFSET_Y = 100
 
-local function DryerPostInit(self)
+local function FueledPostInit(self)
     if not self.inst.components.equippable then
-        table.insert(GLOBAL_SETTING.temporary[ID_FUELED], self.inst)
+        table.insert(GLOBAL_SETTING.entityMap[EXTENSION], self.inst)
         local OnRemoveEntity = self.OnRemoveEntity
         self.OnRemoveEntity = function(...)
             if OnRemoveEntity then
                 OnRemoveEntity(...)
             end
-            for i = #GLOBAL_SETTING.temporary[ID_FUELED], 1, -1 do
-                if self.inst.GUID == GLOBAL_SETTING.temporary[ID_FUELED][i].GUID then
-                    table.remove(GLOBAL_SETTING.temporary[ID_FUELED], i)
+            for i = #GLOBAL_SETTING.entityMap[EXTENSION], 1, -1 do
+                if self.inst.GUID == GLOBAL_SETTING.entityMap[EXTENSION][i].GUID then
+                    table.remove(GLOBAL_SETTING.entityMap[EXTENSION], i)
+                    print('Remove Fueled[' .. self.inst.GUID .. '] Entity')
                 end
             end
             GLOBAL_NOTICE_HUD:RemoveFollowNotice(self.inst)
@@ -21,11 +23,11 @@ local function DryerPostInit(self)
     end
 end
 
-GLOBAL_SETTING.extensionMap[EXTENSION_FUELED] = {
+GLOBAL_SETTING.extensionMap[EXTENSION] = {
     OnEventReport = function()
-        for _, v in ipairs(GLOBAL_SETTING.temporary[ID_FUELED]) do
-            local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(v, OFFSET_Y)
-            local fueled = v.components.fueled
+        for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
+            local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
+            local fueled = e.components.fueled
             local currentTime = fueled.currentfuel
             if currentTime > 0 then
                 local maxTime = fueled.maxfuel
@@ -34,6 +36,6 @@ GLOBAL_SETTING.extensionMap[EXTENSION_FUELED] = {
         end
     end
 }
-print('Add [' .. EXTENSION_FUELED .. '] Extension')
+print('Add [' .. EXTENSION .. '] Extension')
 
-return DryerPostInit
+return FueledPostInit

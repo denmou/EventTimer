@@ -1,21 +1,16 @@
 require 'constant/constants'
 
+local EXTENSION = EXTENSION_BATTED
+
 local function BattedPostInit(self)
-    self.OnEventReport = function()
-        local currentTick = GetTick()
-        for i = #GLOBAL_SETTING.temporary[ID_VAMPIRE_BATS], 1, -1 do
-            if currentTick > GLOBAL_SETTING.temporary[ID_VAMPIRE_BATS][i] then
-                table.remove(GLOBAL_SETTING.temporary[ID_VAMPIRE_BATS], i)
-            end
-        end
-        if 0 < #GLOBAL_SETTING.temporary[ID_VAMPIRE_BATS] then
-            table.sort(GLOBAL_SETTING.temporary[ID_VAMPIRE_BATS])
-            local waitTime = (GLOBAL_SETTING.temporary[ID_VAMPIRE_BATS][1] - currentTick ) * GetTickTime()
-            local text = "[" .. #GLOBAL_SETTING.temporary[ID_VAMPIRE_BATS] .. "]" .. STRINGS.ACTIONS.SPY
-            GLOBAL_NOTICE_HUD:SetText(ID_VAMPIRE_BATS, text, waitTime)
-        else
-            local waitTime = self.timetoattack
-            local count = self:CountBats()
+    table.insert(GLOBAL_SETTING.entityMap[EXTENSION], self)
+end
+
+GLOBAL_SETTING.extensionMap[EXTENSION] = {
+    OnEventReport = function()
+        for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
+            local waitTime = e.timetoattack
+            local count = e:CountBats()
             local config = GLOBAL_SETTING:GetActiveOption(ID_VAMPIRE_BATS)
             if waitTime < config.value then
                 local text = "[" .. count .. "]" .. STRINGS.ACTIONS.RETRIEVE
@@ -23,8 +18,8 @@ local function BattedPostInit(self)
             end
         end
     end
-    GLOBAL_SETTING.extensionMap[EXTENSION_BATTED] = self
-    print('Add [' .. EXTENSION_BATTED .. '] Extension')
-end
+}
+
+print('Add [' .. EXTENSION .. '] Extension')
 
 return BattedPostInit

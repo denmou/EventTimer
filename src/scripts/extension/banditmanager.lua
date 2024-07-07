@@ -1,17 +1,25 @@
 require 'constant/constants'
 
+local EXTENSION = EXTENSION_BANDITMANAGER
+
 local function BanditmanagerPostInit(self)
-    self.OnEventReport = function()
-        if not self.disabled then
-            local waitTime = self.deathtime
+    if not self.disabled then
+        table.insert(GLOBAL_SETTING.entityMap[EXTENSION], self)
+    end
+end
+
+GLOBAL_SETTING.extensionMap[EXTENSION] = {
+    OnEventReport = function()
+        for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
+            local waitTime = e.deathtime
             if waitTime > 0 then
-                waitTime = waitTime + (self.task.nexttick - GetTick()) * GetTickTime()
+                waitTime = waitTime + (e.task.nexttick - GetTick()) * GetTickTime()
                 local config = GLOBAL_SETTING:GetActiveOption(ID_PIG_BANDIT)
                 if waitTime < config.value then
                     GLOBAL_NOTICE_HUD:SetText(ID_PIG_BANDIT, STRINGS.ACTIONS.HEAL, waitTime)
                 end
             else
-                if not self.banditactive then
+                if not e.banditactive then
                     local chance = 0
                     local player = GetPlayer()
                     local pt = Vector3(player.Transform:GetWorldPosition())
@@ -60,8 +68,8 @@ local function BanditmanagerPostInit(self)
                         elseif value == 0 then
                             chance = 0
                         end
-                        chance = chance * self.diffmod
-                        waitTime = (self.task.nexttick - GetTick()) * GetTickTime()
+                        chance = chance * e.diffmod
+                        waitTime = (e.task.nexttick - GetTick()) * GetTickTime()
                         local text = "[" .. chance * 100 .. "%]" .. STRINGS.ACTIONS.PEER
                         GLOBAL_NOTICE_HUD:SetText(ID_PIG_BANDIT, text, waitTime)
                     end
@@ -71,8 +79,7 @@ local function BanditmanagerPostInit(self)
             end
         end
     end
-    GLOBAL_SETTING.extensionMap[EXTENSION_BANDITMANAGER] = self
-    print('Add [' .. EXTENSION_BANDITMANAGER .. '] Extension')
-end
+}
+print('Add [' .. EXTENSION .. '] Extension')
 
 return BanditmanagerPostInit

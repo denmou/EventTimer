@@ -1,6 +1,7 @@
 require 'constant/constants'
 local Utils = require 'util/utils'
 
+local EXTENSION = EXTENSION_LOCOMOTOR
 local OFFSET_Y = 35
 local FONT_SIZE = 16
 
@@ -17,15 +18,16 @@ local LUMINOUS = {
 
 local function LocomotorPostInit(self)
     if self.speed_modifiers_add_timer and self.inst:HasTag('character') then
-        table.insert(GLOBAL_SETTING.temporary[ID_LOCOMOTOR], self.inst)
+        table.insert(GLOBAL_SETTING.entityMap[EXTENSION], self.inst)
         local OnRemoveEntity = self.OnRemoveEntity
         self.OnRemoveEntity = function(...)
             if OnRemoveEntity then
                 OnRemoveEntity(...)
             end
-            for i = #GLOBAL_SETTING.temporary[ID_LOCOMOTOR], 1, -1 do
-                if self.inst.GUID == GLOBAL_SETTING.temporary[ID_LOCOMOTOR][i].GUID then
-                    table.remove(GLOBAL_SETTING.temporary[ID_LOCOMOTOR], i)
+            for i = #GLOBAL_SETTING.entityMap[EXTENSION], 1, -1 do
+                if self.inst.GUID == GLOBAL_SETTING.entityMap[EXTENSION][i].GUID then
+                    table.remove(GLOBAL_SETTING.entityMap[EXTENSION], i)
+                    print('Remove Locomotor[' .. self.inst.GUID .. '] Entity')
                 end
             end
             GLOBAL_NOTICE_HUD:RemoveFollowNotice(self.inst)
@@ -33,12 +35,11 @@ local function LocomotorPostInit(self)
     end
 end
 
-GLOBAL_SETTING.extensionMap[EXTENSION_LOCOMOTOR] = {
+GLOBAL_SETTING.extensionMap[EXTENSION] = {
     OnEventReport = function()
-        for _, v in ipairs(GLOBAL_SETTING.temporary[ID_LOCOMOTOR]) do
-            for k, t in pairs(v.components.locomotor.speed_modifiers_add_timer) do
-                local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(v, OFFSET_Y, FONT_SIZE)
-                local power = v.components.locomotor.speed_modifiers_add[k]
+        for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
+            for k, t in pairs(e.components.locomotor.speed_modifiers_add_timer) do
+                local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y, FONT_SIZE)
                 if t then
                     local text = Utils.SecondFormat(t)
                     local atlas = GetInventoryItemAtlas(ADDITIVES[k] .. '.tex')
@@ -46,9 +47,9 @@ GLOBAL_SETTING.extensionMap[EXTENSION_LOCOMOTOR] = {
                 end
             end
             for k, m in pairs(LUMINOUS) do
-                local light = v[k]
+                local light = e[k]
                 if light then
-                    local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(v, OFFSET_Y, FONT_SIZE)
+                    local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y, FONT_SIZE)
                     local waitTime = light.components.spell.duration - light.components.spell.lifetime
                     if waitTime >= 0 then
                         local atlas = GetInventoryItemAtlas(m .. '.tex')
@@ -59,6 +60,6 @@ GLOBAL_SETTING.extensionMap[EXTENSION_LOCOMOTOR] = {
         end
     end
 }
-print('Add [' .. EXTENSION_LOCOMOTOR .. '] Extension')
+print('Add [' .. EXTENSION .. '] Extension')
 
 return LocomotorPostInit

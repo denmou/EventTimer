@@ -68,14 +68,15 @@ function NoticeHud:Reload()
     local index = 0
     for _, v in pairs(self.noticeMap) do
         if v:RefreshText() then
-            local scaleOption = GLOBAL_SETTING:GetActiveOption(ID_SCALE)
+            --local scaleOption = GLOBAL_SETTING:GetActiveOption(ID_SCALE)
             local rowOption = GLOBAL_SETTING:GetActiveOption(ID_ROW)
             local columnIndex = math.floor(index / rowOption.value)
             local rowIndex = index % rowOption.value
             local positionX = self.positionX + columnIndex * self.spacingX
-            positionX = positionX * scaleOption.value + self.positionOffset
+            --positionX = positionX * scaleOption.value + self.positionOffset
+            positionX = positionX + self.positionOffset
             local positionY = self.positionY + rowIndex * self.spacingY
-            positionY = positionY * scaleOption.value
+            --positionY = positionY * scaleOption.value
             v:SetPosition(positionX, positionY)
             index = index + 1
         end

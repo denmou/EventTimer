@@ -180,7 +180,7 @@ local DEFAULT_OPTIONS = {
     },
     {
         id = ID_VAMPIRE_BATS,
-        extension = { EXTENSION_BATTED, EXTENSION_APORKALYPSE },
+        extension = { EXTENSION_BATTED, EXTENSION_CIRCLINGBAT, EXTENSION_APORKALYPSE },
         icon = 'vampire_bats',
         name = 'STRINGS.NAMES.VAMPIREBAT',
         switch = true,
@@ -323,17 +323,6 @@ local DEFAULT_OPTIONS = {
         value = DEFAULT_ROWS,
         options = OPTIONS_ROWS,
         describe = {}
-    },
-    {
-        id = ID_SCALE,
-        extension = {},
-        icon = 'mods',
-        name = 'STRINGS.UI.HELP.ZOOM_IN',
-        switch = nil,
-        mode = { ROG_MODE, SW_MODE, HAM_MODE },
-        value = DEFAULT_SCALE,
-        options = OPTIONS_SCALES,
-        describe = {}
     }
 }
 
@@ -346,14 +335,10 @@ local Settings = Class(function(self)
     self.extensionMap = {}
     self.currentExtensionList = {}
     self.currentOptionMap = {}
-    self.temporary = {}
-    self.temporary[ID_VAMPIRE_BATS] = {}
-    self.temporary[ID_PACKIM] = {}
-    self.temporary[ID_STEWER] = {}
-    self.temporary[ID_DRYER] = {}
-    self.temporary[ID_FUELED] = {}
-    self.temporary[ID_LOCOMOTOR] = {}
-    self.temporary[ID_PACKIM_FISHBONE] = {}
+    self.entityMap = {}
+    for _, v in ipairs(EXTENSION_LIST) do
+        self.entityMap[v] = {}
+    end
     print('Initialize Setting')
 end)
 

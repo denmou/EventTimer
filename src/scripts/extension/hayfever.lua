@@ -14,7 +14,6 @@ GLOBAL_SETTING.extensionMap[EXTENSION_HAYFEVER] = {
             if e.enabled and waitTime < config.value then
                 GLOBAL_NOTICE_HUD:SetText(ID_HAYFEVER, STRINGS.UI.CUSTOMIZATIONSCREEN.NAMES.HAYFEVER, waitTime)
             end
-
         end
     end
 }

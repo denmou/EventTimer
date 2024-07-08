@@ -6,6 +6,19 @@ local OFFSET_Y = -550
 
 local function PackimPrefabPostInit(inst)
     table.insert(GLOBAL_SETTING.entityMap[EXTENSION], inst)
+    local OnRemoveEntity = inst.OnRemoveEntity
+    inst.OnRemoveEntity = function(...)
+        if OnRemoveEntity then
+            OnRemoveEntity(...)
+        end
+        for i = #GLOBAL_SETTING.entityMap[EXTENSION], 1, -1 do
+            if inst.GUID == GLOBAL_SETTING.entityMap[EXTENSION][i].GUID then
+                table.remove(GLOBAL_SETTING.entityMap[EXTENSION], i)
+                print('Remove Packim[' .. inst.GUID .. '] Entity')
+            end
+        end
+        GLOBAL_NOTICE_HUD:RemoveFollowNotice(inst)
+    end
 end
 
 GLOBAL_SETTING.extensionMap[EXTENSION] = {

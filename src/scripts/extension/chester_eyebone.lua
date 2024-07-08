@@ -1,8 +1,8 @@
 require 'constant/constants'
 local Utils = require 'util/utils'
 
-local EXTENSION = EXTENSION_CHESSNAVY
-local OFFSET_Y = -100
+local EXTENSION = EXTENSION_CHESTER_EYEBONE
+local OFFSET_Y = -180
 
 local function ChesterEyebonePrefabPostInit(inst)
     table.insert(GLOBAL_SETTING.entityMap[EXTENSION], inst)

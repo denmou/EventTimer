@@ -303,6 +303,17 @@ local DEFAULT_OPTIONS = {
         describe = {}
     },
     {
+        id = ID_CHESTER_EYEBONE,
+        extension = { EXTENSION_CHESTER_EYEBONE },
+        resource = GetInventoryItemAtlas('chester_eyebone.tex'),
+        icon = 'chester_eyebone',
+        name = 'STRINGS.NAMES.CHESTER',
+        switch = true,
+        mode = { ROG_MODE },
+        value = nil,
+        describe = {}
+    },
+    {
         id = ID_POSITION,
         extension = {},
         icon = 'mods',

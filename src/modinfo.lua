@@ -1,5 +1,5 @@
 --[NEW] The name of the mod displayed in the "mods" screen.
-name = "[T]Event Timer"
+name = "Event Timer"
 
 --[NEW] A description of the mod.
 description = "显示游戏事件的剩余时间\n—By Google Translate\nShow the remaining time for game events"

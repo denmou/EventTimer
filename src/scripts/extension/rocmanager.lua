@@ -1,6 +1,6 @@
 require 'constant/constants'
 
-local EXTENSION = EXTENSION_PUGALISK_FOUNTAIN
+local EXTENSION = EXTENSION_ROCMANAGER
 local ROC_TIME = TUNING.SEG_TIME / 2
 
 local function RocmanagerPostInit(self)

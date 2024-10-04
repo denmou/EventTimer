@@ -1,7 +1,7 @@
 require 'constant/constants'
 local Utils = require 'util/utils'
 
-local EXTENSION = EXTENSION_KRAKENER
+local EXTENSION = EXTENSION_NIGHTMARECLOCK
 local PHASE = {
     calm = 'STRINGS.ACTIONS.ADDFUEL.REPAIR',
     warn = 'STRINGS.ACTIONS.GIVE.READY',

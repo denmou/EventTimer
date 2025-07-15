@@ -4,6 +4,16 @@ local Utils = require 'util/utils'
 
 local DEFAULT_OPTIONS = {
     {
+        id = ID_ANTHILL,
+        extension = { EXTENSION_ANTHILL },
+        icon = 'mant_lamps',
+        name = 'STRINGS.NAMES.ANTHILL',
+        switch = true,
+        mode = { HAM_MODE },
+        value = nil,
+        describe = {}
+    },
+    {
         id = ID_APORKALYPSE,
         extension = { EXTENSION_APORKALYPSE },
         icon = 'aporkalypse',

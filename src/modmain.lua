@@ -11,7 +11,7 @@ GLOBAL.require 'constant/constants'
 local componentExtensions = { 'aporkalypse', 'basehassler', 'batted', 'banditmanager', 'volcanomanager', 'tigersharker',
                               'rocmanager', 'nightmareclock', 'krakener', 'hounded', 'hayfever', 'chessnavy', 'stewer',
                               'dryer', 'fueled', 'locomotor' }
-local prefabExtensions = { 'wilba', 'wx78', 'pugalisk_fountain', 'packim', 'cave', 'circlingbat', 'packim_fishbone', 'chester_eyebone' }
+local prefabExtensions = { 'wilba', 'wx78', 'pugalisk_fountain', 'packim', 'cave', 'circlingbat', 'packim_fishbone', 'chester_eyebone', 'anthill' }
 GLOBAL.require 'extension/displayName'
 
 for _, name in ipairs(componentExtensions) do

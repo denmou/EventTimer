@@ -6,6 +6,7 @@ local DEFAULT_OPTIONS = {
     {
         id = ID_ANTHILL,
         extension = { EXTENSION_ANTHILL },
+        resource = GetInventoryItemAtlas('mant_lamps.tex'),
         icon = 'mant_lamps',
         name = 'STRINGS.NAMES.ANTHILL',
         switch = true,

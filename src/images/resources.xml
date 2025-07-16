@@ -3,22 +3,23 @@
 	<Texture filename="resources.tex" />
 	<Elements>
 		<Element name="ancient_herald.tex" u1="0.000244141" u2="0.0617676" v1="0.876465" v2="0.999512" />
-		<Element name="aporkalypse.tex" u1="0.0622559" u2="0.123779" v1="0.876465" v2="0.999512" />
-		<Element name="aporkalypse_clock.tex" u1="0.124268" u2="0.185791" v1="0.876465" v2="0.999512" />
-		<Element name="bearger.tex" u1="0.186279" u2="0.247803" v1="0.876465" v2="0.999512" />
-		<Element name="boss.tex" u1="0.248291" u2="0.309814" v1="0.876465" v2="0.999512" />
-		<Element name="chess_monsters.tex" u1="0.310303" u2="0.371826" v1="0.876465" v2="0.999512" />
-		<Element name="coffee.tex" u1="0.372314" u2="0.402588" v1="0.938965" v2="0.999512" />
-		<Element name="cookpot.tex" u1="0.403076" u2="0.43335" v1="0.938965" v2="0.999512" />
-		<Element name="crocodog.tex" u1="0.433838" u2="0.495361" v1="0.876465" v2="0.999512" />
-		<Element name="deerclops.tex" u1="0.49585" u2="0.557373" v1="0.876465" v2="0.999512" />
-		<Element name="dog.tex" u1="0.557861" u2="0.619385" v1="0.876465" v2="0.999512" />
-		<Element name="dragonfly.tex" u1="0.619873" u2="0.681396" v1="0.876465" v2="0.999512" />
-		<Element name="dragoonheart.tex" u1="0.681885" u2="0.712158" v1="0.938965" v2="0.999512" />
-		<Element name="events.tex" u1="0.712646" u2="0.77417" v1="0.876465" v2="0.999512" />
-		<Element name="farm.tex" u1="0.774658" u2="0.836182" v1="0.876465" v2="0.999512" />
-		<Element name="fire.tex" u1="0.83667" u2="0.898193" v1="0.876465" v2="0.999512" />
-		<Element name="firepit.tex" u1="0.898682" u2="0.960693" v1="0.875488" v2="0.999512" />
+		<Element name="ant_hill_entrance.tex" u1="0.0622559" u2="0.0925293" v1="0.938965" v2="0.999512" />
+		<Element name="aporkalypse.tex" u1="0.0930176" u2="0.154541" v1="0.876465" v2="0.999512" />
+		<Element name="aporkalypse_clock.tex" u1="0.155029" u2="0.216553" v1="0.876465" v2="0.999512" />
+		<Element name="bearger.tex" u1="0.217041" u2="0.278564" v1="0.876465" v2="0.999512" />
+		<Element name="boss.tex" u1="0.279053" u2="0.340576" v1="0.876465" v2="0.999512" />
+		<Element name="chess_monsters.tex" u1="0.341064" u2="0.402588" v1="0.876465" v2="0.999512" />
+		<Element name="coffee.tex" u1="0.403076" u2="0.43335" v1="0.938965" v2="0.999512" />
+		<Element name="cookpot.tex" u1="0.433838" u2="0.464111" v1="0.938965" v2="0.999512" />
+		<Element name="crocodog.tex" u1="0.4646" u2="0.526123" v1="0.876465" v2="0.999512" />
+		<Element name="deerclops.tex" u1="0.526611" u2="0.588135" v1="0.876465" v2="0.999512" />
+		<Element name="dog.tex" u1="0.588623" u2="0.650146" v1="0.876465" v2="0.999512" />
+		<Element name="dragonfly.tex" u1="0.650635" u2="0.712158" v1="0.876465" v2="0.999512" />
+		<Element name="dragoonheart.tex" u1="0.712646" u2="0.74292" v1="0.938965" v2="0.999512" />
+		<Element name="events.tex" u1="0.743408" u2="0.804932" v1="0.876465" v2="0.999512" />
+		<Element name="farm.tex" u1="0.80542" u2="0.866943" v1="0.876465" v2="0.999512" />
+		<Element name="fire.tex" u1="0.867432" u2="0.928955" v1="0.876465" v2="0.999512" />
+		<Element name="firepit.tex" u1="0.929443" u2="0.991455" v1="0.875488" v2="0.999512" />
 		<Element name="fissure.tex" u1="0.000244141" u2="0.0617676" v1="0.751465" v2="0.874512" />
 		<Element name="food.tex" u1="0.0622559" u2="0.123779" v1="0.751465" v2="0.874512" />
 		<Element name="goosemoose.tex" u1="0.124268" u2="0.185791" v1="0.751465" v2="0.874512" />
@@ -46,11 +47,12 @@
 		<Element name="tigershark.tex" u1="0.68335" u2="0.744873" v1="0.501465" v2="0.624512" />
 		<Element name="tropicalbouillabaisse.tex" u1="0.745361" u2="0.775635" v1="0.563965" v2="0.624512" />
 		<Element name="twister.tex" u1="0.776123" u2="0.837646" v1="0.501465" v2="0.624512" />
-		<Element name="vampire_bats.tex" u1="0.838135" u2="0.899658" v1="0.501465" v2="0.624512" />
-		<Element name="volcano.tex" u1="0.900146" u2="0.96167" v1="0.501465" v2="0.624512" />
-		<Element name="wilba.tex" u1="0.000244141" u2="0.0578613" v1="0.274902" v2="0.374512" />
-		<Element name="worm.tex" u1="0.0583496" u2="0.119873" v1="0.251465" v2="0.374512" />
-		<Element name="wormlight.tex" u1="0.120361" u2="0.150635" v1="0.313965" v2="0.374512" />
-		<Element name="wx78.tex" u1="0.151123" u2="0.20874" v1="0.274902" v2="0.374512" />
+		<Element name="up.tex" u1="0.838135" u2="0.899658" v1="0.501465" v2="0.624512" />
+		<Element name="vampire_bats.tex" u1="0.900146" u2="0.96167" v1="0.501465" v2="0.624512" />
+		<Element name="volcano.tex" u1="0.000244141" u2="0.0617676" v1="0.251465" v2="0.374512" />
+		<Element name="wilba.tex" u1="0.0622559" u2="0.119873" v1="0.274902" v2="0.374512" />
+		<Element name="worm.tex" u1="0.120361" u2="0.181885" v1="0.251465" v2="0.374512" />
+		<Element name="wormlight.tex" u1="0.182373" u2="0.212646" v1="0.313965" v2="0.374512" />
+		<Element name="wx78.tex" u1="0.213135" u2="0.270752" v1="0.274902" v2="0.374512" />
 	</Elements>
 </Atlas>

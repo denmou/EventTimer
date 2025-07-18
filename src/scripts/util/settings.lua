@@ -4,16 +4,6 @@ local Utils = require 'util/utils'
 
 local DEFAULT_OPTIONS = {
     {
-        id = ID_ANTHILL,
-        extension = { EXTENSION_ANTHILL },
-        icon = 'ant_hill_entrance',
-        name = 'STRINGS.NAMES.ANTHILL',
-        switch = true,
-        mode = { HAM_MODE },
-        value = nil,
-        describe = {}
-    },
-    {
         id = ID_APORKALYPSE,
         extension = { EXTENSION_APORKALYPSE },
         icon = 'aporkalypse',
@@ -259,6 +249,16 @@ local DEFAULT_OPTIONS = {
         name = 'STRINGS.TABS.FARM',
         switch = true,
         mode = { ROG_MODE, SW_MODE, HAM_MODE },
+        value = nil,
+        describe = {}
+    },
+    {
+        id = ID_ANTHILL,
+        extension = { EXTENSION_ANTHILL },
+        icon = 'ant_hill_entrance',
+        name = 'STRINGS.NAMES.ANTHILL',
+        switch = true,
+        mode = { HAM_MODE },
         value = nil,
         describe = {}
     },

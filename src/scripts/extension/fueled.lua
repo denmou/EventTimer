@@ -28,10 +28,12 @@ GLOBAL_SETTING.extensionMap[EXTENSION] = {
         for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
             local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
             local fueled = e.components.fueled
-            local currentTime = fueled.currentfuel
-            if currentTime > 0 then
-                local maxTime = fueled.maxfuel
-                notice:SetValue(Utils.SecondFormat(currentTime) .. '/' .. Utils.SecondFormat(maxTime))
+            if fueled then
+                local currentTime = fueled.currentfuel
+                if currentTime > 0 then
+                    local maxTime = fueled.maxfuel
+                    notice:SetValue(Utils.SecondFormat(currentTime) .. '/' .. Utils.SecondFormat(maxTime))
+                end
             end
         end
     end

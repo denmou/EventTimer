@@ -10,10 +10,13 @@ GLOBAL_SETTING.extensionMap[EXTENSION] = {
     OnEventReport = function()
         for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
             local tasks = e.pendingtasks
-            if tasks and #tasks > 0 then
-                local task = tasks[1]
-                local waitTime = (task.nexttick - GetTick()) * GetTickTime()
-                GLOBAL_NOTICE_HUD:SetText(ID_ANTHILL, STRINGS.ACTIONS.RENOVATE, waitTime)
+            if tasks then
+                for task, _ in pairs(tasks) do
+                    if task.period == TUNING.TOTAL_DAY_TIME / 3 then
+                        local waitTime = (task.nexttick - GetTick()) * GetTickTime()
+                        GLOBAL_NOTICE_HUD:SetText(ID_ANTHILL, STRINGS.ACTIONS.RENOVATE, waitTime)
+                    end
+                end
             end
         end
     end

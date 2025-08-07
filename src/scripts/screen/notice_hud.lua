@@ -94,6 +94,27 @@ function NoticeHud:SetText(id, value, time)
     self.noticeMap[id]:AddText(value, time)
 end
 
+function NoticeHud:SetIconText(id, atlas, value, time)
+    local current_panel
+    local positionOption = GLOBAL_SETTING:GetActiveOption(ID_POSITION)
+    if POSITION_LEFT == positionOption.value then
+        current_panel = self.top_left_notice_panel
+    else
+        current_panel = self.top_right_notice_panel
+    end
+    if not self.noticeMap[id] then
+        local option = {
+            id = id,
+            resource = atlas,
+            icon = id
+        }
+        local notice = current_panel:AddChild(NoticeBadge(option))
+        notice:Hide()
+        self.noticeMap[id] = notice
+    end
+    self.noticeMap[id]:AddText(value, time)
+end
+
 function NoticeHud:GetFollowNotice(inst, y, fontSize)
     if not self.followNoticeMap[inst.GUID] then
         self.followNoticeMap[inst.GUID] = GetPlayer().HUD:AddChild(FollowNoticeBadge(fontSize))

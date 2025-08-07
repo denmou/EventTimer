@@ -12,8 +12,9 @@ GLOBAL_SETTING.extensionMap[EXTENSION_WX78] = {
     OnEventReport = function()
         for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
             if e.charge_time and e.charge_time > 0 then
-                local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
-                notice:SetValue(Utils.TimeFormat(e.charge_time))
+                GLOBAL_NOTICE_HUD:SetText(ID_WX78, STRINGS.ACTIONS.CHARGE_UP, e.charge_time)
+                --local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
+                --notice:SetValue(Utils.TimeFormat(e.charge_time))
             end
 
         end

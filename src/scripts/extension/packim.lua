@@ -24,15 +24,21 @@ end
 GLOBAL_SETTING.extensionMap[EXTENSION] = {
     OnEventReport = function()
         for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
-            local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
+            --local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
             local current = e.components.hunger.current
             local hunger = e.components.hunger
             if e.PackimState == 'NORMAL' then
-                local waitTime = math.mod(current, 1) / (hunger.hungerrate * hunger:GetBurnRate() * hunger.period)
-                notice:SetValue(math.ceil(current) .. "/" .. hunger.max .. ' (' .. Utils.SecondFormat(waitTime) .. ')')
+                if current > 0 then
+                    local waitTime = math.mod(current, 1) / (hunger.hungerrate * hunger:GetBurnRate() * hunger.period)
+                    GLOBAL_NOTICE_HUD:SetText(ID_PACKIM, STRINGS.ACTIONS.FEED .. '(' .. math.ceil(current) .. "/" .. hunger.max .. ')', waitTime)
+                end
+                --notice:SetValue(math.ceil(current) .. "/" .. hunger.max .. ' (' .. Utils.SecondFormat(waitTime) .. ')')
             elseif e.PackimState == 'FAT' then
                 local waitTime = current / (hunger.hungerrate * hunger:GetBurnRate() * hunger.period)
-                notice:SetValue(Utils.SecondFormat(waitTime))
+                if waitTime > 0 then
+                    GLOBAL_NOTICE_HUD:SetText(ID_PACKIM, STRINGS.ACTIONS.MAKEBALLOON, waitTime)
+                end
+                --notice:SetValue(Utils.SecondFormat(waitTime))
             end
         end
     end

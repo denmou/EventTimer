@@ -13,7 +13,7 @@ GLOBAL_SETTING.extensionMap[EXTENSION] = {
             local count = e:CountBats()
             local config = GLOBAL_SETTING:GetActiveOption(ID_VAMPIRE_BATS)
             if waitTime < config.value then
-                local text = "[" .. count .. "]" .. STRINGS.ACTIONS.RETRIEVE
+                local text = "[" .. count .. "]" .. STRINGS.ACTIONS.GIVE.LOAD
                 GLOBAL_NOTICE_HUD:SetText(ID_VAMPIRE_BATS, text, waitTime)
             end
         end

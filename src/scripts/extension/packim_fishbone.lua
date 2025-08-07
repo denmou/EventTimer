@@ -14,8 +14,9 @@ GLOBAL_SETTING.extensionMap[EXTENSION] = {
             if e.respawntime then
                 local waitTime = e.respawntime - GetTime()
                 if waitTime >= 0 then
-                    local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
-                    notice:SetValue(Utils.SecondFormat(waitTime))
+                    GLOBAL_NOTICE_HUD:SetText(ID_PACKIM, STRINGS.ACTIONS.HEAL, waitTime)
+                    --local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
+                    --notice:SetValue(Utils.SecondFormat(waitTime))
                 end
             end
         end

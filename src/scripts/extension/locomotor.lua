@@ -41,19 +41,21 @@ GLOBAL_SETTING.extensionMap[EXTENSION] = {
             for k, t in pairs(e.components.locomotor.speed_modifiers_add_timer) do
                 local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y, FONT_SIZE)
                 if t then
-                    local text = Utils.SecondFormat(t)
+                    --local text = Utils.SecondFormat(t)
                     local atlas = GetInventoryItemAtlas(ADDITIVES[k] .. '.tex')
-                    notice:SetValueById(k, text, atlas, ADDITIVES[k])
+                    --notice:SetValueById(k, text, atlas, ADDITIVES[k])
+                    GLOBAL_NOTICE_HUD:SetIconText(ADDITIVES[k], atlas, STRINGS.ACTIONS.ACTIVATE.GENERIC, t)
                 end
             end
             for k, m in pairs(LUMINOUS) do
                 local light = e[k]
                 if light then
-                    local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y, FONT_SIZE)
+                    --local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y, FONT_SIZE)
                     local waitTime = light.components.spell.duration - light.components.spell.lifetime
                     if waitTime >= 0 then
                         local atlas = GetInventoryItemAtlas(m .. '.tex')
-                        notice:SetValueById(k, Utils.SecondFormat(waitTime), atlas, m)
+                        GLOBAL_NOTICE_HUD:SetIconText(m, atlas, STRINGS.ACTIONS.ACTIVATE.GENERIC, waitTime)
+                        --notice:SetValueById(k, Utils.SecondFormat(waitTime), atlas, m)
                     end
                 end
             end

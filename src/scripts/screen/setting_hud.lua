@@ -22,6 +22,7 @@ local MODE_OPTIONS = {
 local SettingHud = Class(Screen, function(self)
     Widget._ctor(self, "setting_hud")
     self:Hide()
+    self.currentMode = GLOBAL_SETTING.currentMode
     self.scaleRoot = self:AddChild(Widget("scale_root"))
     self.scaleRoot:SetVAnchor(ANCHOR_MIDDLE)
     self.scaleRoot:SetHAnchor(ANCHOR_MIDDLE)
@@ -44,16 +45,16 @@ local SettingHud = Class(Screen, function(self)
     self.applybutton:SetFont(BUTTONFONT)
     self.applybutton:SetTextSize(40)
 
-    --self.resetbutton = self.scaleRoot:AddChild(ImageButton())
-    --self.resetbutton:SetPosition(0, -V_POSITION, 0)
-    --self.resetbutton:SetScale(.8, .8, .8)
-    --self.resetbutton:SetText(STRINGS.UI.CONTROLSSCREEN.RESET)
-    --self.resetbutton.text:SetColour(0, 0, 0, 1)
-    --self.resetbutton:SetOnClick(function()
-    --    self:LoadDefaultControls()
-    --end)
-    --self.resetbutton:SetFont(BUTTONFONT)
-    --self.resetbutton:SetTextSize(40)
+    self.resetbutton = self.scaleRoot:AddChild(ImageButton())
+    self.resetbutton:SetPosition(0, -V_POSITION, 0)
+    self.resetbutton:SetScale(.8, .8, .8)
+    self.resetbutton:SetText(STRINGS.UI.CONTROLSSCREEN.RESET)
+    self.resetbutton.text:SetColour(0, 0, 0, 1)
+    self.resetbutton:SetOnClick(function()
+       self:LoadDefaultControls()
+    end)
+    self.resetbutton:SetFont(BUTTONFONT)
+    self.resetbutton:SetTextSize(40)
 
     self.cancelbutton = self.scaleRoot:AddChild(ImageButton())
     self.cancelbutton:SetPosition(H_POSITION, -V_POSITION, 0)
@@ -106,6 +107,7 @@ function SettingHud:AddConfigurationBadge(mode, config)
 end
 
 function SettingHud:SwitchPanel(mode)
+    self.currentMode = mode
     for _, v in ipairs(self.modeList) do
         v:check(mode)
     end
@@ -126,7 +128,18 @@ function SettingHud:Apply()
 end
 
 function SettingHud:LoadDefaultControls()
-    GLOBAL_SETTING:Reset()
+    for _, configuration in ipairs(self.configurationGroupMap[self.currentMode]) do
+        local defaultValue = GLOBAL_SETTING:GetDefaultOption(configuration.option.id)
+        if defaultValue then
+            if defaultValue.switch ~= nil then
+                configuration:SetSwitch(defaultValue.switch)
+            end
+            if defaultValue.value ~= nil then
+                configuration:SetOption(defaultValue.value)
+            end
+        end
+    end
+    --GLOBAL_SETTING:Reset()
 end
 
 function SettingHud:Cancel()

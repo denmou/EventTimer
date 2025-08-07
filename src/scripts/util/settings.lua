@@ -441,6 +441,18 @@ function Settings:Cancel()
     end
 end
 
+function Settings:GetDefaultOption(id)
+    for _, v in ipairs(DEFAULT_OPTIONS) do
+        if v.id == id then
+            return {
+                switch = v.switch,
+                value = v.value
+            }
+        end
+    end
+    return nil
+end
+
 function Settings:GetActiveOption(id)
     for _, v in ipairs(self.activeOptionList) do
         if v.id == id then

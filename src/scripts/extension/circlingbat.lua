@@ -25,8 +25,11 @@ GLOBAL_SETTING.extensionMap[EXTENSION] = {
     OnEventReport = function()
         for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
             local waitTime = (e.task.nexttick - GetTick()) * GetTickTime()
-            local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
-            notice:SetValue(Utils.SecondFormat(waitTime))
+            --GLOBAL_NOTICE_HUD:SetText(ID_VAMPIRE_BATS, STRINGS.ACTIONS.ACTIVATE.INVESTIGATE, waitTime)
+            --local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
+            --notice:SetValue(Utils.SecondFormat(waitTime))
+            local text = "[" .. #GLOBAL_SETTING.entityMap[EXTENSION] .. "]" .. STRINGS.ACTIONS.ACTIVATE.INVESTIGATE
+            GLOBAL_NOTICE_HUD:SetText(ID_VAMPIRE_BATS, text, waitTime)
         end
     end
 }

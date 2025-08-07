@@ -30,10 +30,10 @@ EntityScript.GetDisplayName = function(self, ...)
                 end
             end
         end
-        if self.respawntime and self.respawntime > 0 then
-            local currentTime = self.respawntime - GetTime()
-            name = name .. "\n" .. Utils.TimeFormat(currentTime)
-        end
+        --if self.respawntime and self.respawntime > 0 then
+        --    local currentTime = self.respawntime - GetTime()
+        --    name = name .. "\n" .. Utils.TimeFormat(currentTime)
+        --end
     end
     return name
 end

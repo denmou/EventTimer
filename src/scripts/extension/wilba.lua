@@ -18,11 +18,13 @@ GLOBAL_SETTING.extensionMap[EXTENSION] = {
                 end
                 if waitTime > 0 then
                     if e.from_food then
-                        local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
-                        notice:SetValue(Utils.SecondFormat(waitTime))
+                        --local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
+                        --notice:SetValue(Utils.SecondFormat(waitTime))
+                        GLOBAL_NOTICE_HUD:SetText(ID_WILBA, STRINGS.ACTIONS.GNAW, waitTime)
                     else
-                        local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
-                        notice:SetValue(e.monster_count .. '/2 (' .. Utils.SecondFormat(waitTime) .. ')')
+                        --local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
+                        --notice:SetValue(e.monster_count .. '/2 (' .. Utils.SecondFormat(waitTime) .. ')')
+                        GLOBAL_NOTICE_HUD:SetText(ID_WILBA, STRINGS.ACTIONS.FEED .. '(' .. e.monster_count .. '/2)', waitTime)
                     end
                 end
             end

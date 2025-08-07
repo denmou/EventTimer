@@ -69,9 +69,11 @@ GLOBAL_SETTING.extensionMap[EXTENSION] = {
                             chance = 0
                         end
                         chance = chance * e.diffmod
-                        waitTime = (e.task.nexttick - GetTick()) * GetTickTime()
-                        local text = "[" .. chance * 100 .. "%]" .. STRINGS.ACTIONS.PEER
-                        GLOBAL_NOTICE_HUD:SetText(ID_PIG_BANDIT, text, waitTime)
+                        if chance > 0 then
+                            waitTime = (e.task.nexttick - GetTick()) * GetTickTime()
+                            local text = "[" .. chance * 100 .. "%]" .. STRINGS.ACTIONS.PEER
+                            GLOBAL_NOTICE_HUD:SetText(ID_PIG_BANDIT, text, waitTime)
+                        end
                     end
                 else
                     GLOBAL_NOTICE_HUD:SetText(ID_PIG_BANDIT, STRINGS.BANDIT_TALK_FIGHT[2], NONE_TIME)

@@ -315,7 +315,6 @@ local DEFAULT_OPTIONS = {
     {
         id = ID_CHESTER_EYEBONE,
         extension = { EXTENSION_CHESTER_EYEBONE },
-        resource = GetInventoryItemAtlas('chester_eyebone.tex'),
         icon = 'chester_eyebone',
         name = 'STRINGS.NAMES.CHESTER',
         switch = true,

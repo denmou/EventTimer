@@ -131,4 +131,12 @@ function NoticeHud:RemoveFollowNotice(inst)
     end
 end
 
+function NoticeHud:SetNoticeText(id, inst, offsetY, fontSize, text, value)
+    local config = GLOBAL_SETTING:GetActiveOption(id)
+    if self.followNoticeMap[inst.GUID] then
+        self.followNoticeMap[inst.GUID]:Kill()
+        self.followNoticeMap[inst.GUID] = nil
+    end
+end
+
 return NoticeHud

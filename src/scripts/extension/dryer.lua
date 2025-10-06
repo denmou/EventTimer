@@ -23,12 +23,15 @@ end
 
 GLOBAL_SETTING.extensionMap[EXTENSION] = {
     OnEventReport = function()
-        for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
-            local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
-            local dryer = e.components.dryer
-            local waitTime = dryer:GetTimeToDry()
-            if waitTime > 0 then
-                notice:SetValue(Utils.SecondFormat(waitTime))
+        local config = GLOBAL_SETTING:GetActiveOption(ID_DRYER)
+        if nil ~= config.value and config.value == DISPLAY_FOLLOW then
+            for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
+                local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
+                local dryer = e.components.dryer
+                local waitTime = dryer:GetTimeToDry()
+                if waitTime > 0 then
+                    notice:SetValue(Utils.SecondFormat(waitTime))
+                end
             end
         end
     end

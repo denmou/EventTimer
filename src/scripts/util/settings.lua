@@ -279,7 +279,8 @@ local DEFAULT_OPTIONS = {
         name = 'STRINGS.ACTIONS.ADDFUEL.GENERIC',
         switch = true,
         mode = { ROG_MODE, SW_MODE, HAM_MODE },
-        value = nil,
+        options = OPTIONS_DISPLAYS,
+        value = DISPLAY_INSPECT,
         describe = {}
     },
     {
@@ -289,7 +290,8 @@ local DEFAULT_OPTIONS = {
         name = 'STRINGS.ACTIONS.STORE.COOK',
         switch = true,
         mode = { ROG_MODE, SW_MODE, HAM_MODE },
-        value = nil,
+        options = OPTIONS_DISPLAYS,
+        value = DISPLAY_INSPECT,
         describe = {}
     },
     {
@@ -299,7 +301,8 @@ local DEFAULT_OPTIONS = {
         name = 'STRINGS.ACTIONS.DRY',
         switch = true,
         mode = { ROG_MODE, SW_MODE, HAM_MODE },
-        value = nil,
+        options = OPTIONS_DISPLAYS,
+        value = DISPLAY_INSPECT,
         describe = {}
     },
     {

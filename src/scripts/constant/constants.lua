@@ -11,6 +11,10 @@ TWENTY_FOUR_MINUTE = 24 * 60
 POSITION_LEFT = 1
 POSITION_RIGHT = 2
 
+DISPLAY_BADGE = 'badge'
+DISPLAY_INSPECT = 'inspect'
+DISPLAY_FOLLOW = 'follow'
+
 DEFAULT_ROWS = 6
 DEFAULT_SCALE = 1
 
@@ -152,4 +156,8 @@ OPTIONS_SCALES = {
 OPTIONS_POSITIONS = {
     { text = '左侧', data = POSITION_LEFT },
     { text = '右侧', data = POSITION_RIGHT }
+}
+OPTIONS_DISPLAYS = {
+    { text = '查看显示', data = DISPLAY_INSPECT },
+    { text = '跟随显示', data = DISPLAY_FOLLOW }
 }

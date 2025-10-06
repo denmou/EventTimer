@@ -25,14 +25,17 @@ end
 
 GLOBAL_SETTING.extensionMap[EXTENSION] = {
     OnEventReport = function()
-        for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
-            local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
-            local fueled = e.components.fueled
-            if fueled then
-                local currentTime = fueled.currentfuel
-                if currentTime > 0 then
+        local config = GLOBAL_SETTING:GetActiveOption(ID_FUELED)
+        if nil ~= config.value and config.value == DISPLAY_FOLLOW then
+            for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
+                local fueled = e.components.fueled
+                if fueled then
+                    local currentTime = fueled.currentfuel
+                    if currentTime > 0 then
                     local maxTime = fueled.maxfuel
-                    notice:SetValue(Utils.SecondFormat(currentTime) .. '/' .. Utils.SecondFormat(maxTime))
+                        local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
+                        notice:SetValue(Utils.SecondFormat(currentTime) .. '/' .. Utils.SecondFormat(maxTime))
+                    end
                 end
             end
         end

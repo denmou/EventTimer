@@ -23,11 +23,14 @@ end
 
 GLOBAL_SETTING.extensionMap[EXTENSION] = {
     OnEventReport = function()
-        for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
-            local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
-            local waitTime = e.components.stewer:GetTimeToCook()
-            if waitTime > 0 then
-                notice:SetValue(Utils.SecondFormat(waitTime))
+        local config = GLOBAL_SETTING:GetActiveOption(ID_STEWER)
+        if nil ~= config.value and config.value == DISPLAY_FOLLOW then
+            for _, e in ipairs(GLOBAL_SETTING.entityMap[EXTENSION]) do
+                local notice = GLOBAL_NOTICE_HUD:GetFollowNotice(e, OFFSET_Y)
+                local waitTime = e.components.stewer:GetTimeToCook()
+                if waitTime > 0 then
+                    notice:SetValue(Utils.SecondFormat(waitTime))
+                end
             end
         end
     end
